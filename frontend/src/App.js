@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route } from "react-router-dom";
-import { Main, TimeLine, TestPage } from './Pages';
+import { Main, TimeLine } from './Pages';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 
@@ -12,7 +12,6 @@ class App extends Component {
           <BrowserRouter>
             <Route path="/" exact component={Main} />
             <Route path="/timeLine" component={TimeLine} />
-            <Route path="/testPage" component={TestPage} />
           </BrowserRouter>
         </div>
       </Provider>

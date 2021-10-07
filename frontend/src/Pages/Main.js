@@ -34,10 +34,6 @@ const Main = ({ history }) => {
           daily updated charts.
         </p>
       </div>
-      {/* <h1>나는 메인페이지야!</h1>
-            <Button onClick={()=>{
-                history.push('/TimeLine')
-            }}>Go To TimeLine Sample Page</Button> */}
     </div>
   );
 };
