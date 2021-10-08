@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import Title_logo from "../img/title.png";
+import Map1 from "../Components/Map1";
 import Map from "../Components/Map";
 
 const Main = ({ history }) => {
@@ -18,6 +19,7 @@ const Main = ({ history }) => {
         <img src={Title_logo} />
       </div>
       <div className="map_wrap">
+        {/* <Map1></Map1> */}
         <Map></Map>
       </div>
       <div className="Explanation">
@@ -34,10 +36,6 @@ const Main = ({ history }) => {
           daily updated charts.
         </p>
       </div>
-      {/* <h1>나는 메인페이지야!</h1>
-            <Button onClick={()=>{
-                history.push('/TimeLine')
-            }}>Go To TimeLine Sample Page</Button> */}
     </div>
   );
 };
