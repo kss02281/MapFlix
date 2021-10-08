@@ -12,6 +12,7 @@ function DrawBar(props) {
     const maxHeight = props.maxHeight;
     const onClickAction = props.onClick;
     const ratio = props.ratio;
+    const idx = props.idx;
 
 
     return (
@@ -24,14 +25,14 @@ function DrawBar(props) {
 export default DrawBar;
 
 const Bar = styled.div`
-
     width: 12px;
     height: ${(props) => Math.round(props.confirmedCnt/props.ratio)}px;
     margin-top: ${(props) => 400-Math.round(props.confirmedCnt/props.ratio)/2}px;
     background-color: pink;
     cursor: pointer;
     border-radius: 60px 60px;
+
     &:hover {
-        background-color: red;
+        background-color: #F08080;
     }
 `

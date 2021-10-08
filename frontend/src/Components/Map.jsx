@@ -58,7 +58,7 @@ export default function Map() {
     <WorldMap
       color={"#868686"}
       tooltipBgColor={"#000000"}
-      size="lg"
+      size="xxl"
       data={countryData}
       frame={true}
       frameColor={"black"}
