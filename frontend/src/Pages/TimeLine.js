@@ -15,7 +15,7 @@ function DrawBarChart(props) {
   const dispatch = useDispatch();
 
   const [nationName, setNationName] = useState('');
-  const [coronaData, setCoronaData] = useState([{'week': 'intialweek', 'confirmedCnt':1}]);
+  const [coronaData, setCoronaData] = useState([]);
   const [nationCode, setNationCode] = useState(props.nationCode);
   const [maxVal, setMaxVal] = useState(0);
 
@@ -37,6 +37,7 @@ function DrawBarChart(props) {
     }).then(data => setCoronaData(data.map(item => {
         return {week: item.week, confirmedCnt: item.confirmed}
     })))
+    
     console.log(coronaData)
   },[ nationName ])
 
