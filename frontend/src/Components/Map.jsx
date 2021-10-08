@@ -4,17 +4,6 @@ import { countryData } from "../data/Country_data";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router";
 
-// const localizedCountryDictionary = new Map([
-//   ["br", "Brasil", 1000, 10000], // brazil
-//   ["cn", "China", 1000, 10000], // china
-//   ["id", "Indonesia", 1000, 10000], // indonesia
-//   ["in", "India", 1000, 10000], // india
-//   ["mx", "México", 1000, 10000], // mexico
-//   ["ng", "Nigeria", 1000, 10000], // nigeria
-//   ["ru", "Rusia", 1000, 10000], // russia
-//   ["us", "USA", 1000, 10000], // united states
-// ]);
-
 const stylingFunction = ({ countryValue, color }) => {
   const opacityLevel = countryValue ? 1 : 0.9;
   return {
@@ -59,7 +48,9 @@ export default function Map() {
     console.log(countryName);
     history.push({
       pathname: "/timeLine",
-      props: { nation: countryName },
+      props: { 
+        nation: countryName,
+        nationCode: countryCode.toLowerCase() },
     });
   };
 
