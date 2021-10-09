@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import Title_logo from "../img/title.png";
+import Map1 from "../Components/Map1";
 import Map from "../Components/Map";
+import ReactTooltip from "react-tooltip";
 
 const Main = ({ history }) => {
+
   return (
-    <div>
-      <div className="header" style={{textAlign:"center"}}>
+    <>
+      <div className="header" style={{textAlign:"center", position:"relative"}}>
         <p className="headtext" style={{fontSize:'1.5em'}}>
           How many Netflix subscribers have increased before and after
           Covid-19? <br />
@@ -15,10 +18,15 @@ const Main = ({ history }) => {
         </p>
         <img src={Title_logo} alt=""/>
       </div>
+
+
       <div className="map_wrap" style={{textAlign:"center"}}>
         <Map></Map>
       </div>
-      <div className="Explanation" style={{fontSize:'1.4em'}}>
+
+
+
+      <div className="Explanation" style={{fontSize:'1.4em', position:"absolute"}}>
         <p>
           1. Streaming service is not available in the country, therefore
           COVID-MAPFLIX has no charts.
@@ -32,7 +40,7 @@ const Main = ({ history }) => {
           daily updated charts.
         </p>
       </div>
-    </div>
+    </>
   );
 };
 
