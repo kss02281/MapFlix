@@ -127,22 +127,6 @@ function ContentShow() {
 const TimeLine = ({ history, location }) => {
   const nation = location.props.nation;
   const nationCode = location.props.nationCode;
-<<<<<<< HEAD
-  return (
-    <div>
-      <h1>나는 타임라인이야!</h1>
-      <h2>{nation}</h2>
-      <h2>{nationCode}</h2>
-      <Button
-        onClick={() => {
-          history.push("/");
-        }}
-      >
-        Go To Main Page
-      </Button>
-=======
-
-
   return (
     <div>
       <DrawBarChart nation={nation} nationCode={nationCode}/>
@@ -157,7 +141,6 @@ const TimeLine = ({ history, location }) => {
         </Button>
         <ContentShow />
       </Container>
->>>>>>> 36d63709442af201f742dba13a7cf286ceffd47a
     </div>
   );
 };
