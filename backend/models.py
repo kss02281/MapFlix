@@ -89,7 +89,7 @@ class NetflixContent(db.Model):
     @property
     def serialize(self):
         return {
-            'id': self.id,
+            # 'id': self.id,
             'title': self.title,
             'content_typqe': self.content_type,
             'genre1': self.genre1,
