@@ -27,7 +27,7 @@ export default DrawBar;
 const Bar = styled.div`
     width: 12px;
     height: ${(props) => Math.round(props.confirmedCnt/props.ratio)}px;
-    margin-top: ${(props) => 400-Math.round(props.confirmedCnt/props.ratio)/2}px;
+    margin-top: ${(props) => 300-Math.round(props.confirmedCnt/props.ratio)/2}px;
     background-color: pink;
     cursor: pointer;
     border-radius: 60px 60px;
