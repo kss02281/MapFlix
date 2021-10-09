@@ -10,7 +10,7 @@ const Main = ({ history }) => {
 
   return (
     <>
-      <div className="header" style={{textAlign:"center", position:"relative"}}>
+      <div className="header" style={{textAlign:"center"}}>
         <p className="headtext" style={{fontSize:'1.5em'}}>
           How many Netflix subscribers have increased before and after
           Covid-19? <br />
@@ -26,7 +26,7 @@ const Main = ({ history }) => {
 
 
 
-      <div className="Explanation" style={{fontSize:'1.4em', position:"absolute"}}>
+      <div className="Explanation" style={{fontSize:'1.4em'}}>
         <p>
           1. Streaming service is not available in the country, therefore
           COVID-MAPFLIX has no charts.

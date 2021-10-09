@@ -49,10 +49,11 @@ const MapChart = ({ setTooltipContent }) => {
   return (
     <>
       <ComposableMap
+        width={400}
+        height={170}
         data-tip=""
         projectionConfig={{
-          rotate: [0, 0, 0],
-          scale: 100,
+          scale: 55,
         }}
       >
         <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
@@ -130,7 +131,7 @@ const MapChart = ({ setTooltipContent }) => {
                         <div>
                           <div style={countryName}>{NAME}</div>
                           <div style={container}>
-                            <div style={mapBox}>
+                            <div style={{backgroundColor: "white", color:'black'}}>
                               <div style={number}>6</div>
                               <div style={text}>Subscibes</div>
                               <div style={text2}>67.28M</div>
@@ -139,9 +140,10 @@ const MapChart = ({ setTooltipContent }) => {
                               </div>
                             </div>
                             <hr style={line}></hr>
-                            <div style={mapBox}>
-                              <div>asd</div>
-                              {NAME} ㅁㄴㅇㅁㄴㅇ {rounded(POP_EST)}
+                            <div style={{backgroundColor: "white", color:'black', fontSize:'2em'}}>
+                              <p style={{marginTop:'50px'}}>nation name</p>
+                              <p style={{padding: '5px'}}>{NAME}</p>
+                              <p>{rounded(POP_EST)}</p>
                             </div>
                           </div>
                         </div>
@@ -154,7 +156,15 @@ const MapChart = ({ setTooltipContent }) => {
                       hover: {
                         fill: "#F53",
                         outline: "none",
+                        cursor: "pointer",
                       },
+                      default: {
+                        outline: "none",
+                      },
+                      pressed: {
+                        outline: "none",
+                        cursor: "pointer",
+                      }
                     }}
                   />
                 );

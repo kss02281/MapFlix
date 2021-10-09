@@ -66,7 +66,7 @@ function DrawBarChart(props) {
 }
 
   return (
-      <div>
+      <div style={{height: '700px'}}>
           <p style={{fontSize:'4em', marginTop:'30px'}}>{nationName}</p>
           <ChartContainer maxHeight={maxVal}>
             {
