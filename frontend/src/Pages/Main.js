@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import Title_logo from "../img/title.png";
-import Map1 from "../Components/Map1";
 import Map from "../Components/Map";
 import ReactTooltip from "react-tooltip";
 
 const Main = ({ history }) => {
 
   return (
-    <>
+    <div style={{backgroundColor:'black'}}>
       <div className="header" style={{textAlign:"center"}}>
         <p className="headtext" style={{fontSize:'1.5em'}}>
           How many Netflix subscribers have increased before and after
@@ -40,7 +39,7 @@ const Main = ({ history }) => {
           daily updated charts.
         </p>
       </div>
-    </>
+    </div>
   );
 };
 

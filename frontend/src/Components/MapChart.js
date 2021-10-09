@@ -50,14 +50,14 @@ const MapChart = ({ setTooltipContent }) => {
     <>
       <ComposableMap
         width={400}
-        height={170}
+        height={150}
         data-tip=""
         projectionConfig={{
           scale: 55,
         }}
       >
-        <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
-        <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
+        <Sphere stroke="#ffffff" strokeWidth={0.5} />
+        <Graticule stroke="#ffffff" strokeWidth={0.5} />
         {data.length > 0 && (
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
@@ -141,9 +141,9 @@ const MapChart = ({ setTooltipContent }) => {
                             </div>
                             <hr style={line}></hr>
                             <div style={{backgroundColor: "white", color:'black', fontSize:'2em'}}>
-                              <p style={{marginTop:'50px'}}>nation name</p>
-                              <p style={{padding: '5px'}}>{NAME}</p>
-                              <p>{rounded(POP_EST)}</p>
+                              <p className='hover' style={{marginTop:'50px'}}>nation name</p>
+                              <p className='hover' style={{padding: '5px'}}>{NAME}</p>
+                              <p className='hover'>{rounded(POP_EST)}</p>
                             </div>
                           </div>
                         </div>
