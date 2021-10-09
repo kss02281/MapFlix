@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./Redux/store";
 import "./index.css";
 
+
 class App extends Component {
   render() {
     return (
@@ -13,7 +14,6 @@ class App extends Component {
           <BrowserRouter>
             <Route path="/" exact component={Main} />
             <Route path="/timeLine" component={TimeLine} />
-            <Route path="/testPage" component={TestPage} />
           </BrowserRouter>
         </div>
       </Provider>

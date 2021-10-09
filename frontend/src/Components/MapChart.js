@@ -32,7 +32,11 @@ function colorScale(Status) {
   } else if (Status === "3") {
     return "rgb(220, 38, 38)";
   } else {
+<<<<<<< HEAD
     return "white";
+=======
+    return "gray";
+>>>>>>> 36d63709442af201f742dba13a7cf286ceffd47a
   }
 }
 
@@ -50,10 +54,17 @@ const MapChart = ({ setTooltipContent }) => {
     <>
       <ComposableMap
         width={400}
+<<<<<<< HEAD
         height={200}
         data-tip=""
         projectionConfig={{
           scale: 70,
+=======
+        height={130}
+        data-tip=""
+        projectionConfig={{
+          scale: 40,
+>>>>>>> 36d63709442af201f742dba13a7cf286ceffd47a
         }}
       >
         <Sphere stroke="#ffffff" strokeWidth={0.5} />
@@ -67,6 +78,7 @@ const MapChart = ({ setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
+<<<<<<< HEAD
                     fill={d ? colorScale(d["Status"]) : "#D8D8D8"}
                     onClick={() => {
                       const { NAME } = geo.properties;
@@ -78,6 +90,19 @@ const MapChart = ({ setTooltipContent }) => {
                           nation: NAME,
                           nationCode: ISO_A2.toLowerCase(),
                         },
+=======
+                    fill={d ? colorScale(d["Status"]) : "gray"}
+                    onClick={() => {
+                      const { NAME } = geo.properties;
+                      const { ISO_A2 } = geo.properties;
+                      console.log(NAME);
+                      history.push({
+                        pathname: "/timeLine",
+                        props: { 
+                          nation: NAME,
+                          nationCode: ISO_A2.toLowerCase()
+                         },
+>>>>>>> 36d63709442af201f742dba13a7cf286ceffd47a
                       });
                     }}
                     onMouseEnter={() => {
@@ -131,7 +156,11 @@ const MapChart = ({ setTooltipContent }) => {
                         <div>
                           <div style={countryName}>{NAME}</div>
                           <div style={container}>
+<<<<<<< HEAD
                             <div style={mapBox}>
+=======
+                            <div style={{backgroundColor: "white", color:'black'}}>
+>>>>>>> 36d63709442af201f742dba13a7cf286ceffd47a
                               <div style={number}>6</div>
                               <div style={text}>Subscibes</div>
                               <div style={text2}>67.28M</div>
@@ -140,9 +169,16 @@ const MapChart = ({ setTooltipContent }) => {
                               </div>
                             </div>
                             <hr style={line}></hr>
+<<<<<<< HEAD
                             <div style={mapBox}>
                               <div>asd</div>
                               {NAME} ㅁㄴㅇㅁㄴㅇ {rounded(POP_EST)}
+=======
+                            <div style={{backgroundColor: "white", color:'black', fontSize:'2em'}}>
+                              <p className='hover' style={{marginTop:'50px'}}>nation name</p>
+                              <p className='hover' style={{padding: '5px'}}>{NAME}</p>
+                              <p className='hover'>{rounded(POP_EST)}</p>
+>>>>>>> 36d63709442af201f742dba13a7cf286ceffd47a
                             </div>
                           </div>
                         </div>
@@ -155,7 +191,19 @@ const MapChart = ({ setTooltipContent }) => {
                       hover: {
                         fill: "#F53",
                         outline: "none",
+<<<<<<< HEAD
                       },
+=======
+                        cursor: "pointer",
+                      },
+                      default: {
+                        outline: "none",
+                      },
+                      pressed: {
+                        outline: "none",
+                        cursor: "pointer",
+                      }
+>>>>>>> 36d63709442af201f742dba13a7cf286ceffd47a
                     }}
                   />
                 );

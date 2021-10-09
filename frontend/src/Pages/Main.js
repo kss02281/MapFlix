@@ -4,25 +4,34 @@ import { useHistory } from "react-router-dom";
 import Title_logo from "../img/title.png";
 import Map1 from "../Components/Map1";
 import Map from "../Components/Map";
+import ReactTooltip from "react-tooltip";
 
 const Main = ({ history }) => {
+
   return (
-    <div>
-      <div className="header">
-        <p className="headtext">
-          너는 아니 How many Netflix subscribers have increased before and after
+    <div style={{backgroundColor:'black'}}>
+      <div className="header" style={{textAlign:"center"}}>
+        <p className="headtext" style={{fontSize:'1.5em'}}>
+          How many Netflix subscribers have increased before and after
           Covid-19? <br />
-          우리는 팬데믹 동안의 너가 선택한 국가의 넷플릭스 가입자 수 증가를
-          보여줄거고 <br />
-          and 그 국가의 주간 넷플릭스의 탑클라스 콘텐츠를 알려줄거야
+          I'll show you the top 10 contents of weekly Netflix in each country.
         </p>
-        <img src={Title_logo} />
+        <img src={Title_logo} alt=""/>
       </div>
+<<<<<<< HEAD
       <div className="map_wrap">
         {/* <Map1></Map1> */}
+=======
+
+
+      <div className="map_wrap" style={{textAlign:"center"}}>
+>>>>>>> 36d63709442af201f742dba13a7cf286ceffd47a
         <Map></Map>
       </div>
-      <div className="Explanation">
+
+
+
+      <div className="Explanation" style={{fontSize:'1.4em'}}>
         <p>
           1. Streaming service is not available in the country, therefore
           COVID-MAPFLIX has no charts.

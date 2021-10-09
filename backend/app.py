@@ -1,7 +1,7 @@
 from flask import Flask 
 from db_connect import db
 import config
-from models import TestModel
+from models import SubscribersByCountry
 
 def create_app():
     app = Flask(__name__)
@@ -10,8 +10,8 @@ def create_app():
 
     db.init_app(app)
 
-    from views import main
-    app.register_blueprint(main.bp)
+    from views import timeline
+    app.register_blueprint(timeline.bp)
 
     app.secret_key = 'secret'
     # 시크릿 키는 추후 수정 
