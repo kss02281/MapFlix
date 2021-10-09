@@ -32,7 +32,7 @@ function colorScale(Status) {
   } else if (Status === "3") {
     return "rgb(220, 38, 38)";
   } else {
-    return "gray";
+    return "white";
   }
 }
 
@@ -49,14 +49,15 @@ const MapChart = ({ setTooltipContent }) => {
   return (
     <>
       <ComposableMap
+        width={400}
+        height={200}
         data-tip=""
         projectionConfig={{
-          rotate: [-10, 0, 0],
-          scale: 137,
+          scale: 70,
         }}
       >
-        <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
-        <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
+        <Sphere stroke="#ffffff" strokeWidth={0.5} />
+        <Graticule stroke="#ffffff" strokeWidth={0.5} />
         {data.length > 0 && (
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
@@ -66,13 +67,17 @@ const MapChart = ({ setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={d ? colorScale(d["Status"]) : "gray"}
+                    fill={d ? colorScale(d["Status"]) : "#D8D8D8"}
                     onClick={() => {
                       const { NAME } = geo.properties;
-                      console.log(NAME);
+                      const { ISO_A2 } = geo.properties;
+                      console.log(ISO_A2);
                       history.push({
                         pathname: "/timeLine",
-                        props: { nation: NAME },
+                        props: {
+                          nation: NAME,
+                          nationCode: ISO_A2.toLowerCase(),
+                        },
                       });
                     }}
                     onMouseEnter={() => {
