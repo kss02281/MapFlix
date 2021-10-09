@@ -50,10 +50,10 @@ const MapChart = ({ setTooltipContent }) => {
     <>
       <ComposableMap
         width={400}
-        height={150}
+        height={130}
         data-tip=""
         projectionConfig={{
-          scale: 55,
+          scale: 40,
         }}
       >
         <Sphere stroke="#ffffff" strokeWidth={0.5} />

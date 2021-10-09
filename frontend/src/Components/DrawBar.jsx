@@ -7,6 +7,8 @@ import styled, {css} from 'styled-components'
 
 function DrawBar(props) {
 
+    const colors = ['#FFB6C1', 'LightSkyBlue', 'LightSteelBlue', '#E0FFFF']
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
     const week = props.week;
     const confirmedCnt = props.confirmedCnt;
     const maxHeight = props.maxHeight;
@@ -17,10 +19,12 @@ function DrawBar(props) {
 
     return (
         <>
-            <Bar confirmedCnt={confirmedCnt} ratio={ratio} onClick={onClickAction}></Bar>
+            <Bar confirmedCnt={confirmedCnt} ratio={ratio} onClick={onClickAction} color={randomColor}></Bar>
         </>
     )
 }
+
+
 
 export default DrawBar;
 
@@ -28,7 +32,7 @@ const Bar = styled.div`
     width: 12px;
     height: ${(props) => Math.round(props.confirmedCnt/props.ratio)}px;
     margin-top: ${(props) => 300-Math.round(props.confirmedCnt/props.ratio)/2}px;
-    background-color: pink;
+    background-color: ${(props) => props.color};
     cursor: pointer;
     border-radius: 60px 60px;
 
