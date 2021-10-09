@@ -94,11 +94,10 @@ function DrawBarChart(props) {
                     </Trigger>
                     <Hover type='hover'>
                       <HoverContainer>
-                        <p>{nationName}</p>
-                        <p>{item.week}</p>
-                        <p>Confirmed People : {item.confirmedCnt}</p>
+                        <p className='hover'>{nationName}</p>
+                        <p className='hover'>{item.week}</p>
+                        <p className='hover'>Confirmed People : {item.confirmedCnt}</p>
                       </HoverContainer>
-
                     </Hover>
                   </ReactHover>
                 </>
