@@ -7,31 +7,21 @@ import Map from "../Components/Map";
 import ReactTooltip from "react-tooltip";
 
 const Main = ({ history }) => {
-
   return (
-    <div style={{backgroundColor:'black'}}>
-      <div className="header" style={{textAlign:"center"}}>
-        <p className="headtext" style={{fontSize:'1.5em'}}>
-          How many Netflix subscribers have increased before and after
-          Covid-19? <br />
+    <div style={{ backgroundColor: "black" }}>
+      <div className="header" style={{ textAlign: "center" }}>
+        <p className="headtext" style={{ fontSize: "1.5em" }}>
+          How many Netflix subscribers have increased before and after Covid-19?{" "}
+          <br />
           I'll show you the top 10 contents of weekly Netflix in each country.
         </p>
-        <img src={Title_logo} alt=""/>
+        <img src={Title_logo} alt="" />
       </div>
-<<<<<<< HEAD
-      <div className="map_wrap">
-        {/* <Map1></Map1> */}
-=======
-
-
-      <div className="map_wrap" style={{textAlign:"center"}}>
->>>>>>> 36d63709442af201f742dba13a7cf286ceffd47a
+      <div className="map_wrap" style={{ textAlign: "center" }}>
         <Map></Map>
       </div>
 
-
-
-      <div className="Explanation" style={{fontSize:'1.4em'}}>
+      <div className="Explanation" style={{ fontSize: "1.4em" }}>
         <p>
           1. Streaming service is not available in the country, therefore
           COVID-MAPFLIX has no charts.
