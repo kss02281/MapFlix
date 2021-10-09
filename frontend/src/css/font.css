@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+body {
+    background-color: #000;
+}
+
+p, Button {
+    color: white;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+}
+
+p.hover {
+    color:black;
+}
