@@ -4,6 +4,8 @@ from models import *
 bp = Blueprint('main', __name__, url_prefix='/')
 
 # 국가별로 전체 week 확진자 수 불러오기
+
+
 @bp.route('/timeline/<string:country_code>', methods=['GET'])
 def get_confirmed_num(country_code):
 
@@ -13,9 +15,12 @@ def get_confirmed_num(country_code):
     return jsonify([confirmed.serialize for confirmed in confirmed_list])
 
 # 국가별로 넷플릭스 구독자/매출 불러오기
+
+
 @bp.route('/netflix/<string:country_code>', methods=['Get'])
 def get_subscribers_num(country_code):
-    data = db.session.query(SubscribersByCountry).filter(SubscribersByCountry.country_code == country_code).first()
+    data = db.session.query(SubscribersByCountry).filter(
+        SubscribersByCountry.country_code == country_code).first()
 
     print(data.q1_subscribers)
 

@@ -163,6 +163,12 @@ const countryData = [
   { country: "am", value: 2 },
   { country: "lk", value: 3 },
   { country: "th", value: 3 },
+  { country: "aq", value: 4 },
+  { country: "gl", value: 4 },
+  { country: "-99", value: 4 },
+  { country: "nc", value: 4 },
+  { country: "pr", value: 4 },
+  { country: "fk", value: 4 },
 ];
 
 export { countryData };
