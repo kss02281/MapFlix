@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import Title_logo from "../img/title.png";
-import Map1 from "../Components/Map1";
 import Map from "../Components/Map";
+import NavBar from "../Components/NavBar";
 import ReactTooltip from "react-tooltip";
 
 const Main = ({ history }) => {
@@ -17,6 +17,7 @@ const Main = ({ history }) => {
         </p>
         <img src={Title_logo} alt="" />
       </div>
+      <NavBar />
       <div className="map_wrap" style={{ textAlign: "center" }}>
         <Map></Map>
       </div>

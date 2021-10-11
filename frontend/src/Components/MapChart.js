@@ -67,7 +67,6 @@ const MapChart = ({ setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-
                     fill={d ? colorScale(d["Status"]) : "#D8D8D8"}
                     onClick={() => {
                       const { NAME } = geo.properties;
@@ -132,7 +131,12 @@ const MapChart = ({ setTooltipContent }) => {
                         <div>
                           <div style={countryName}>{NAME}</div>
                           <div style={container}>
-                            <div style={{backgroundColor: "white", color:'black'}}>
+                            <div
+                              style={{
+                                backgroundColor: "white",
+                                color: "black",
+                              }}
+                            >
                               <div style={number}>6</div>
                               <div style={text}>Subscibes</div>
                               <div style={text2}>67.28M</div>
@@ -141,10 +145,23 @@ const MapChart = ({ setTooltipContent }) => {
                               </div>
                             </div>
                             <hr style={line}></hr>
-                            <div style={{backgroundColor: "white", color:'black', fontSize:'2em'}}>
-                              <p className='hover' style={{marginTop:'50px'}}>nation name</p>
-                              <p className='hover' style={{padding: '5px'}}>{NAME}</p>
-                              <p className='hover'>{rounded(POP_EST)}</p>
+                            <div
+                              style={{
+                                backgroundColor: "white",
+                                color: "black",
+                                fontSize: "2em",
+                              }}
+                            >
+                              <p
+                                className="hover"
+                                style={{ marginTop: "50px" }}
+                              >
+                                nation name
+                              </p>
+                              <p className="hover" style={{ padding: "5px" }}>
+                                {NAME}
+                              </p>
+                              <p className="hover">{rounded(POP_EST)}</p>
                             </div>
                           </div>
                         </div>
@@ -165,7 +182,7 @@ const MapChart = ({ setTooltipContent }) => {
                       pressed: {
                         outline: "none",
                         cursor: "pointer",
-                      }
+                      },
                     }}
                   />
                 );
