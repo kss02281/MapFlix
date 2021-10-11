@@ -31,7 +31,7 @@ def get_netflix_top1(country_code):
     return jsonify([top1.serialize for top1 in top1_list])
 
 # 국가별 각 주차의 top10 영화리스트, tv쇼 리스트
-@bp.route('/netflix/<string:country_code>/<string:week>/top10')
+@bp.route('/netflix/<string:country_code>/<string:week>/top10', methods=['GET'])
 def get_netflix_top10(country_code, week):
     top10_movies = db.session.query(NetflixContent).join(NetflixTop10).\
         filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.content_type == 'movies').all()
@@ -45,7 +45,7 @@ def get_netflix_top10(country_code, week):
         })
 
 # 국가별 각 주차의 가장 인기있는 장르와 색상
-@bp.route('/netflix/<string:country_code>/<string:week>/genre')
+@bp.route('/netflix/<string:country_code>/<string:week>/genre',  methods=['GET'])
 def get_top_genre(country_code, week):
     contents = db.session.query(NetflixContent).join(NetflixTop10).\
         filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week).all()
