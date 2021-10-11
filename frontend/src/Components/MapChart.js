@@ -68,17 +68,19 @@ const MapChart = ({ setTooltipContent }) => {
                     key={geo.rsmKey}
                     geography={geo}
                     fill={d ? colorScale(d["Status"]) : "#D8D8D8"}
-                    onClick={() => {
+                    onClick={(Status) => {
                       const { NAME } = geo.properties;
                       const { ISO_A2 } = geo.properties;
-                      console.log(ISO_A2);
-                      history.push({
-                        pathname: "/timeLine",
-                        props: {
-                          nation: NAME,
-                          nationCode: ISO_A2.toLowerCase(),
-                        },
-                      });
+                      console.log(NAME);
+                      if (d["Status"] === "1") {
+                        history.push({
+                          pathname: "/timeLine",
+                          props: {
+                            nation: NAME,
+                            nationCode: ISO_A2.toLowerCase(),
+                          },
+                        });
+                      }
                     }}
                     onMouseEnter={() => {
                       const { NAME, POP_EST } = geo.properties;
