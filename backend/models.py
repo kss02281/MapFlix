@@ -106,6 +106,13 @@ class NetflixContent(db.Model):
             'content_type': self.content_type,
             'genre': [self.genre1, self.genre2, self.genre3, self.genre4, self.genre5, self.genre6, self.genre7, self.genre8, self.genre9]
         }
+    @property
+    def serialize2(self):
+        return {
+            'title': self.title,
+            'content_type': self.content_type,
+            'genre': [self.genre1, self.genre2]
+        }
 
 # 국가별 넷플릭스 top10
 class NetflixTop10(db.Model):

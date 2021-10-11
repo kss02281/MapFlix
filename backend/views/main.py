@@ -40,8 +40,8 @@ def get_netflix_top10(country_code, week):
         filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.content_type == 'tv').all()
     
     return jsonify(
-        {'movies': [movie.serialize for movie in top10_movies],
-        'tv_shows': [tv.serialize for tv in top10_tv_shows]
+        {'movies': [movie.serialize2 for movie in top10_movies],
+        'tv_shows': [tv.serialize2 for tv in top10_tv_shows]
         })
 
 # 국가별 각 주차의 가장 인기있는 장르와 색상
