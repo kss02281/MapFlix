@@ -10,8 +10,8 @@ def create_app():
 
     db.init_app(app)
 
-    from views import timeline
-    app.register_blueprint(timeline.bp)
+    from views import main
+    app.register_blueprint(main.bp)
 
     app.secret_key = 'secret'
     # 시크릿 키는 추후 수정 

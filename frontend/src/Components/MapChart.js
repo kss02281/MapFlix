@@ -67,11 +67,11 @@ const MapChart = ({ setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={d ? colorScale(d["Status"]) : "#D8D8D8"}
+                    fill={d ? colorScale(d["Status"]) : "gray"}
                     onClick={(Status) => {
                       const { NAME } = geo.properties;
                       const { ISO_A2 } = geo.properties;
-                      console.log(NAME);
+                      console.log(NAME, ISO_A2);
                       if (d["Status"] === "1") {
                         history.push({
                           pathname: "/timeLine",

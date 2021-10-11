@@ -1,10 +1,11 @@
 export const setNationInfo = (nation, nationCode) => ({
-    type: "SET_NATIONINFO",
+    type: "SET_NATION",
     nation,
     nationCode
 })
 
-export const switchShow = (showBoolean) => ({
-    type: "SWITCH_SHOW",
-    showBoolean
+export const setWeek = (year, week) => ({
+    type: "SET_WEEK",
+    year,
+    week
 })
