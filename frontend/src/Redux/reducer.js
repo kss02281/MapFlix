@@ -1,7 +1,8 @@
 const initState = {
     nation: '',
     nationCode: '',
-    showBoolean: false
+    currentYear: 0,
+    currentWeek: 0
 }
 
 const Reducer = (state = initState, action) => {
@@ -12,11 +13,13 @@ const Reducer = (state = initState, action) => {
                 nation: action.nation,
                 nationCode: action.nationCode
             }
-        case "SWITCH_SHOW":
-            return {
+        case "SET_WEEK":
+            return{
                 ...state,
-                showBoolean: action.showBoolean
+                currentYear: action.year,
+                currentWeek: action.week
             }
+        
         default:
             return state;
     }
