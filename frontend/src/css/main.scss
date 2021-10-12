@@ -1,22 +1,69 @@
 @charset 'utf-8';
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
+$body-font: "Maven Pro", sans-serif;
 p {
-  color: white;
+  color: rgb(173, 173, 173);
+}
+circle {
+  padding-right: 3px;
 }
 
 .mainWrap {
-  background-color: black;
+  background-color: #111111;
+  text-align: center;
   .header {
     text-align: center;
-    .headtext {
-      font-size: 1.5em;
+  }
+  .Explanation_Wrap {
+    .Explanation {
+      display: flex;
+      justify-content: center;
+      .Explanation_list {
+        font-family: $body-font;
+        font-size: 0.85em;
+        background-color: rgba(233, 221, 221, 0.329);
+        border-radius: 40px;
+        width: 500px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-right: 15px;
+        .Explanation_green {
+          display: flex;
+          align-items: center;
+          p {
+            margin-left: 5px;
+            margin-bottom: 0;
+            color: rgba(233, 221, 221, 0.781);
+            // color: rgb(5, 150, 105);
+          }
+        }
+        .Explanation_yellow {
+          display: flex;
+          align-items: center;
+          p {
+            margin-left: 5px;
+            margin-bottom: 0;
+            color: rgba(233, 221, 221, 0.781);
+            // color: rgb(245, 158, 11);
+          }
+        }
+        .Explanation_red {
+          display: flex;
+          align-items: center;
+          p {
+            margin-left: 5px;
+            margin-bottom: 0;
+            color: rgba(233, 221, 221, 0.781);
+            // color: rgb(220, 38, 38);
+          }
+        }
+      }
     }
-  }
-  .map_wrap {
-    text-align: center;
-  }
-  .Explanation {
-    font-size: 1.4em;
+    .Explanation_text {
+      font-size: 1.5em;
+      text-align: center;
+    }
   }
 }
