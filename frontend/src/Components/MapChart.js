@@ -73,13 +73,7 @@ const MapChart = ({ setTooltipContent }) => {
                       const { ISO_A2 } = geo.properties;
                       console.log(NAME, ISO_A2);
                       if (d["Status"] === "1") {
-                        history.push({
-                          pathname: "/timeLine",
-                          props: {
-                            nation: NAME,
-                            nationCode: ISO_A2.toLowerCase(),
-                          },
-                        });
+                        history.push(`/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`)
                       }
                     }}
                     onMouseEnter={() => {

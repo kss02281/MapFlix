@@ -1,30 +1,24 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-// import { southKoreaData } from "../data/Corona_data";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { setNationInfo, setWeek } from "../Redux/action";
 import DrawBar from "../Components/DrawBar";
-import BorderSelect from "../Components/BorderSelect";
-import styled, { css } from "styled-components";
-import { Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import ReactHover, { Trigger, Hover } from "react-hover";
-import {
-  FaAngleDoubleDown,
-  FaAngleDoubleUp,
-  FaAngleDoubleLeft,
-} from "react-icons/fa";
-import { HiCursorClick } from "react-icons/hi";
-import { BsCircleFill } from "react-icons/bs";
+import BorderSelect from '../Components/BorderSelect';
+import styled, {css} from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ReactHover, { Trigger, Hover } from 'react-hover';
+import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-icons/fa';
+import { HiCursorClick } from 'react-icons/hi';
+import { BsCircleFill } from 'react-icons/bs';
 
-import "../css/TimeLine.scss";
+import { setDate } from '../Redux/actions/yearWeek'
+
+import queryString from 'query-string'; 
+import '../css/TimeLine.scss';
+
 
 function DrawBarChart(props) {
   const dispatch = useDispatch();
-  const barRef = useRef();
-
-  const [nationName, setNationName] = useState("");
+  const [cnt, setCnt] = useState(0);
   const [coronaData, setCoronaData] = useState([]);
-  const [nationCode, setNationCode] = useState(props.nationCode);
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
@@ -57,43 +51,34 @@ function DrawBarChart(props) {
     Sport: "#00BFFF",
   };
 
-  useEffect(() => {
-    setNationCode(props.nationCode);
-    setNationName(props.nation);
-    dispatch(setNationInfo(nationName, nationCode));
-  }, [nationName, nationCode]);
 
   useMemo(() => {
     console.log("/timeline/" + props.nationCode);
     console.log(props.nationCode);
     console.log(props.nation);
-    fetch("/timeline/" + nationCode)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-      })
-      .then((data) =>
-        setCoronaData(
-          data.map((item) => {
-            return { week: item.week, confirmedCnt: item.confirmed };
-          })
-        )
-      );
+    fetch('/timeline/'+props.nationCode).then(response => {
+      if(response.ok){
+        return response.json()
+      }
+    }).then(data => setCoronaData(data.map(item => {
+        return {week: item.week, confirmedCnt: item.confirmed}
+    })))
+    
+    console.log(coronaData)
+    setCnt(1);
+  },[cnt])
 
-    console.log(coronaData);
-  }, [nationName]);
 
-  useEffect(() => {
-    const confirmedList = coronaData.map((item) => item.confirmedCnt);
-    confirmedList.sort(function (a, b) {
-      return parseInt(a - b);
+  useEffect(()=>{
+    const confirmedList = coronaData.map((item)=>item.confirmedCnt);
+    confirmedList.sort(function(a,b){
+      return parseInt(a-b);
     });
-    setMaxVal(confirmedList[confirmedList.length - 1]);
-
-    setRatio(maxVal / 400);
-    console.log(confirmedList[confirmedList.length - 1]);
-  }, [coronaData]);
+    setMaxVal(confirmedList[confirmedList.length-1]);
+    
+    setRatio(maxVal/400);
+    console.log(confirmedList[confirmedList.length-1]);
+  },[ coronaData ])
 
   const optionsCursorTrueWithMargin = {
     followCursor: true,
@@ -102,55 +87,55 @@ function DrawBarChart(props) {
   };
 
   return (
-    <div className="timeline">
-      <span className="nationName">{nationName}'s</span>
-      <span className="title"> confirmed people by week</span>
-      <ChartContainer maxHeight={maxVal}>
-        {coronaData.map((item, idx) => (
-          <>
-            <Bar />
-            <ReactHover options={optionsCursorTrueWithMargin}>
-              <Trigger type="trigger">
-                <DrawBar
-                  confirmedCnt={item.confirmedCnt}
-                  maxHeight={maxVal}
-                  ratio={ratio}
-                  onClick={() => {
-                    console.log(item.week);
-                    const [year, week] = [
-                      parseInt(item.week.slice(0, 4)),
-                      parseInt(item.week.slice(5, 8)),
-                    ];
-                    console.log(year, week);
-                    dispatch(setWeek(year, week));
-                    const content = document.getElementById("content");
-                    window.scrollBy({
-                      top: content.getBoundingClientRect().top,
-                      behavior: "smooth",
-                    });
-                  }}
-                  ref={barRef}
-                />
-              </Trigger>
-              <Hover type="hover">
-                <div className="hoverContainer">
-                  <p className="hover">{nationName}</p>
-                  <p className="hover">{item.week}</p>
-                  <p className="hover">
-                    Confirmed People : {item.confirmedCnt}
-                  </p>
-                </div>
-              </Hover>
-            </ReactHover>
-          </>
-        ))}
-        <div className="genrecolor">
-          {Object.entries(genre_colors).map(([key, value]) => (
-            <div className="colorlist">
-              {key}
-              <div className="circle">
-                <BsCircleFill color={value} />
-              </div>
+      <div className='timeline'>
+          <span className="nationName">{props.nation}'s</span>
+          <span className="title"> confirmed people by week</span>
+          <ChartContainer maxHeight={maxVal}>
+            {
+              coronaData.map((item, idx) => (
+                <>
+                  <Bar />
+                  <ReactHover options={optionsCursorTrueWithMargin}>
+                    <Trigger type="trigger">
+                      <DrawBar
+                        confirmedCnt={item.confirmedCnt}
+                        maxHeight={maxVal}
+                        ratio={ratio}
+                        onClick={() => {
+                          console.log(item.week);
+                          const [year, week] = [parseInt(item.week.slice(0,4)), parseInt(item.week.slice(5,8))];
+                          console.log(year, week)
+                          dispatch(setDate({
+                            'year': year, 
+                            'week': week
+                          }))
+                          const content = document.getElementById('content');
+                          window.scrollBy({top: content.getBoundingClientRect().top, behavior: 'smooth'});
+                        }}
+                      />
+                    </Trigger>
+                    <Hover type='hover'>
+                      <div className='hoverContainer'>
+                        <p className='hover'>{props.nation}</p>
+                        <p className='hover'>{item.week}</p>
+                        <p className='hover'>Confirmed People : {item.confirmedCnt}</p>
+                      </div>
+                    </Hover>
+                  </ReactHover>
+                </>
+              ))
+            }
+            <div className='genrecolor'>
+
+              {
+                Object.entries(genre_colors).map(([key, value])=>(
+                  <div className='colorlist'>
+                    {key}
+                    <div className='circle'><BsCircleFill color={value}/></div>
+                  </div>
+                ))
+              }
+              
             </div>
           ))}
         </div>
@@ -163,16 +148,18 @@ function DrawBarChart(props) {
   );
 }
 
-const TimeLine = ({ history, location }) => {
-  const nation = location.props.nation;
-  const nationCode = location.props.nationCode;
+const TimeLine = ({ history, location, match }) => {
+  const query = queryString.parse(location.search)
+  console.log(query)
+  const { nation, nationCode } = query;
+
   const { year, week } = useSelector(
-    (state) => ({
-      year: state.currentYear,
-      week: state.currentWeek,
+    state => ({
+      year: state.yearWeek.year, week: state.yearWeek.week
     }),
     shallowEqual
-  );
+  )
+  
 
   const goToMain = () => {
     history.push("/");
