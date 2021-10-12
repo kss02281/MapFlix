@@ -1,28 +1,24 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-// import { southKoreaData } from "../data/Corona_data";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { setNationInfo, setWeek } from "../Redux/action";
 import DrawBar from "../Components/DrawBar";
 import BorderSelect from '../Components/BorderSelect';
 import styled, {css} from 'styled-components';
-import { Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactHover, { Trigger, Hover } from 'react-hover';
 import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-icons/fa';
 import { HiCursorClick } from 'react-icons/hi';
 import { BsCircleFill } from 'react-icons/bs';
 
+import { setDate } from '../redux/actions/yearWeek'
 
+import queryString from 'query-string'; 
 import '../css/TimeLine.scss';
 
 
 function DrawBarChart(props) {
   const dispatch = useDispatch();
-  const barRef = useRef();
-
-  const [nationName, setNationName] = useState('');
+  const [cnt, setCnt] = useState(0);
   const [coronaData, setCoronaData] = useState([]);
-  const [nationCode, setNationCode] = useState(props.nationCode);
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
@@ -56,16 +52,13 @@ function DrawBarChart(props) {
     'Sport':'#00BFFF'
   }
 
-  useEffect(() => {
-    setNationCode(props.nationCode);
-    setNationName(props.nation);
-    dispatch(setNationInfo(nationName, nationCode))
-  },[ nationName , nationCode])
+
 
   useMemo(() => {
     console.log('/timeline/'+props.nationCode);
-
-    fetch('/timeline/'+nationCode).then(response => {
+    console.log(props.nationCode);
+    console.log(props.nation);
+    fetch('/timeline/'+props.nationCode).then(response => {
       if(response.ok){
         return response.json()
       }
@@ -74,7 +67,8 @@ function DrawBarChart(props) {
     })))
     
     console.log(coronaData)
-  },[ nationName ])
+    setCnt(1);
+  },[cnt])
 
 
   useEffect(()=>{
@@ -86,7 +80,7 @@ function DrawBarChart(props) {
     
     setRatio(maxVal/400);
     console.log(confirmedList[confirmedList.length-1]);
-  },[coronaData])
+  },[ coronaData ])
 
   const optionsCursorTrueWithMargin = {
     followCursor:true,
@@ -96,7 +90,7 @@ function DrawBarChart(props) {
 
   return (
       <div className='timeline'>
-          <span className="nationName">{nationName}'s</span>
+          <span className="nationName">{props.nation}'s</span>
           <span className="title"> confirmed people by week</span>
           <ChartContainer maxHeight={maxVal}>
             {
@@ -113,16 +107,18 @@ function DrawBarChart(props) {
                           console.log(item.week);
                           const [year, week] = [parseInt(item.week.slice(0,4)), parseInt(item.week.slice(5,8))];
                           console.log(year, week)
-                          dispatch(setWeek(year, week))
+                          dispatch(setDate({
+                            'year': year, 
+                            'week': week
+                          }))
                           const content = document.getElementById('content');
                           window.scrollBy({top: content.getBoundingClientRect().top, behavior: 'smooth'});
                         }}
-                        ref={barRef}
                       />
                     </Trigger>
                     <Hover type='hover'>
                       <div className='hoverContainer'>
-                        <p className='hover'>{nationName}</p>
+                        <p className='hover'>{props.nation}</p>
                         <p className='hover'>{item.week}</p>
                         <p className='hover'>Confirmed People : {item.confirmedCnt}</p>
                       </div>
@@ -152,16 +148,18 @@ function DrawBarChart(props) {
   )
 }
 
-const TimeLine = ({ history, location }) => {
-  const nation = location.props.nation;
-  const nationCode = location.props.nationCode;
-  const {year, week} = useSelector(
+const TimeLine = ({ history, location, match }) => {
+  const query = queryString.parse(location.search)
+  console.log(query)
+  const { nation, nationCode } = query;
+
+  const { year, week } = useSelector(
     state => ({
-      year: state.currentYear,
-      week: state.currentWeek
+      year: state.yearWeek.year, week: state.yearWeek.week
     }),
     shallowEqual
   )
+  
 
   const goToMain = () => {
     history.push("/");
