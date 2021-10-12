@@ -65,7 +65,7 @@ function DrawBarChart(props) {
   useMemo(() => {
     console.log('/timeline/'+props.nationCode);
     console.log(props.nationCode);
-    console.log(props.nation);
+    console.log(props.nation)
     fetch('/timeline/'+nationCode).then(response => {
       if(response.ok){
         return response.json()

@@ -1,23 +1,16 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Title_logo from "./img/title.png";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 
-const GoToTimeline = () => {
-    const history = useHistory();
 
-    history.push({
-        pathname: "/timeLine",
-        props: {
-          nation: 'India',
-          nationCode: 'IN',
-        },
-      });
-    }
 
 
 const NavBar = () => {
+    
+        
+    
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{width:"100%", backgroundColor:"black"}}>
       <a className="navbar-brand" href="/" style={{marginLeft:'3vw', width:"100px"}}><img src={Title_logo} alt=""  style={{width:"150px"}}/></a>
@@ -30,7 +23,10 @@ const NavBar = () => {
             <a className="nav-link" href="/" style={{width:"100px"}}>Covid-19</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/timeline" style={{width:"100px"}} onClick={GoToTimeline}>Timeline</a>
+            <a className="nav-link" href="/genreanalysis" style={{width:"140px"}}>Genre-Analysis</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" nation={"India"} nationCode={"in"} style={{width:"100px"}}>Timeline</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/dicerec" style={{width:"100px"}}>Dice-Rec</a>
@@ -38,6 +34,7 @@ const NavBar = () => {
           <li className="nav-item">
             <a className="nav-link" href="/makers" >Makers</a>
           </li>
+          
         </ul>
       </div>
     </nav>
