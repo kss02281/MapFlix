@@ -83,6 +83,7 @@ const MapChart = ({ setTooltipContent }) => {
                       }
                     }}
                     onMouseEnter={() => {
+                      console.log(geo);
                       const { NAME, POP_EST } = geo.properties;
                       const countryName = {
                         display: "inline-block",

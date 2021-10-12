@@ -2,6 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 $body-font: "Maven Pro", sans-serif;
+body {
+  background-color: #111111;
+}
 p {
   color: rgb(173, 173, 173);
 }
@@ -10,10 +13,11 @@ circle {
 }
 
 .mainWrap {
-  background-color: #111111;
+  // background-color: #111111;
   text-align: center;
   .header {
     text-align: center;
+    margin-top: 30px;
   }
   .Explanation_Wrap {
     .Explanation {
@@ -28,7 +32,7 @@ circle {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        margin-right: 15px;
+        margin-bottom: 30px;
         .Explanation_green {
           display: flex;
           align-items: center;
