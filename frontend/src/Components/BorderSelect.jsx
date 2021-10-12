@@ -6,8 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-// Original design here: https://github.com/siriwatknp/mui-treasury/issues/541
-
 function BorderSelect() {
   const [val,setVal] = useState(1);
 
@@ -24,11 +22,11 @@ function BorderSelect() {
     },
     anchorOrigin: {
       vertical: "bottom",
-        horizontal: "left"
+        horizontal: "right"
     },
     transformOrigin: {
       vertical: "top",
-        horizontal: "left"
+        horizontal: "right"
     },
     getContentAnchorEl: null
   };
@@ -43,6 +41,7 @@ function BorderSelect() {
       <InputLabel
         className={borderSelectClasses.label}
         id="inputLabel"
+        style={{color:'white'}}
       >LABEL</InputLabel>
       <Select
         disableUnderline
@@ -52,6 +51,7 @@ function BorderSelect() {
         MenuProps={menuProps}
         value={val}
         onChange={handleChange}
+        style={{backgroundColor:'white'}}
       >
         <MenuItem value={0}>None</MenuItem>
         <MenuItem value={1}>One</MenuItem>

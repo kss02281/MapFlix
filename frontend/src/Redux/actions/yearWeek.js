@@ -6,7 +6,8 @@ export function setDate(date) {
     type: type.SET_DATE,
     payload: {
       year : date.year,
-      week : date.week
+      week : date.week,
+      date : date.date
     }
   }
 }
