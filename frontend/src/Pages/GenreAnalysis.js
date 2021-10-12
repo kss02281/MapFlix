@@ -36,40 +36,19 @@ const dataText = data.map((datas) =>
   return (
     <div>
         <div className="Title">Correlation between Covid-19 confirmeds and Netflix subscribers</div>
+        <div className="Gap"></div>
         <div className="Graph">
+            <img src="https://han.gl/5HFmY" style={{width:"55vw"}}/>
+        {/*
             <div className="Box">
             <div className="dataBar">{dataBar}</div>
             </div>
             
             <div className="dataText">{dataText}</div>
+        ​ */}
         </div>
         <div className="Description">
-            하얗게 번지는 머릿속에다
-            그대를 새겨놓고 저 멀리 날아가
-모든 게 보이는 두 눈을 감고서
-시간을 되돌려서 그 때로 돌아가고 싶어
-Falling 이대로, falling for you
-날 잡아줄 수 없어도
-Falling 이대로, falling for you
-날 감싸줄 수 없나요
-좋았던 나날도 너무 아팠던 날도
-이제 돌이켜보면 그저 그랬었나요
-아니라 말해요 멍든 가슴도
-멍해진 내마음도 다시 느낄 수만 있다면
-Falling 이대로, falling for you
-날 잡아줄 수 없어도
-Falling 또 다시, falling for you
-날 감싸줄 수 없나요
-까맣게 번지는 하늘 위에서
-한없이 추락하는 날 보고만 있네요
-Falling 이대로, falling for you
-이런 날 잡아 주세요
-Falling 또 다시, falling for you
-제발 날 감싸 주세요
-한없이 추락하더라도
-바닥까지 떨어져도
-그댈 향해, 난 falling for you
-그저 그대만 보네요</div>
+        In the graph above, the bars represent the number of confirmed cases, and the line represents the number of Netflix's new subscribers. In the beginning of the pandemic, the number of subscribers was greatly increased, but over time, the number of subscribers decreased significantly.  And then, at some point, you can see that it rises sharply. It is presumed to be because the number of confirmed cases surged as the lockdown in certain areas was eased, resulting in a stronger lockdown. Since then, there has been a significant increase or decrease in the number of confirmed cases, but the number of new subscribers is decreasing. This means that people have enough subscriptions, no more new subscriptions.</div>
     </div>
   );
 }
