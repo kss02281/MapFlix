@@ -3,7 +3,6 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import DrawBar from "../Components/DrawBar";
 import MovieBox from "../Components/MovieBox";
 import ShowBox from "../Components/ShowBox";
-import BorderSelect from '../Components/BorderSelect';
 import styled, {css} from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactHover, { Trigger, Hover } from 'react-hover';
@@ -12,6 +11,7 @@ import { HiCursorClick } from 'react-icons/hi';
 import { BsCircleFill } from 'react-icons/bs';
 
 import { setDate } from '../redux/actions/yearWeek'
+import { getContentShow } from '../redux/actions/contentShow'
 
 import { weekDate } from "../data/Week_date";
 import queryString from 'query-string'; 
@@ -66,6 +66,9 @@ function DrawBarChart(props) {
     }).then(data => setCoronaData(data.map(item => {
         return {week: item.week, confirmedCnt: item.confirmed}
     })))
+
+
+    
     
     console.log(coronaData)
     setCnt(1);
@@ -111,7 +114,8 @@ function DrawBarChart(props) {
                             'week': week,
                             'date': weekDate[item.week],
                           }))
-                          
+                          dispatch(getContentShow({nationCode: props.nationCode,week: item.week}))
+
                           const content = document.getElementById('content');
                           window.scrollBy({top: content.getBoundingClientRect().top, behavior: 'smooth'});
                         }}
@@ -176,7 +180,7 @@ const TimeLine = ({ history, location }) => {
   return (
     <div>
       <button className='arrowButton' onClick={goToMain}><FaAngleDoubleLeft className='arrowIcon'/>Go To Main Page</button>
-      <BorderSelect styled={{color: 'white'}} nation={nation}/>
+
       <DrawBarChart nation={nation} nationCode={nationCode}/>
       <Container>
         <h1 className='guide'>Click on the stick for details by week <HiCursorClick/></h1>
