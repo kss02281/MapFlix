@@ -84,8 +84,9 @@ class NetflixContent(db.Model):
     genre7 = db.Column(db.String(240), nullable=True)
     genre8 = db.Column(db.String(240), nullable=True)
     genre9 = db.Column(db.String(240), nullable=True)
+    poster = db.Column(db.String(240))
 
-    def __init__(self, title, content_type, genre1, genre2, genre3, genre4, genre5, genre6, genre7, genre8, genre9):
+    def __init__(self, title, content_type, genre1, genre2, genre3, genre4, genre5, genre6, genre7, genre8, genre9, poster):
         self.title = title
         self.content_type = content_type
         self.genre1 = genre1
@@ -97,6 +98,7 @@ class NetflixContent(db.Model):
         self.genre7 = genre7
         self.genre8 = genre8
         self.genre9 = genre9
+        self.poster = poster
     
     @property
     def serialize(self):
@@ -111,7 +113,8 @@ class NetflixContent(db.Model):
         return {
             'title': self.title,
             'content_type': self.content_type,
-            'genre': [self.genre1, self.genre2]
+            'genre': [self.genre1, self.genre2],
+            'poster': self.poster
         }
 
 # 국가별 넷플릭스 top10

@@ -1,5 +1,6 @@
 from flask import Flask, Blueprint, jsonify
 from models import *
+import random
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
@@ -27,21 +28,44 @@ def get_netflix_top1(country_code):
 
     top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
         filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.rank == 1).all()
+    
 
-    return jsonify([top1.serialize for top1 in top1_list])
+    return jsonify([top1.serialize2 for top1 in top1_list])
 
 # 국가별 각 주차의 top10 영화리스트, tv쇼 리스트
 @bp.route('/netflix/<string:country_code>/<string:week>/top10', methods=['GET'])
 def get_netflix_top10(country_code, week):
+    x = random.randint(1, 3)
+
     top10_movies = db.session.query(NetflixContent).join(NetflixTop10).\
         filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.content_type == 'movies').all()
+
+    for movie in top10_movies:
+        if 'img' in movie.poster == '':
+            movie.poster = f'../../frontend/src/img/{x}.png'
+            db.session.commit()
+
     
     top10_tv_shows = db.session.query(NetflixContent).join(NetflixTop10).\
         filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.content_type == 'tv').all()
+
+    for tv in top10_tv_shows:
+        if 'img' in tv.poster :
+            tv.poster = f'../../frontend/src/img/{x}.png'
+            db.session.commit()
+    
+    
+
+    new_top10_movies = db.session.query(NetflixContent).join(NetflixTop10).\
+        filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.content_type == 'movies').all()
+    
+    new_top10_tv_shows = db.session.query(NetflixContent).join(NetflixTop10).\
+        filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.content_type == 'tv').all()
+
     
     return jsonify(
-        {'movies': [movie.serialize2 for movie in top10_movies],
-        'tv_shows': [tv.serialize2 for tv in top10_tv_shows]
+        {'movies': [movie.serialize2 for movie in new_top10_movies],
+        'tv_shows': [tv.serialize2 for tv in new_top10_tv_shows]
         })
 
 # 국가별 각 주차의 가장 인기있는 장르와 색상
