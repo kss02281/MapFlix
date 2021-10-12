@@ -1,0 +1,44 @@
+.countryName {
+  display: inline-block;
+  border: 1px solid black;
+  font-size: 35px;
+  margin-bottom: 6px;
+}
+.hover_Wrap {
+  display: grid;
+  grid-template-columns: 1fr 10px 1fr;
+  grid-gap: 10px;
+  .leftBox {
+    background-color: whitesmoke;
+    color: black;
+    .subscibes {
+      font-size: 60px;
+      grid-row: 1/3;
+      text-align: center;
+      margin: 0;
+    }
+
+    .total_Subscibes {
+      font-size: 25px;
+      justify-self: end;
+      margin-right: 10px;
+    }
+
+    .increase_Subscibes {
+      justify-self: end;
+      margin-right: 10px;
+      font-weight: 10px;
+    }
+    .Subscribes_Chart {
+      font-family: sans-serif;
+      text-align: center;
+    }
+  }
+  .line {
+    height: auto;
+  }
+  .rightBox {
+    background-color: whitesmoke;
+    color: black;
+  }
+}

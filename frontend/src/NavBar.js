@@ -2,19 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import Title_logo from "./img/title.png";
 import { Link, useHistory } from "react-router-dom";
 
-  history.push({
-    pathname: "/timeLine",
-    props: {
-      nation: "India",
-      nationCode: "IN",
-    },
-  });
-};
-
 const NavBar = () => {
-    
-        
-    
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -49,10 +37,26 @@ const NavBar = () => {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/genreanalysis" style={{width:"140px"}}>Genre-Analysis</a>
+            <a
+              className="nav-link"
+              href="/genreanalysis"
+              style={{ width: "140px" }}
+            >
+              Genre-Analysis
+            </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href={'/timeLine'+'/nationInfo?nation=South Korea'+'&nationCode=kr'} style={{width:"100px"}}>Timeline</a>
+            <a
+              className="nav-link"
+              href={
+                "/timeLine" +
+                "/nationInfo?nation=South Korea" +
+                "&nationCode=kr"
+              }
+              style={{ width: "100px" }}
+            >
+              Timeline
+            </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/dicerec" style={{ width: "100px" }}>
@@ -64,7 +68,6 @@ const NavBar = () => {
               Makers
             </a>
           </li>
-          
         </ul>
       </div>
     </nav>
