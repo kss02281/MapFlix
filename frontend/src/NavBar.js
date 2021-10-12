@@ -3,20 +3,6 @@ import Title_logo from "./img/title.png";
 import { useHistory } from "react-router-dom";
 
 
-
-const GoToTimeline = () => {
-    const history = useHistory();
-
-    history.push({
-        pathname: "/timeLine",
-        props: {
-          nation: 'India',
-          nationCode: 'IN',
-        },
-      });
-    }
-
-
 const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{width:"100%", backgroundColor:"black"}}>
@@ -30,7 +16,7 @@ const NavBar = () => {
             <a className="nav-link" href="/" style={{width:"100px"}}>Covid-19</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/timeline" style={{width:"100px"}} onClick={GoToTimeline}>Timeline</a>
+            <a className="nav-link" href={'/timeLine'+'/nationInfo?nation=South Korea'+'&nationCode=kr'} style={{width:"100px"}}>Timeline</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/dicerec" style={{width:"100px"}}>Dice-Rec</a>
