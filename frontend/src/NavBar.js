@@ -3,10 +3,6 @@ import Title_logo from "./img/title.png";
 import { Link, useHistory } from "react-router-dom";
 
 
-
-
-
-
 const NavBar = () => {
     
         
@@ -26,7 +22,7 @@ const NavBar = () => {
             <a className="nav-link" href="/genreanalysis" style={{width:"140px"}}>Genre-Analysis</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" nation={"India"} nationCode={"in"} style={{width:"100px"}}>Timeline</a>
+            <a className="nav-link" href={'/timeLine'+'/nationInfo?nation=South Korea'+'&nationCode=kr'} style={{width:"100px"}}>Timeline</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/dicerec" style={{width:"100px"}}>Dice-Rec</a>

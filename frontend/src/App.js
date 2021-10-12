@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { GenreAnalysis, Main, TimeLine } from './Pages';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
@@ -14,9 +14,12 @@ class App extends Component {
         <NavBar />
           <BrowserRouter>
             <Route path="/" exact component={Main} />
-            <Route path="/timeLine" component={TimeLine} />
-            <Route path="/makers" component={Makers} />
-            <Route path="/genreanalysis" component={GenreAnalysis} />
+            <Switch>
+              <Route path="/timeLine/:nation/:nationCode" component={TimeLine} />
+              <Route path="/timeLine" component={TimeLine} />              
+              <Route path="/makers" component={Makers} />
+              <Route path="/genreanalysis" component={GenreAnalysis} />
+            </Switch>
           </BrowserRouter>
         </div>
       </Provider>
