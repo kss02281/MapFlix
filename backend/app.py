@@ -1,7 +1,7 @@
 from flask import Flask 
 from db_connect import db
 import config
-from models import TestModel
+from models import SubscribersByCountry
 
 def create_app():
     app = Flask(__name__)
