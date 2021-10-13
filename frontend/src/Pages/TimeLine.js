@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import DrawBar from "../Components/DrawBar";
-import BorderSelect from '../Components/BorderSelect';
+import MovieBox from "../Components/MovieBox";
+import ShowBox from "../Components/ShowBox";
 import styled, {css} from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactHover, { Trigger, Hover } from 'react-hover';
@@ -9,8 +10,11 @@ import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-ico
 import { HiCursorClick } from 'react-icons/hi';
 import { BsCircleFill } from 'react-icons/bs';
 
-import { setDate } from '../Redux/actions/yearWeek'
+import { setDate } from '../redux/actions/yearWeek'
+import { getContentShow } from '../redux/actions/contentShow'
 
+
+import { weekDate } from "../data/Week_date";
 import queryString from 'query-string'; 
 import '../css/TimeLine.scss';
 
@@ -52,8 +56,6 @@ function DrawBarChart(props) {
     'Sport':'#00BFFF'
   }
 
-
-
   useMemo(() => {
     console.log('/timeline/'+props.nationCode);
     console.log(props.nationCode);
@@ -65,10 +67,11 @@ function DrawBarChart(props) {
     }).then(data => setCoronaData(data.map(item => {
         return {week: item.week, confirmedCnt: item.confirmed}
     })))
-    
+
+
     console.log(coronaData)
     setCnt(1);
-  },[cnt])
+  },[ cnt ])
 
 
   useEffect(()=>{
@@ -104,13 +107,14 @@ function DrawBarChart(props) {
                         maxHeight={maxVal}
                         ratio={ratio}
                         onClick={() => {
-                          console.log(item.week);
                           const [year, week] = [parseInt(item.week.slice(0,4)), parseInt(item.week.slice(5,8))];
-                          console.log(year, week)
                           dispatch(setDate({
                             'year': year, 
-                            'week': week
+                            'week': week,
+                            'date': weekDate[item.week],
                           }))
+                          dispatch(getContentShow({nationCode: props.nationCode,week: item.week}))
+
                           const content = document.getElementById('content');
                           window.scrollBy({top: content.getBoundingClientRect().top, behavior: 'smooth'});
                         }}
@@ -148,14 +152,16 @@ function DrawBarChart(props) {
   )
 }
 
-const TimeLine = ({ history, location, match }) => {
+const TimeLine = ({ history, location }) => {
   const query = queryString.parse(location.search)
   console.log(query)
   const { nation, nationCode } = query;
 
-  const { year, week } = useSelector(
+  const { year, week, date } = useSelector(
     state => ({
-      year: state.yearWeek.year, week: state.yearWeek.week
+      year: state.yearWeek.year, 
+      week: state.yearWeek.week, 
+      date: state.yearWeek.date
     }),
     shallowEqual
   )
@@ -173,17 +179,22 @@ const TimeLine = ({ history, location, match }) => {
   return (
     <div>
       <button className='arrowButton' onClick={goToMain}><FaAngleDoubleLeft className='arrowIcon'/>Go To Main Page</button>
-      {/* <BorderSelect styled={{color: 'white'}}/> */}
+
       <DrawBarChart nation={nation} nationCode={nationCode}/>
       <Container>
         <h1 className='guide'>Click on the stick for details by week <HiCursorClick/></h1>
         <FaAngleDoubleDown className='arrowIcon'/>
         <div id='contentContainer'>
-          <h1>{year}, WEEK {week}</h1>
+          <h1 className='contentBox'>WEEK {week} ({date},  {year})</h1> 
+          
           <div id='content'>
-            <div className='movie'>Movie</div>
+            <div className='movie'>
+              <MovieBox />
+            </div>
             <div className='updown'></div>
-            <div className='show'>Show</div>
+            <div className='show'>
+              <ShowBox />
+            </div>
           </div>
         </div>
         

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 import styled, {css} from 'styled-components'
 
 
@@ -22,7 +22,7 @@ function DrawBar(props) {
     )
 }
 
-export default DrawBar;
+export default memo(DrawBar);
 
 const Bar = styled.div`
     width: 12px;

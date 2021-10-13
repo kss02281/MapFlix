@@ -6,6 +6,8 @@ import store from './Redux/store';
 import NavBar from './NavBar';
 import Makers from './Pages/Makers';
 
+
+
 class App extends Component {
   render() {
     return (
