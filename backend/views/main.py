@@ -5,8 +5,6 @@ import random
 bp = Blueprint('main', __name__, url_prefix='/')
 
 # 국가별로 전체 week 확진자 수 불러오기
-
-
 @bp.route('/timeline/<string:country_code>', methods=['GET'])
 def get_confirmed_num(country_code):
 
@@ -18,8 +16,7 @@ def get_confirmed_num(country_code):
 # 국가별로 넷플릭스 구독자/매출 불러오기
 @bp.route('/netflix/<string:country_code>', methods=['GET'])
 def get_subscribers_num(country_code):
-    data = db.session.query(SubscribersByCountry).filter(
-        SubscribersByCountry.country_code == country_code).first()
+    data = db.session.query(SubscribersByCountry).filter(SubscribersByCountry.country_code == country_code).first()
 
     return jsonify({'q1_subscribers': data.q1_subscribers, 'q2_subscribers': data.q2_subscribers})
 
@@ -42,7 +39,7 @@ def get_netflix_top1(country_code):
     
     return jsonify([top1.serialize2 for top1 in new_top1_list])
 
-# 국가별 각 주차의 1위 영화, tv쇼 리스트 불러오기
+# 국가별 각 주차의 1위 영화, tv쇼 불러오기
 @bp.route('/netflix/<string:country_code>/top1', methods=['GET'])
 def get_netflix_top1_by_week(country_code):
     rank = 1
@@ -130,23 +127,3 @@ def get_top_genre(country_code, week):
     color = db.session.query(GenreColor).filter(GenreColor.genre == top_genre).first()
 
     return jsonify({'genre': top_genre, 'color': color.color})
-
-# 국가별 각 주차의 1위 영화, tv쇼
-@bp.route('/netflix/<string:country_code>/<string:week>/top1', methods=['GET'])
-def get_netflix_top1_by_week(country_code, week):
-    rank = 1
-
-    top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
-        filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.rank == rank).all()
-    
-    x = random.randint(1, 3)
-    for content in top1_list:
-        if (content.poster == '') or ('img' in content.poster):
-            content.poster = f'../../frontend/src/img/{x}.png'
-            db.session.commit()
-    
-    new_top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
-        filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.rank == rank).all()
-    
-
-    return jsonify([top1.serialize2 for top1 in new_top1_list])

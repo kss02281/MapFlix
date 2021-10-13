@@ -29,6 +29,7 @@ function MapHover(props) {
         }
       })
       .then((data) => {
+        console.log(data)
         setSubscibesQ1(data.q1_subscribers);
         setSubscibesQ2(data.q2_subscribers);
       });

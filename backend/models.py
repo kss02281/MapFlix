@@ -1,8 +1,6 @@
-from db_connect import db
+from db_connect import db 
 
-# 국가코드, 국가명
-
-
+# 국가코드, 국가명 
 class Country(db.Model):
     __tablename__ = 'country'
 
@@ -12,7 +10,7 @@ class Country(db.Model):
     def __init__(self, country_code, country):
         self.country_code = country_code
         self.country = country
-
+    
     @property
     def serialize(self):
         return {
@@ -20,15 +18,12 @@ class Country(db.Model):
             'country': self.country
         }
 
-# 국가별 넷플릭스 구독자, 소득
-
-
+# 국가별 넷플릭스 구독자, 소득 
 class SubscribersByCountry(db.Model):
     __tablename__ = 'netflix_subscribers_revenue_by_country'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    country_code = db.Column(db.String(240), db.ForeignKey(
-        'country.country_code'), nullable=True)
+    country_code = db.Column(db.String(240), db.ForeignKey('country.country_code'),nullable=True)
     q1_subscribers = db.Column(db.Integer)
     q1_revenue = db.Column(db.BigInteger)
     q2_subscribers = db.Column(db.Integer)
@@ -52,22 +47,19 @@ class SubscribersByCountry(db.Model):
         }
 
 # 국가별/주차별 코로나 확진자
-
-
 class CovidConfirmed(db.Model):
     __tablename__ = 'covid_confirmed'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    country_code = db.Column(db.String(240), db.ForeignKey(
-        'country.country_code'), nullable=False)
+    country_code = db.Column(db.String(240), db.ForeignKey('country.country_code'), nullable=False)
     week = db.Column(db.String(240))
     confirmed = db.Column(db.Integer)
 
     def __init__(self, country_code, week, confirmed):
-        self.country_code = country_code
+        self.country_code = country_code 
         self.week = week
         self.confirmed = confirmed
-
+    
     @property
     def serialize(self):
         return {
@@ -76,14 +68,11 @@ class CovidConfirmed(db.Model):
             'confirmed': self.confirmed
         }
 
-# 넷플릭스 작품
-
-
+# 넷플릭스 작품 
 class NetflixContent(db.Model):
     __tablename__ = 'netflix_content'
 
-    id = db.Column(db.Integer, primary_key=True,
-                   autoincrement=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     title = db.Column(db.String(240), nullable=False)
     content_type = db.Column(db.String(240), nullable=True)
     genre1 = db.Column(db.String(240), nullable=True)
@@ -110,7 +99,7 @@ class NetflixContent(db.Model):
         self.genre8 = genre8
         self.genre9 = genre9
         self.poster = poster
-
+    
     @property
     def serialize(self):
         return {
@@ -119,7 +108,6 @@ class NetflixContent(db.Model):
             'content_type': self.content_type,
             'genre': [self.genre1, self.genre2, self.genre3, self.genre4, self.genre5, self.genre6, self.genre7, self.genre8, self.genre9]
         }
-
     @property
     def serialize2(self):
         return {
@@ -130,15 +118,11 @@ class NetflixContent(db.Model):
         }
 
 # 국가별 넷플릭스 top10
-
-
 class NetflixTop10(db.Model):
     __tablename__ = 'netflix_top10'
 
-    id = db.Column(db.Integer, primary_key=True,
-                   autoincrement=True, nullable=False)
-    country_code = db.Column(db.String(240), db.ForeignKey(
-        'country.country_code'), nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    country_code = db.Column(db.String(240), db.ForeignKey('country.country_code'),nullable=False)
     week = db.Column(db.String(240))
     content_id = db.Column(db.Integer, db.ForeignKey('netflix_content.id'))
     content_type = db.Column(db.String(240), nullable=True)
@@ -150,7 +134,7 @@ class NetflixTop10(db.Model):
         self.content_id = content_id
         self.content_type = content_type
         self.rank = rank
-
+    
     @property
     def serialize(self):
         return {
@@ -162,13 +146,10 @@ class NetflixTop10(db.Model):
             'rank': self.rank
         }
 
-# 장르-색상
-
-
+# 장르-색상 
 class GenreColor(db.Model):
     __tablename__ = 'genre_color'
 
-    id = db.Column(db.Integer, primary_key=True,
-                   autoincrement=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     genre = db.Column(db.String(240))
     color = db.Column(db.String(240))
