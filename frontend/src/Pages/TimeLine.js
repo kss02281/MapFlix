@@ -74,6 +74,10 @@ function DrawBarChart(props) {
                   <ReactHover options={optionsCursorTrueWithMargin}>
                     <Trigger type="trigger">
                       <DrawBar
+                        countryCode={props.nationCode}
+                        fullweek={item.week}
+                        year={parseInt(item.week.slice(0,4))}
+                        week={parseInt(item.week.slice(5,8))}
                         confirmedCnt={item.confirmedCnt}
                         maxHeight={maxVal}
                         ratio={ratio}
