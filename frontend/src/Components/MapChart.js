@@ -9,8 +9,12 @@ import {
   Graticule,
 } from "react-simple-maps";
 import { useHistory } from "react-router";
+
 import { useDispatch } from "react-redux";
 import { getTopContentList } from '../redux/actions/topContentList' 
+
+import MapHover from "./MapHover";
+import MapHoverNodata from "./MapHoverNodata";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -64,6 +68,7 @@ const MapChart = ({ setTooltipContent }) => {
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
+                console.log();
                 const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
                 return (
                   <Geography
@@ -71,84 +76,32 @@ const MapChart = ({ setTooltipContent }) => {
                     geography={geo}
                     fill={d ? colorScale(d["Status"]) : "gray"}
                     onClick={(Status) => {
-                      const { NAME } = geo.properties;
-                      const { ISO_A2 } = geo.properties;
-                      console.log(d["Status"]);
-                      console.log(NAME);
-                      console.log(ISO_A2);
+                      const { NAME, ISO_A2 } = geo.properties;
+                      console.log(NAME, ISO_A2);
                       if (d["Status"] === "1") {
                         dispatch(getTopContentList({nationCode: ISO_A2.toLowerCase()}))
                         history.push(`/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`)
+
                       }
                     }}
                     onMouseEnter={() => {
-                      const { NAME, POP_EST } = geo.properties;
-                      const countryName = {
-                        display: "inline-block",
-                        boder: "1px solid black",
-                        fontSize: "35px",
-                        marginBottom: "6px",
-                      };
-                      const mapBox = {
-                        display: "grid",
-                        width: "250px",
-                        height: "250px",
-                        boder: "1px solid black",
-                        fontSize: "20px",
-                        marginBottom: "6px",
-                        backgroundColor: "yellow",
-                        color: "black",
-                        gridTemplateRows: "35px 40px 1fr",
-                        gridTemplateColumns: "70px 1fr",
-                      };
-                      const container = {
-                        display: "grid",
-                        gridTemplateColumns: "1fr 10px 1fr",
-                        gridGap: "10px",
-                      };
-                      const number = {
-                        fontSize: "60px",
-                        gridRow: "1/3",
-                        textAlign: "center",
-                        margin: "0",
-                      };
-                      const text = {
-                        fontSize: "25px",
-                        justifySelf: "end",
-                        marginRight: "10px",
-                      };
-                      const text2 = {
-                        justifySelf: "end",
-                        marginRight: "10px",
-                        fontWeight: "bold",
-                      };
-                      const image = {
-                        alignSelf: "end",
-                      };
-                      const line = {
-                        height: "235px",
-                      };
-                      setTooltipContent(
-                        <div>
-                          <div style={countryName}>{NAME}</div>
-                          <div style={container}>
-                            <div style={{backgroundColor: "white", color:'black'}}>
-                              <div style={number}>6</div>
-                              <div style={text}>Subscibes</div>
-                              <div style={text2}>67.28M</div>
-                              <div style={image}>
-                                <img src="https://han.gl/kF7Bm" width="150px" />
-                              </div>
-                            </div>
-                            <hr style={line}></hr>
-                            <div style={{backgroundColor: "white", color:'black', fontSize:'2em'}}>
-                              <p className='hover' style={{marginTop:'50px'}}>nation name</p>
-                              <p className='hover' style={{padding: '5px'}}>{NAME}</p>
-                              <p className='hover'>{rounded(POP_EST)}</p>
-                            </div>
-                          </div>
-                        </div>
-                      );
+                      const { NAME, ISO_A2 } = geo.properties;
+                      console.log(NAME, ISO_A2);
+                      if (d["Status"] === "1") {
+                        setTooltipContent(
+                          <MapHover
+                            nationName={NAME}
+                            nationCode={ISO_A2.toLowerCase()}
+                          ></MapHover>
+                        );
+                      } else if (d["Status"] === "3" || d["Status"] === "2") {
+                        setTooltipContent(
+                          <MapHoverNodata
+                            nationName={NAME}
+                            nationCode={ISO_A2.toLowerCase()}
+                          ></MapHoverNodata>
+                        );
+                      }
                     }}
                     onMouseLeave={() => {
                       setTooltipContent("");
@@ -165,7 +118,7 @@ const MapChart = ({ setTooltipContent }) => {
                       pressed: {
                         outline: "none",
                         cursor: "pointer",
-                      }
+                      },
                     }}
                   />
                 );

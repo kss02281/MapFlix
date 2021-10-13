@@ -29,7 +29,6 @@ function DrawBarChart(props) {
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
-
   const topContent = useSelector(
     state => (
         state.topContentList.topContent
@@ -37,11 +36,11 @@ function DrawBarChart(props) {
     shallowEqual
   )
 
-
   useMemo(() => {
-    console.log('/timeline/'+props.nationCode);
+    console.log("/timeline/" + props.nationCode);
     console.log(props.nationCode);
     console.log(props.nation);
+
     fetch('/timeline/'+props.nationCode).then(response => {
       if(response.ok){
         return response.json()
@@ -58,26 +57,26 @@ function DrawBarChart(props) {
 
     //console.log(topContent)
     console.log(coronaData)
+
     setCnt(1);
-  },[ cnt ])
+  }, [cnt]);
 
-
-  useEffect(()=>{
-    const confirmedList = coronaData.map((item)=>item.confirmedCnt);
-    confirmedList.sort(function(a,b){
-      return parseInt(a-b);
+  useEffect(() => {
+    const confirmedList = coronaData.map((item) => item.confirmedCnt);
+    confirmedList.sort(function (a, b) {
+      return parseInt(a - b);
     });
-    setMaxVal(confirmedList[confirmedList.length-1]);
-    
-    setRatio(maxVal/400);
-    console.log(confirmedList[confirmedList.length-1]);
-  },[ coronaData ])
+    setMaxVal(confirmedList[confirmedList.length - 1]);
+
+    setRatio(maxVal / 400);
+    console.log(confirmedList[confirmedList.length - 1]);
+  }, [coronaData]);
 
   const optionsCursorTrueWithMargin = {
-    followCursor:true,
-    shiftX:20,
-    shiftY:0
-}
+    followCursor: true,
+    shiftX: 20,
+    shiftY: 0,
+  };
 
   return (
       <div className='timeline'>
@@ -134,40 +133,41 @@ function DrawBarChart(props) {
                   </div>
                 ))
               }
-              
             </div>
-          </ChartContainer>
-          <div className='year'>
-            <div>2020</div>
-            <div>2021</div>
-          </div>
+      </ChartContainer>
+      <div className="year">
+        <div>2020</div>
+        <div>2021</div>
       </div>
-  )
+    </div>
+  );
 }
 
 const TimeLine = ({ history, location }) => {
-  const query = queryString.parse(location.search)
-  console.log(query)
+  const query = queryString.parse(location.search);
+  console.log(query);
   const { nation, nationCode } = query;
 
   const { year, week, date } = useSelector(
-    state => ({
-      year: state.yearWeek.year, 
-      week: state.yearWeek.week, 
-      date: state.yearWeek.date
+    (state) => ({
+      year: state.yearWeek.year,
+      week: state.yearWeek.week,
+      date: state.yearWeek.date,
     }),
     shallowEqual
-  )
-  
+  );
 
   const goToMain = () => {
     history.push("/");
-  }
+  };
 
   const clickToScrollUp = () => {
-    const root = document.getElementById('root');
-    window.scrollBy({top: root.getBoundingClientRect().top - 30, behavior: 'smooth'});
-  }
+    const root = document.getElementById("root");
+    window.scrollBy({
+      top: root.getBoundingClientRect().top - 30,
+      behavior: "smooth",
+    });
+  };
 
   const styleLink = document.createElement("link");
   styleLink.rel = "stylesheet";
@@ -179,23 +179,27 @@ const TimeLine = ({ history, location }) => {
       <button className='arrowButton' onClick={goToMain}><FaAngleDoubleLeft className='arrowIcon'/>Go To Main Page</button>
       <DropDownMenu />
       <DrawBarChart nation={nation} nationCode={nationCode}/>
+
       <Container>
-        <h1 className='guide'>Click on the stick for details by week <HiCursorClick/></h1>
-        <FaAngleDoubleDown className='arrowIcon'/>
-        <div id='contentContainer'>
-          <h1 className='contentBox'>WEEK {week} ({date},  {year})</h1> 
-          
-          <div id='content'>
-            <div className='movie'>
+        <h1 className="guide">
+          Click on the stick for details by week <HiCursorClick />
+        </h1>
+        <FaAngleDoubleDown className="arrowIcon" />
+        <div id="contentContainer">
+          <h1 className="contentBox">
+            WEEK {week} ({date}, {year})
+          </h1>
+
+          <div id="content">
+            <div className="movie">
               <MovieBox />
             </div>
-            <div className='updown'></div>
-            <div className='show'>
+            <div className="updown"></div>
+            <div className="show">
               <ShowBox />
             </div>
           </div>
         </div>
-        
         <div className='bottomArrow'>
           <button className='arrowButton' onClick={clickToScrollUp}><FaAngleDoubleUp className='arrowIcon'/></button>
        </div>
@@ -207,14 +211,13 @@ const TimeLine = ({ history, location }) => {
 
 export default TimeLine;
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 50px;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const ChartContainer = styled.div`
   display: flex;
@@ -225,9 +228,9 @@ const ChartContainer = styled.div`
   justify-content: center;
   align-items: stretch;
   padding: 0;
-  text-align:center;
-`
+  text-align: center;
+`;
 const Bar = styled.div`
-    width: 2px;
-    height: 300px;
-`
+  width: 2px;
+  height: 300px;
+`;
