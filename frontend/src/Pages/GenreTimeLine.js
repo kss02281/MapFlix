@@ -86,7 +86,7 @@ function DrawBarChart(props) {
     followCursor:true,
     shiftX:20,
     shiftY:0
-}
+} 
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
 styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
