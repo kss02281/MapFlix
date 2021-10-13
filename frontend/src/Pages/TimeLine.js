@@ -3,6 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import DrawBar from "../Components/DrawBar";
 import MovieBox from "../Components/MovieBox";
 import ShowBox from "../Components/ShowBox";
+import TimelineHoverBox from "../Components/TimelineHoverBox";
 import styled, {css} from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactHover, { Trigger, Hover } from 'react-hover';
@@ -23,9 +24,18 @@ function DrawBarChart(props) {
   const dispatch = useDispatch();
   const [cnt, setCnt] = useState(0);
   const [coronaData, setCoronaData] = useState([]);
+  const [topContentList, SetTopContentList] = useState([]);
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
+
+  const topContent = useSelector(
+    state => (
+        state.topContentList.topContent
+    ),
+    shallowEqual
+  )
+
 
   useMemo(() => {
     console.log('/timeline/'+props.nationCode);
@@ -40,6 +50,12 @@ function DrawBarChart(props) {
     })))
 
 
+
+    SetTopContentList(topContent)
+    // const sample = Object.values(topContent)[0]['2020-033'][0].title
+    // console.log(sample);
+
+    //console.log(topContent)
     console.log(coronaData)
     setCnt(1);
   },[ cnt ])
@@ -96,11 +112,12 @@ function DrawBarChart(props) {
                       />
                     </Trigger>
                     <Hover type='hover'>
-                      <div className='hoverContainer'>
-                        <p className='hover'>{props.nation}</p>
-                        <p className='hover'>{item.week}</p>
-                        <p className='hover'>Confirmed People : {item.confirmedCnt}</p>
-                      </div>
+                      {/* {
+                      !(parseInt(item.week.slice(0,4)) == 2020 && parseInt(item.week.slice(5,8))<33)? 
+                      (<div>{Object?.values(topContent)[idx][item.week]}</div>)
+                      :(<div></div>)
+                      } */}
+                      <TimelineHoverBox nation={props.nation} week={item.week} confirmedCnt={item.confirmedCnt}/>
                     </Hover>
                   </ReactHover>
                 </>

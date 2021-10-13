@@ -19,8 +19,8 @@ const NavBars = () => {
     <Nav.Link href="/dicerec">Dice-Rec</Nav.Link>
       <Nav.Link href="/timeLine/nationInfo?nation=South Korea&nationCode=kr">TimeLine</Nav.Link>
       <NavDropdown title="Data-Analysis" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="/DataComparison">Data-Comparison</NavDropdown.Item>
-        <NavDropdown.Item href="/GenreAnalysis">Genre-Analysis</NavDropdown.Item>
+        <NavDropdown.Item href="/DataComparison">Genre-Analysis</NavDropdown.Item>
+        <NavDropdown.Item href="/GenreAnalysis">Data-Comparison</NavDropdown.Item>
       </NavDropdown>
       <Nav.Link eventKey={2} href="/makers">
         Makers

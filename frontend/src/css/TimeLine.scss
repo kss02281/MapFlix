@@ -43,21 +43,6 @@ display: none; /* Chrome, Safari, Opera */
     font-size: 1.5em;
 }
 
-.hoverContainer {
-    width: 200px;
-    background-color: white;
-    border: 4px solid #8A2BE2;
-    border-radius: 20px 40px;
-    padding: 4px;
-    font-size: 2em;
-    font-weight: bold;
-    overflow: auto;
-}
-
-.hover {
-    font-family: $title-font;
-}
-
 .guide {
     font-family: $title-font;
     color: white;

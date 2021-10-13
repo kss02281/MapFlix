@@ -9,7 +9,8 @@ import {
   Graticule,
 } from "react-simple-maps";
 import { useHistory } from "react-router";
-import { useLocation } from "react-router";
+import { useDispatch } from "react-redux";
+import { getTopContentList } from '../redux/actions/topContentList' 
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -38,6 +39,7 @@ function colorScale(Status) {
 
 const MapChart = ({ setTooltipContent }) => {
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     csv(`/vulnerability.csv`).then((data) => {
@@ -75,6 +77,7 @@ const MapChart = ({ setTooltipContent }) => {
                       console.log(NAME);
                       console.log(ISO_A2);
                       if (d["Status"] === "1") {
+                        dispatch(getTopContentList({nationCode: ISO_A2.toLowerCase()}))
                         history.push(`/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`)
                       }
                     }}
