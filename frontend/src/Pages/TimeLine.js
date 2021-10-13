@@ -11,8 +11,8 @@ import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-ico
 import { HiCursorClick } from 'react-icons/hi';
 import { BsCircleFill } from 'react-icons/bs';
 import { Genre_colors } from '../data/Genre_colors'
-import { setDate } from '../redux/actions/yearWeek'
-import { getContentShow } from '../redux/actions/contentShow'
+import { setDate } from '../Redux/actions/yearWeek'
+import { getContentShow } from '../Redux/actions/contentShow'
 
 
 import { weekDate } from "../data/Week_date";

@@ -11,7 +11,7 @@ import {
 import { useHistory } from "react-router";
 
 import { useDispatch } from "react-redux";
-import { getTopContentList } from '../redux/actions/topContentList' 
+import { getTopContentList } from '../Redux/actions/topContentList' 
 
 import MapHover from "./MapHover";
 import MapHoverNodata from "./MapHoverNodata";
