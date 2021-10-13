@@ -32,13 +32,13 @@ function MovieBox () {
                 </div>
                 <div className='space'></div>
                 <div className="rankBox">
-                    {
+                    {/* {
                         Object.entries(movieData).map((movie) => (
                         <div>
                             {movie.title}
                         </div>
-                    ))
-                    }
+                        ))
+                    } */}
                 </div>
             </div>
         </>

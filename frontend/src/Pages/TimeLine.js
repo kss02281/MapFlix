@@ -68,8 +68,6 @@ function DrawBarChart(props) {
     })))
 
 
-    
-    
     console.log(coronaData)
     setCnt(1);
   },[ cnt ])
