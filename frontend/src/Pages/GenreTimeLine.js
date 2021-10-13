@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import DrawBar from "../Components/DrawBar";
+import GenreDrawBar from "../Components/GenreDrawBar";
 import styled  from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactHover, { Trigger, Hover } from 'react-hover';
@@ -12,7 +12,7 @@ import { setDate } from '../Redux/actions/yearWeek'
 import DropdownNation from "../Components/DropdownNation";
 
 import queryString from 'query-string'; 
-import '../css/TimeLine.scss';
+import '../css/GenreTimeLine.scss';
 
 
 function DrawBarChart(props) {
@@ -106,7 +106,7 @@ document.head.appendChild(styleLink);
                   <Bar />
                   <ReactHover options={optionsCursorTrueWithMargin}>
                     <Trigger type="trigger">
-                      <DrawBar
+                      <GenreDrawBar
                         confirmedCnt={item.confirmedCnt}
                         maxHeight={maxVal}
                         ratio={ratio}
@@ -134,28 +134,13 @@ document.head.appendChild(styleLink);
                 </>
               ))
             }
-            <div className='genrecolor'>
-
-              {
-                Object.entries(genre_colors).map(([key, value])=>(
-                  <div className='colorlist'>
-                    {key}
-                    <div className='circle'><BsCircleFill color={value}/></div>
-                  </div>
-                ))
-              }
-              
-            </div>
           </ChartContainer>
-          <div className='year'>
-            <div>2020</div>
-            <div>2021</div>
-          </div>
+          
       </div>
   )
 }
 
-const TimeLine = ({ history, location, match, }) => {
+const GenreTimeLine = ({ history, location, match, }) => {
   const query = queryString.parse(location.search)
   console.log(query)
   const { nation, nationCode } = query;
@@ -179,8 +164,6 @@ const TimeLine = ({ history, location, match, }) => {
 
   return (
     <div>
-      <button className='arrowButton' onClick={goToMain}><FaAngleDoubleLeft className='arrowIcon'/>Go To Main Page</button>
-      {/* <BorderSelect styled={{color: 'white'}}/> */}
       <DrawBarChart nation={nation} nationCode={nationCode}/>
       <ContainerT>
         <h1 className='guide'>Click on the stick for details by week <HiCursorClick/></h1>
@@ -200,7 +183,7 @@ const TimeLine = ({ history, location, match, }) => {
   );
 };
 
-export default TimeLine;
+export default GenreTimeLine;
 
 
 const ContainerT = styled.div`
@@ -217,10 +200,8 @@ const ChartContainer = styled.div`
   height: 700px;
   flex-wrap: nowrap;
   overflow: auto;
-  justify-content: center;
-  align-items: stretch;
   padding: 0;
-  text-align:center;
+  align-items: flex-start;
 `
 const Bar = styled.div`
     width: 2px;

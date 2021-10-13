@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
 import { csv } from "d3-fetch";
-import { scaleLinear } from "d3-scale";
 import {
   ComposableMap,
   Geographies,
@@ -9,7 +8,6 @@ import {
   Graticule,
 } from "react-simple-maps";
 import { useHistory } from "react-router";
-import { useLocation } from "react-router";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -86,18 +84,6 @@ const MapChart = ({ setTooltipContent }) => {
                         fontSize: "35px",
                         marginBottom: "6px",
                       };
-                      const mapBox = {
-                        display: "grid",
-                        width: "250px",
-                        height: "250px",
-                        boder: "1px solid black",
-                        fontSize: "20px",
-                        marginBottom: "6px",
-                        backgroundColor: "yellow",
-                        color: "black",
-                        gridTemplateRows: "35px 40px 1fr",
-                        gridTemplateColumns: "70px 1fr",
-                      };
                       const container = {
                         display: "grid",
                         gridTemplateColumns: "1fr 10px 1fr",
@@ -134,7 +120,7 @@ const MapChart = ({ setTooltipContent }) => {
                               <div style={text}>Subscibes</div>
                               <div style={text2}>67.28M</div>
                               <div style={image}>
-                                <img src="https://han.gl/kF7Bm" width="150px" />
+                                <img src="https://han.gl/kF7Bm" width="150px" alt=""/>
                               </div>
                             </div>
                             <hr style={line}></hr>
