@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { GenreAnalysis, Main, TimeLine } from './Pages';
 import { Provider } from 'react-redux';
-import store from './Redux/store';
+import store from './redux/store';
 import NavBar from './NavBar';
 import Makers from './Pages/Makers';
 
