@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import Title_logo from "../img/title.png";
 import Map from "../Components/Map";
-import ReactTooltip from "react-tooltip";
-import { BsCircleFill } from "react-icons/bs";
-import "../css/main.scss";
 
 const Main = ({ history }) => {
   return (

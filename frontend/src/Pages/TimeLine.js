@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import DrawBar from "../Components/DrawBar";
-import MovieBox from "../Components/MovieBox";
-import ShowBox from "../Components/ShowBox";
-import TimelineHoverBox from "../Components/TimelineHoverBox";
-import styled, {css} from 'styled-components';
+import styled  from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactHover, { Trigger, Hover } from 'react-hover';
 import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-icons/fa';
@@ -19,8 +16,6 @@ import { getContentShow } from '../Redux/actions/contentShow'
 
 import { weekDate } from "../data/Week_date";
 
-import { Container, Header, List } from "semantic-ui-react";
-import pkg from 'semantic-ui-react/package.json'
 import DropdownNation from "../Components/DropdownNation";
 
 import queryString from 'query-string'; 
@@ -88,8 +83,8 @@ function DrawBarChart(props) {
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
 styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-
 document.head.appendChild(styleLink);
+
   return (
       <div className='timeline'>
           <span className="nationName">{props.nation}'s</span>
@@ -158,9 +153,9 @@ document.head.appendChild(styleLink);
   );
 }
 
-const TimeLine = ({ history, location }) => {
-  const query = queryString.parse(location.search);
-  console.log(query);
+const TimeLine = ({ history, location, match, }) => {
+  const query = queryString.parse(location.search)
+  console.log(query)
   const { nation, nationCode } = query;
 
   const { year, week, date } = useSelector(
