@@ -11,7 +11,7 @@
   .leftBox {
     background-color: whitesmoke;
     color: black;
-    .subscibes {
+    .subscibesText {
       font-size: 60px;
       grid-row: 1/3;
       text-align: center;
@@ -40,5 +40,11 @@
   .rightBox {
     background-color: whitesmoke;
     color: black;
+  }
+
+  .noData {
+    color: whitesmoke;
+    font-size: 50px;
+    text-align: center;
   }
 }

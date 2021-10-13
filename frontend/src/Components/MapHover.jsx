@@ -3,33 +3,52 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import "../css/MapHover.scss";
 
-const data = [
-  {
-    name: "2021 Q1",
-    pv: 1654846,
-  },
-  {
-    name: "2021 Q2",
-    pv: 1854698,
-  },
-];
-
 function MapHover(props) {
+  const [subscibesQ1, setSubscibesQ1] = useState(0);
+  const [subscibesQ2, setSubscibesQ2] = useState(0);
   const nationName = props.nationName;
   const nationCode = props.nationCode;
-  console.log(nationName);
+
+  const subscibes_data = [
+    {
+      name: "2021 Q1",
+      pv: subscibesQ1,
+    },
+    {
+      name: "2021 Q2",
+      pv: subscibesQ2,
+    },
+  ];
+  useMemo(() => {
+    console.log("/netflix/" + nationCode);
+    fetch("/netflix/" + nationCode)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return { q1_subscribers: 0, q2_subscribers: 0 };
+        }
+      })
+      .then((data) => {
+        setSubscibesQ1(data.q1_subscribers);
+        setSubscibesQ2(data.q2_subscribers);
+      });
+  });
+
   return (
     <div>
       <div className="countryName">{nationName}</div>
       <div className="hover_Wrap">
         <div className="leftBox">
           <div className="leftText">
-            <p className="subscibes">Subscibes</p>
-            <p className="total_Subscibes">{data[1].pv}</p>
-            <p className="increase_Subscibes">{data[1].pv - data[0].pv}</p>
+            <p className="subscibesText">Subscibes</p>
+            <p className="total_Subscibes">{subscibes_data[1].pv}</p>
+            <p className="increase_Subscibes">
+              {subscibes_data[1].pv - subscibes_data[0].pv}
+            </p>
           </div>
           <div className="subscribes_Chart">
-            <BarChart width={230} height={150} data={data}>
+            <BarChart width={230} height={150} data={subscibes_data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
