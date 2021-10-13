@@ -18,6 +18,7 @@ import { getContentShow } from '../redux/actions/contentShow'
 import { weekDate } from "../data/Week_date";
 import queryString from 'query-string'; 
 import '../css/TimeLine.scss';
+import DropDownMenu from "../Components/DropDownMenu";
 
 
 function DrawBarChart(props) {
@@ -168,10 +169,15 @@ const TimeLine = ({ history, location }) => {
     window.scrollBy({top: root.getBoundingClientRect().top - 30, behavior: 'smooth'});
   }
 
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  document.head.appendChild(styleLink);
+
   return (
     <div>
       <button className='arrowButton' onClick={goToMain}><FaAngleDoubleLeft className='arrowIcon'/>Go To Main Page</button>
-
+      <DropDownMenu />
       <DrawBarChart nation={nation} nationCode={nationCode}/>
       <Container>
         <h1 className='guide'>Click on the stick for details by week <HiCursorClick/></h1>
@@ -190,8 +196,11 @@ const TimeLine = ({ history, location }) => {
           </div>
         </div>
         
-        <button className='arrowButton' onClick={clickToScrollUp}><FaAngleDoubleUp className='arrowIcon'/></button>
+        <div className='bottomArrow'>
+          <button className='arrowButton' onClick={clickToScrollUp}><FaAngleDoubleUp className='arrowIcon'/></button>
+       </div>
       </Container>
+
     </div>
   );
 };
