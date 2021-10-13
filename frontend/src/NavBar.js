@@ -3,7 +3,7 @@ import Title_logo from "./img/title.png";
 import { Container,Navbar,Nav,NavDropdown} from 'react-bootstrap';
 
 
-import "./css/Navbar.scss"
+import "./css/Navbar.scss";
 
 const NavBars = () => {
   
@@ -32,6 +32,6 @@ const NavBars = () => {
   </Container>
 </Navbar>
   );
-}
+};
 
 export default NavBars;

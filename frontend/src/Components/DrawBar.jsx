@@ -20,17 +20,18 @@ function DrawBar(props) {
     )
 }
 
-export default DrawBar;
+export default memo(DrawBar);
 
 const Bar = styled.div`
-    width: 12px;
-    height: ${(props) => Math.round(props.confirmedCnt/props.ratio)}px;
-    margin-top: ${(props) => 280-Math.round(props.confirmedCnt/props.ratio)/2}px;
-    background-color: ${(props) => props.color};
-    cursor: pointer;
-    border-radius: 60px 60px;
+  width: 12px;
+  height: ${(props) => Math.round(props.confirmedCnt / props.ratio)}px;
+  margin-top: ${(props) =>
+    280 - Math.round(props.confirmedCnt / props.ratio) / 2}px;
+  background-color: ${(props) => props.color};
+  cursor: pointer;
+  border-radius: 60px 60px;
 
-    &:hover {
-        opacity: 0.7;
-    }
-`
+  &:hover {
+    opacity: 0.7;
+  }
+`;

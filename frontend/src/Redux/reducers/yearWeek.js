@@ -2,7 +2,8 @@ import * as type from '../types';
 
 const initialState = {
   year: '',
-  week: ''
+  week: '',
+  date: ''
 }
 
 export default function yearWeek(state = initialState, action) {
@@ -11,7 +12,8 @@ export default function yearWeek(state = initialState, action) {
       return {
         ...state,
         year: action.payload.year,
-        week: action.payload.week
+        week: action.payload.week,
+        date: action.payload.date
       }
     default:
       return state

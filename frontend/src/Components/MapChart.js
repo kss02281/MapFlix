@@ -36,6 +36,7 @@ function colorScale(Status) {
 
 const MapChart = ({ setTooltipContent }) => {
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     csv(`/vulnerability.csv`).then((data) => {
@@ -60,6 +61,7 @@ const MapChart = ({ setTooltipContent }) => {
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
+                console.log();
                 const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
                 return (
                   <Geography
@@ -67,13 +69,12 @@ const MapChart = ({ setTooltipContent }) => {
                     geography={geo}
                     fill={d ? colorScale(d["Status"]) : "gray"}
                     onClick={(Status) => {
-                      const { NAME } = geo.properties;
-                      const { ISO_A2 } = geo.properties;
-                      console.log(d["Status"]);
-                      console.log(NAME);
-                      console.log(ISO_A2);
+                      const { NAME, ISO_A2 } = geo.properties;
+                      console.log(NAME, ISO_A2);
                       if (d["Status"] === "1") {
+                        dispatch(getTopContentList({nationCode: ISO_A2.toLowerCase()}))
                         history.push(`/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`)
+
                       }
                     }}
                     onMouseEnter={() => {
@@ -148,7 +149,7 @@ const MapChart = ({ setTooltipContent }) => {
                       pressed: {
                         outline: "none",
                         cursor: "pointer",
-                      }
+                      },
                     }}
                   />
                 );

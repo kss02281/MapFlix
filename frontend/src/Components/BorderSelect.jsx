@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { useBorderSelectStyles } from '@mui-treasury/styles/select/border';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React, { useState } from "react";
+import { useBorderSelectStyles } from "@mui-treasury/styles/select/border";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 // Original design here: https://github.com/siriwatknp/mui-treasury/issues/541
 
 function BorderSelect() {
-  const [val,setVal] = useState(1);
+  const [val, setVal] = useState(1);
 
   const handleChange = (event) => {
     setVal(event.target.value);
@@ -20,33 +20,35 @@ function BorderSelect() {
   // moves the menu below the select input
   const menuProps = {
     classes: {
-      list: borderSelectClasses.list
+      list: borderSelectClasses.list,
     },
     anchorOrigin: {
       vertical: "bottom",
-        horizontal: "left"
+      horizontal: "left",
     },
     transformOrigin: {
       vertical: "top",
-        horizontal: "left"
+      horizontal: "left",
     },
-    getContentAnchorEl: null
+    getContentAnchorEl: null,
   };
 
   const iconComponent = (props) => {
     return (
-      <ExpandMoreIcon className={props.className + " " + borderSelectClasses.icon}/>
-    )};
+      <ExpandMoreIcon
+        className={props.className + " " + borderSelectClasses.icon}
+      />
+    );
+  };
 
   return (
     <FormControl>
-      <InputLabel
-        className={borderSelectClasses.label}
-        id="inputLabel"
-      >LABEL</InputLabel>
+      <InputLabel className={borderSelectClasses.label} id="inputLabel">
+        LABEL
+      </InputLabel>
       <Select
         disableUnderline
-        classes={{ root: borderSelectClasses.select, }}
+        classes={{ root: borderSelectClasses.select }}
         labelId="inputLabel"
         IconComponent={iconComponent}
         MenuProps={menuProps}
@@ -60,7 +62,6 @@ function BorderSelect() {
       </Select>
     </FormControl>
   );
-};
-
+}
 
 export default BorderSelect;
