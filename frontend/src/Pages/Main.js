@@ -8,7 +8,7 @@ import ReactTooltip from "react-tooltip";
 const Main = ({ history }) => {
 
   return (
-    <div style={{backgroundColor:'black'}}>
+    <div>
       <div className="header" style={{textAlign:"center"}}>
         <p className="headtext" style={{fontSize:'1.5em'}}>
           How many Netflix subscribers have increased before and after
