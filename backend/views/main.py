@@ -32,8 +32,37 @@ def get_netflix_top1(country_code):
     top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
         filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.rank == 1).all()
     
+    x = random.randint(1, 3)
+    for content in top1_list:
+        if (content.poster == '') or ('img' in content.poster):
+            content.poster = f'../../frontend/src/img/{x}.png'
+            db.session.commit()
+    
+    new_top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
+        filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.rank == 1).all()
+    
 
-    return jsonify([top1.serialize2 for top1 in top1_list])
+    return jsonify([top1.serialize2 for top1 in new_top1_list])
+
+# 국가별 각 주차의 1위 영화, tv쇼 불러오기
+@bp.route('/netflix/<string:country_code>/<string:week>/top1', methods=['GET'])
+def get_netflix_top1_by_week(country_code, week):
+    rank = 1
+
+    top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
+        filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.rank == 1).all()
+    
+    x = random.randint(1, 3)
+    for content in top1_list:
+        if (content.poster == '') or ('img' in content.poster):
+            content.poster = f'../../frontend/src/img/{x}.png'
+            db.session.commit()
+    
+    new_top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
+        filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week, NetflixTop10.rank == 1).all()
+    
+
+    return jsonify([top1.serialize2 for top1 in new_top1_list])
 
 # 국가별 각 주차의 top10 영화리스트, tv쇼 리스트
 @bp.route('/netflix/<string:country_code>/<string:week>/top10', methods=['GET'])

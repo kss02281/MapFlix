@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import DrawBar from "../Components/DrawBar";
-import BorderSelect from "../Components/BorderSelect";
+import MovieBox from "../Components/MovieBox";
+import ShowBox from "../Components/ShowBox";
 import styled, { css } from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReactHover, { Trigger, Hover } from "react-hover";
@@ -12,9 +13,11 @@ import {
 } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
 import { BsCircleFill } from "react-icons/bs";
+import { Genre_colors } from "../data/Genre_colors";
+import { setDate } from "../redux/actions/yearWeek";
+import { getContentShow } from "../redux/actions/contentShow";
 
-import { setDate } from "../Redux/actions/yearWeek";
-
+import { weekDate } from "../data/Week_date";
 import queryString from "query-string";
 import "../css/TimeLine.scss";
 
@@ -25,34 +28,6 @@ function DrawBarChart(props) {
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
-
-  const genre_colors = {
-    Comedy: "#FFFF96",
-    Adventure: "#FFE650",
-    "Talk-Show": "#FFE5CB",
-    Family: "#FFCAD5",
-    Animation: "#FFB900",
-    "Reality-TV": "#FF9E9B",
-    Romance: "#FF88A7",
-    Action: "#FF5675",
-    Musical: "#F0B469",
-    Western: "#FF6666",
-    "Sci-Fi": "#DDDDDD",
-    War: "#D27D32",
-    Crime: "#CAB2DB",
-    Thriller: "#BECDFF",
-    Fantasy: "#ACF3FF",
-    Horror: "#AAEBAA",
-    Biography: "#A8F552",
-    Mystery: "#9D71BD",
-    Drama: "#93DAFF",
-    Documentary: "#78A9ED",
-    News: "#68D168",
-    "Game-Show": "#65FFBA",
-    Military: "#369F36",
-    History: "#14D3FF",
-    Sport: "#00BFFF",
-  };
 
   useMemo(() => {
     console.log("/timeline/" + props.nationCode);
@@ -104,22 +79,32 @@ function DrawBarChart(props) {
             <ReactHover options={optionsCursorTrueWithMargin}>
               <Trigger type="trigger">
                 <DrawBar
+                  countryCode={props.nationCode}
+                  fullweek={item.week}
+                  year={parseInt(item.week.slice(0, 4))}
+                  week={parseInt(item.week.slice(5, 8))}
                   confirmedCnt={item.confirmedCnt}
                   maxHeight={maxVal}
                   ratio={ratio}
                   onClick={() => {
-                    console.log(item.week);
                     const [year, week] = [
                       parseInt(item.week.slice(0, 4)),
                       parseInt(item.week.slice(5, 8)),
                     ];
-                    console.log(year, week);
                     dispatch(
                       setDate({
                         year: year,
                         week: week,
+                        date: weekDate[item.week],
                       })
                     );
+                    dispatch(
+                      getContentShow({
+                        nationCode: props.nationCode,
+                        week: item.week,
+                      })
+                    );
+
                     const content = document.getElementById("content");
                     window.scrollBy({
                       top: content.getBoundingClientRect().top,
@@ -141,7 +126,7 @@ function DrawBarChart(props) {
           </>
         ))}
         <div className="genrecolor">
-          {Object.entries(genre_colors).map(([key, value]) => (
+          {Object.entries(Genre_colors).map(([key, value]) => (
             <div className="colorlist">
               {key}
               <div className="circle">
@@ -159,15 +144,16 @@ function DrawBarChart(props) {
   );
 }
 
-const TimeLine = ({ history, location, match }) => {
+const TimeLine = ({ history, location }) => {
   const query = queryString.parse(location.search);
   console.log(query);
   const { nation, nationCode } = query;
 
-  const { year, week } = useSelector(
+  const { year, week, date } = useSelector(
     (state) => ({
       year: state.yearWeek.year,
       week: state.yearWeek.week,
+      date: state.yearWeek.date,
     }),
     shallowEqual
   );
@@ -190,7 +176,7 @@ const TimeLine = ({ history, location, match }) => {
         <FaAngleDoubleLeft className="arrowIcon" />
         Go To Main Page
       </button>
-      {/* <BorderSelect styled={{color: 'white'}}/> */}
+
       <DrawBarChart nation={nation} nationCode={nationCode} />
       <Container>
         <h1 className="guide">
@@ -198,13 +184,18 @@ const TimeLine = ({ history, location, match }) => {
         </h1>
         <FaAngleDoubleDown className="arrowIcon" />
         <div id="contentContainer">
-          <h1>
-            {year}, WEEK {week}
+          <h1 className="contentBox">
+            WEEK {week} ({date}, {year})
           </h1>
+
           <div id="content">
-            <div className="movie">Movie</div>
+            <div className="movie">
+              <MovieBox />
+            </div>
             <div className="updown"></div>
-            <div className="show">Show</div>
+            <div className="show">
+              <ShowBox />
+            </div>
           </div>
         </div>
 

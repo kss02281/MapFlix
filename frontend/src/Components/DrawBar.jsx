@@ -1,9 +1,30 @@
-import React from "react";
+import React, { memo, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
 function DrawBar(props) {
   const maxHeight = props.maxHeight;
   const idx = props.idx;
+
+  const fullweek = props.fullweek;
+  const week = props.week;
+  const year = props.year;
+  const countryCode = props.countryCode;
+  const [color, setColor] = useState("#ffffff");
+
+  useEffect(() => {
+    if (!(year == 2020 && week < 33)) {
+      fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          //console.log(data?.color);
+          setColor(data?.color);
+        });
+    }
+  }, [week]);
 
   const colors = [
     "#FFFF96",
@@ -43,13 +64,13 @@ function DrawBar(props) {
         confirmedCnt={confirmedCnt}
         ratio={ratio}
         onClick={onClickAction}
-        color={randomColor}
+        color={color}
       ></Bar>
     </>
   );
 }
 
-export default DrawBar;
+export default memo(DrawBar);
 
 const Bar = styled.div`
   width: 12px;

@@ -1,77 +1,53 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Title_logo from "./img/title.png";
 import { Link, useHistory } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  NavDropdown,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
 
-const NavBar = () => {
+import "./css/Navbar.scss";
+
+const NavBars = () => {
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-dark bg-dark"
-      style={{ width: "100%", backgroundColor: "black" }}
-    >
-      <a
-        className="navbar-brand"
-        href="/"
-        style={{ marginLeft: "3vw", width: "100px" }}
-      >
-        <img src={Title_logo} alt="" style={{ width: "150px" }} />
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul
-          className="navbar-nav"
-          style={{ position: "absolute", right: "4%" }}
-        >
-          <li className="nav-item">
-            <a className="nav-link" href="/" style={{ width: "100px" }}>
-              Covid-19
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              href="/genreanalysis"
-              style={{ width: "140px" }}
-            >
-              Genre-Analysis
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              href={
-                "/timeLine" +
-                "/nationInfo?nation=South Korea" +
-                "&nationCode=kr"
-              }
-              style={{ width: "100px" }}
-            >
-              Timeline
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/dicerec" style={{ width: "100px" }}>
-              Dice-Rec
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/makers">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand href="/">
+          <img
+            src={Title_logo}
+            width="150px"
+            class="d-inline-block align-text-top"
+          />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto"></Nav>
+          <Nav>
+            <Nav.Link href="/dicerec">Dice-Rec</Nav.Link>
+            <Nav.Link href="/timeLine/nationInfo?nation=South Korea&nationCode=kr">
+              TimeLine
+            </Nav.Link>
+            <NavDropdown title="Data-Analysis" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="/DataComparison">
+                Data-Comparison
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/GenreAnalysis">
+                Genre-Analysis
+              </NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link eventKey={2} href="/makers">
               Makers
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
-export default NavBar;
+export default NavBars;
