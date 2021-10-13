@@ -28,7 +28,7 @@ function DrawBarChart(props) {
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
-
+  useMemo(() => {});
   useMemo(() => {
     console.log("/timeline/" + props.nationCode);
     console.log(props.nationCode);
