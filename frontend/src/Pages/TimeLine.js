@@ -10,12 +10,19 @@ import ReactHover, { Trigger, Hover } from 'react-hover';
 import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-icons/fa';
 import { HiCursorClick } from 'react-icons/hi';
 import { BsCircleFill } from 'react-icons/bs';
+
 import { Genre_colors } from '../data/Genre_colors'
 import { setDate } from '../Redux/actions/yearWeek'
 import { getContentShow } from '../Redux/actions/contentShow'
 
 
+
 import { weekDate } from "../data/Week_date";
+
+import { Container, Header, List } from "semantic-ui-react";
+import pkg from 'semantic-ui-react/package.json'
+import DropdownNation from "../Components/DropdownNation";
+
 import queryString from 'query-string'; 
 import '../css/TimeLine.scss';
 import DropDownMenu from "../Components/DropDownMenu";
@@ -73,15 +80,23 @@ function DrawBarChart(props) {
   }, [coronaData]);
 
   const optionsCursorTrueWithMargin = {
-    followCursor: true,
-    shiftX: 20,
-    shiftY: 0,
-  };
 
+    followCursor:true,
+    shiftX:20,
+    shiftY:0
+}
+const styleLink = document.createElement("link");
+styleLink.rel = "stylesheet";
+styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+
+document.head.appendChild(styleLink);
   return (
       <div className='timeline'>
           <span className="nationName">{props.nation}'s</span>
+          <div className="DaT"> 
           <span className="title"> confirmed people by week</span>
+          <span><DropdownNation /></span>
+          </div>
           <ChartContainer maxHeight={maxVal}>
             {
               coronaData.map((item, idx) => (
@@ -179,8 +194,7 @@ const TimeLine = ({ history, location }) => {
       <button className='arrowButton' onClick={goToMain}><FaAngleDoubleLeft className='arrowIcon'/>Go To Main Page</button>
       <DropDownMenu />
       <DrawBarChart nation={nation} nationCode={nationCode}/>
-
-      <Container>
+      <ContainerT>
         <h1 className="guide">
           Click on the stick for details by week <HiCursorClick />
         </h1>
@@ -203,15 +217,14 @@ const TimeLine = ({ history, location }) => {
         <div className='bottomArrow'>
           <button className='arrowButton' onClick={clickToScrollUp}><FaAngleDoubleUp className='arrowIcon'/></button>
        </div>
-      </Container>
-
+      </ContainerT>
     </div>
   );
 };
 
 export default TimeLine;
 
-const Container = styled.div`
+const ContainerT = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 50px;

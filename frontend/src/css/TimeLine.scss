@@ -42,7 +42,6 @@ body::-webkit-scrollbar {
     font-family: $body-font;
     font-size: 1.5em;
     margin-top: 10px;
-
 }
 
 .guide {
@@ -155,7 +154,6 @@ body::-webkit-scrollbar {
 }
 
 .show {
-
     width: 45%;
     margin-left: 3%;
 }
@@ -164,4 +162,11 @@ body::-webkit-scrollbar {
     width: 100%;
     background-color:black;
     text-align: center;
+}
+
+
+.DaT {
+    display: flex;
+    margin-top: 40px;
+    align-items: center;
 }
