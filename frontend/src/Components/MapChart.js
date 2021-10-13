@@ -64,6 +64,7 @@ const MapChart = ({ setTooltipContent }) => {
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
+                console.log();
                 const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
                 return (
                   <Geography
@@ -82,14 +83,14 @@ const MapChart = ({ setTooltipContent }) => {
                     onMouseEnter={() => {
                       const { NAME, ISO_A2 } = geo.properties;
                       console.log(NAME, ISO_A2);
-                      if (d["Status"] === "1" || d["Status"] === "2") {
+                      if (d["Status"] === "1") {
                         setTooltipContent(
                           <MapHover
                             nationName={NAME}
                             nationCode={ISO_A2.toLowerCase()}
                           ></MapHover>
                         );
-                      } else if (d["Status"] === "3") {
+                      } else if (d["Status"] === "3" || d["Status"] === "2") {
                         setTooltipContent(
                           <MapHoverNodata
                             nationName={NAME}

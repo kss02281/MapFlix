@@ -24,9 +24,8 @@ function MapHover(props) {
     fetch("/netflix/" + nationCode)
       .then((response) => {
         if (response.ok) {
+          console.log("ok");
           return response.json();
-        } else {
-          return { q1_subscribers: 0, q2_subscribers: 0 };
         }
       })
       .then((data) => {
