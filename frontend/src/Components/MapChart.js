@@ -11,6 +11,7 @@ import {
 import { useHistory } from "react-router";
 import { useLocation } from "react-router";
 import MapHover from "./MapHover";
+import MapHoverNodata from "./MapHoverNodata";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -63,6 +64,7 @@ const MapChart = ({ setTooltipContent }) => {
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
+                console.log();
                 const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
                 return (
                   <Geography
@@ -79,14 +81,23 @@ const MapChart = ({ setTooltipContent }) => {
                       }
                     }}
                     onMouseEnter={() => {
-                      console.log(geo);
                       const { NAME, ISO_A2 } = geo.properties;
-                      setTooltipContent(
-                        <MapHover
-                          nationName={NAME}
-                          nationCode={ISO_A2.toLowerCase()}
-                        ></MapHover>
-                      );
+                      console.log(NAME, ISO_A2);
+                      if (d["Status"] === "1") {
+                        setTooltipContent(
+                          <MapHover
+                            nationName={NAME}
+                            nationCode={ISO_A2.toLowerCase()}
+                          ></MapHover>
+                        );
+                      } else if (d["Status"] === "3" || d["Status"] === "2") {
+                        setTooltipContent(
+                          <MapHoverNodata
+                            nationName={NAME}
+                            nationCode={ISO_A2.toLowerCase()}
+                          ></MapHoverNodata>
+                        );
+                      }
                     }}
                     onMouseLeave={() => {
                       setTooltipContent("");
