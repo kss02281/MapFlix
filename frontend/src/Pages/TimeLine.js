@@ -95,7 +95,7 @@ document.head.appendChild(styleLink);
           <span className="nationName">{props.nation}'s</span>
           <div className="DaT"> 
           <span className="title"> confirmed people by week</span>
-          <span><DropdownNation /></span>
+          {/* <span><DropdownNation /></span> */}
           </div>
           <ChartContainer maxHeight={maxVal}>
             {
