@@ -12,7 +12,11 @@ function DrawBar(props) {
   const [color, setColor] = useState("#ffffff");
 
   useEffect(() => {
-    if (!(year == 2020 && week < 33)) {
+    if (year === 2020 && week < 33) {
+      setColor('#ffffff')
+    }else if (year === 2021 && week === 1 && countryCode != 'kr'){
+      setColor('#ffffff')
+    }else {
       fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
         .then((response) => {
           if (response.ok) {

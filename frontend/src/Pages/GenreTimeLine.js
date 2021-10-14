@@ -73,19 +73,14 @@ document.head.appendChild(styleLink);
                   <ReactHover options={optionsCursorTrueWithMargin}>
                     <Trigger type="trigger">
                       <GenreDrawBar
+                        countryCode={props.nationCode}
+                        fullweek={item.week}
+                        year={parseInt(item.week.slice(0,4))}
+                        week={parseInt(item.week.slice(5,8))}
                         confirmedCnt={item.confirmedCnt}
                         maxHeight={maxVal}
                         ratio={ratio}
                         onClick={() => {
-                          console.log(item.week);
-                          const [year, week] = [parseInt(item.week.slice(0,4)), parseInt(item.week.slice(5,8))];
-                          console.log(year, week)
-                          dispatch(setDate({
-                            'year': year, 
-                            'week': week
-                          }))
-                          const content = document.getElementById('content');
-                          window.scrollBy({top: content.getBoundingClientRect().top, behavior: 'smooth'});
                         }}
                       />
                     </Trigger>

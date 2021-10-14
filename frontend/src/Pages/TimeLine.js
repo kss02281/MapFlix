@@ -60,7 +60,7 @@ function DrawBarChart(props) {
     console.log(coronaData)
 
     setCnt(1);
-  }, [cnt]);
+  }, [cnt, props.nationCode]);
 
   useEffect(() => {
     const confirmedList = coronaData.map((item) => item.confirmedCnt);

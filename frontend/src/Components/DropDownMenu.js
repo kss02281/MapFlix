@@ -1,5 +1,5 @@
-import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import React, { useRef, useState } from 'react'
+import { Dropdown, Flag, Menu } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 
 const countryOptions = [
@@ -89,31 +89,27 @@ const countryOptions = [
 
 ]
 
-
 const DropDownMenu = () => {
+  const dropdownRef = useRef();
   const history = useHistory();
+  const flagRenderer = (item) => <Flag name={item.flag} />
 
-
-  const handleDropdown = (event, data) => {
-    console.log(event.target.key)
-    console.log(data.key)
-  };
+  const clickhandler = (e, {value, nation}) => {
+    console.log(value, nation)
+    history.push(`/timeLine/nationInfo?nation=${nation}&nationCode=${value}`)
+  }
 
   return(
-    <Dropdown
-        style={{float: 'right', width: '150px', marginRight: '10px', cursor: 'pointer', marginTop: '10px'}}
-        placeholder='Select Country'
-        fluid
-        search
-        selection
-        options={countryOptions}
-        onChange={handleDropdown}
-        // onClick={(e, value) => {
-        //     const nation_code = value;
-        //     const nation_name = value.text;
-        //     console.log(nation_code, nation_name)
-        //     history.push(`/timeLine/nationInfo?nation=${nation_name}&nationCode=${nation_code}`)
-        // }}
-    />
+    <Menu compact style={{float: 'right' , marginRight: '30px', cursor: 'pointer', marginTop: '20px'}} >
+      <Dropdown item text='Select Country'>
+        <Dropdown.Menu>
+          <Dropdown.Item value="vn" nation="Vietnam" onClick={clickhandler}><Flag name='vn' />Vietnam</Dropdown.Item>
+          <Dropdown.Item value="vn" nation="Vietnam" onClick={clickhandler}><Flag name='vn' />Vietnam</Dropdown.Item>
+          <Dropdown.Item value="vn" nation="Vietnam" onClick={clickhandler}><Flag name='vn' />Vietnam</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </Menu>
 )}
+
+
 export default DropDownMenu;
