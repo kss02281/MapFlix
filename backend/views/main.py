@@ -109,6 +109,11 @@ def get_netflix_top10(country_code, week):
 # 국가별 각 주차의 가장 인기있는 장르와 색상
 @bp.route('/netflix/<string:country_code>/<string:week>/genre',  methods=['GET'])
 def get_top_genre(country_code, week):
+    if country_code == 'world':
+        genre = db.session.query(WorldGenreScore).filter(WorldGenreScore.week == week).order_by(WorldGenreScore.score.desc()).first()
+
+        return jsonify({'genre': genre.genre, 'color': genre.color})
+
     contents = db.session.query(NetflixContent).join(NetflixTop10).\
         filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week).all()
 
@@ -127,3 +132,33 @@ def get_top_genre(country_code, week):
     color = db.session.query(GenreColor).filter(GenreColor.genre == top_genre).first()
 
     return jsonify({'genre': top_genre, 'color': color.color})
+
+# 국가별 각 주차의 장르 스코어
+@bp.route('/netflix/<string:country_code>/<string:week>/genres',  methods=['GET'])
+def get_genres_score(country_code, week):
+    contents = db.session.query(NetflixContent).join(NetflixTop10).\
+        filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week).all()
+    
+    genres = []
+    for content in contents:
+        genres = genres + content.serialize['genre']
+    
+    genres = [v for v in genres if v]
+    genres_unique = list(set(genres))
+    genres_unique.sort()
+
+    result = []
+    for genre in genres_unique:
+        cnt = genres.count(genre)
+        color = db.session.query(GenreColor).filter(GenreColor.genre == genre).first().color
+        result.append({'genre': genre, 'score': cnt, 'color': color})
+    
+    print(result)
+    return jsonify(result)
+
+    # 전세계 통합 주차별 장르 스코어
+@bp.route('/netflix/world/<string:week>/genres', methods=['GET'])
+def get_world_genres_score(week):
+    genres = db.session.query(WorldGenreScore).filter(WorldGenreScore.week == week).all()
+
+    return jsonify([genre.serialize for genre in genres])
