@@ -1,4 +1,4 @@
-import React, { useState, useMemo} from "react";
+import React, { useState, useMemo } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import "../css/MapHover.scss";
 
@@ -51,40 +51,57 @@ function MapHover(props) {
         setShowURL(show.poster);
         setMovieTitle(movie.title);
         setShowTitle(show.title);
-        console.log(movieURL);
       });
   });
   const increase_Subscibes_Data = subscibes_data[1].pv - subscibes_data[0].pv;
+  const increase_Color =
+    increase_Subscibes_Data > 0
+      ? "red"
+      : increase_Subscibes_Data == 0
+      ? "black"
+      : "blue";
   return (
-    <div>
+    <div className="MapHover_Wrap">
       <div className="countryName">{nationName}</div>
       <div className="hover_Wrap">
         <div className="leftBox">
           <div className="leftText">
             <p className="subscibesText">Subscibes</p>
             <p className="total_Subscibes">{subscibes_data[1].pv}</p>
-            <p className="increase_Subscibes">{increase_Subscibes_Data}</p>
+            <p className="increase_Subscibes" style={{ color: increase_Color }}>
+              {increase_Subscibes_Data}
+            </p>
           </div>
           <div className="subscribes_Chart">
-            <BarChart width={230} height={150} data={subscibes_data}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Bar dataKey="pv" fill="#8884d8" />
-            </BarChart>
+            <div className="subscribes_Chart_Box">
+              <BarChart width={250} height={200} data={subscibes_data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Bar dataKey="pv" fill="#8884d8" />
+              </BarChart>
+            </div>
           </div>
         </div>
         <hr className="line"></hr>
         <div className="rightBox">
           <div className="topMovieBox">
-            <img className="movieImage" src={movieURL}></img>
-            <p className="topMovie">Top Movie</p>
-            <p className="movieTitle">Title : {movieTitle}</p>
+            <div className="movieImageBox">
+              <img className="movieImage" src={movieURL}></img>
+            </div>
+            <div className="movieTextBox">
+              <div className="topMovie">Top Movie</div>
+              <div className="movieTitle">{movieTitle}</div>
+            </div>
           </div>
           <div className="topShowBox">
-            <img className="showImage" src={showURL}></img>
-            <p className="topShow">Top Show</p>
-            <p className="ShowTitle">Title : {showTitle}</p>
+            <div className="showImageBox">
+              <img className="showImage" src={showURL}></img>
+            </div>
+            <div className="showTextBox">
+              <div className="topShow">Top Show</div>
+              <div className="ShowTitle">{showTitle}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -93,4 +110,3 @@ function MapHover(props) {
 }
 
 export default MapHover;
-

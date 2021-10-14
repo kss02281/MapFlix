@@ -1,16 +1,6 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import DrawBar from "../Components/DrawBar";
-import styled from "styled-components";
-import "bootstrap/dist/css/bootstrap.min.css";
-import ReactHover, { Trigger, Hover } from "react-hover";
-import {
-  FaAngleDoubleDown,
-  FaAngleDoubleUp,
-  FaAngleDoubleLeft,
-} from "react-icons/fa";
-import { HiCursorClick } from "react-icons/hi";
-import { BsCircleFill } from "react-icons/bs";
 import MovieBox from "../Components/MovieBox";
 import ShowBox from "../Components/ShowBox";
 import TimelineHoverBox from "../Components/TimelineHoverBox";
@@ -30,9 +20,6 @@ import { setDate } from "../Redux/actions/yearWeek";
 import { getContentShow } from "../Redux/actions/contentShow";
 
 import { weekDate } from "../data/Week_date";
-
-import DropdownNation from "../Components/DropdownNation";
-
 import queryString from "query-string";
 import "../css/TimeLine.scss";
 import DropDownMenu from "../Components/DropDownMenu";
@@ -95,19 +82,11 @@ function DrawBarChart(props) {
     shiftX: 20,
     shiftY: 0,
   };
-  const styleLink = document.createElement("link");
-  styleLink.rel = "stylesheet";
-  styleLink.href =
-    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-  document.head.appendChild(styleLink);
 
   return (
     <div className="timeline">
       <span className="nationName">{props.nation}'s</span>
-      <div className="DaT">
-        <span className="title"> confirmed people by week</span>
-        {/* <span><DropdownNation /></span> */}
-      </div>
+      <span className="title"> confirmed people by week</span>
       <ChartContainer maxHeight={maxVal}>
         {coronaData.map((item, idx) => (
           <>
@@ -183,7 +162,7 @@ function DrawBarChart(props) {
   );
 }
 
-const TimeLine = ({ history, location, match }) => {
+const TimeLine = ({ history, location }) => {
   const query = queryString.parse(location.search);
   console.log(query);
   const { nation, nationCode } = query;
@@ -223,7 +202,8 @@ const TimeLine = ({ history, location, match }) => {
       </button>
       <DropDownMenu />
       <DrawBarChart nation={nation} nationCode={nationCode} />
-      <ContainerT>
+
+      <Container>
         <h1 className="guide">
           Click on the stick for details by week <HiCursorClick />
         </h1>
@@ -248,14 +228,14 @@ const TimeLine = ({ history, location, match }) => {
             <FaAngleDoubleUp className="arrowIcon" />
           </button>
         </div>
-      </ContainerT>
+      </Container>
     </div>
   );
 };
 
 export default TimeLine;
 
-const ContainerT = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 50px;
