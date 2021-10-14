@@ -51,7 +51,7 @@ function DrawBarChart(props) {
       .then((data) =>
         setCoronaData(
           data.map((item) => {
-            return { week: item.week, confirmedCnt: item.confirmed };
+            return { week: item.week, confirmedCnt: Math.sqrt(item.confirmed) };
           })
         )
       );

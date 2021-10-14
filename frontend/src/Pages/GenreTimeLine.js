@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import GenreDrawBar from "../Components/GenreDrawBar";
+import DropDownMenuGenre from '../Components/DropDownMenuGenre';
 import styled  from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactHover, { Trigger, Hover } from 'react-hover';
-import { FaAngleDoubleDown, FaAngleDoubleUp } from 'react-icons/fa';
-import { HiCursorClick } from 'react-icons/hi';
-import { setDate } from '../Redux/actions/yearWeek'
-import { Genre_colors } from '../data/Genre_colors'
 
 import queryString from 'query-string'; 
 import '../css/GenreTimeLine.scss';
@@ -30,12 +27,12 @@ function DrawBarChart(props) {
         return response.json()
       }
     }).then(data => setCoronaData(data.map(item => {
-        return {week: item.week, confirmedCnt: item.confirmed}
+        return {week: item.week, confirmedCnt: Math.sqrt(item.confirmed)}
     })))
     
     console.log(coronaData)
     setCnt(1);
-  },[cnt])
+  },[cnt, props.nationCode])
 
 
   useEffect(()=>{
@@ -115,6 +112,7 @@ const GenreTimeLine = ({ history, location, match, }) => {
   
   return (
     <div>
+      <DropDownMenuGenre />
       <DrawBarChart nation={nation} nationCode={nationCode}/>
     </div>
   );
@@ -130,6 +128,7 @@ const ChartContainerG = styled.div`
   overflow: auto;
   padding: 0;
   align-items: flex-start;
+  margin-top: 50px;
 `
 const BarG = styled.div`
     width: 2px;

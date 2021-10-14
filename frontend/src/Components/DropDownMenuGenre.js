@@ -5,20 +5,20 @@ import { useDispatch } from 'react-redux'
 import { setDate } from '../Redux/actions/yearWeek'
 import { getContentShow } from '../Redux/actions/contentShow'
 
-const DropDownMenuGenre = () => {
+const DropDownMenu = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
   const clickhandler = (e, {value, nation}) => {
     console.log(value, nation)
     
-    dispatch(setDate({
-      'year': '2021', 
-      'week': '39',
-      'date': 'Sep 27 - Oct 3',
-    }));
-    dispatch(getContentShow({nationCode: value,week: '2021-039'}));
-    history.push(`/timeLine/nationInfo?nation=${nation}&nationCode=${value}`);
+    // dispatch(setDate({
+    //   'year': '2021', 
+    //   'week': '39',
+    //   'date': 'Sep 27 - Oct 3',
+    // }));
+    // dispatch(getContentShow({nationCode: value,week: '2021-039'}));
+    history.push(`/GenreAnalysis/nationInfo?nation=${nation}&nationCode=${value}`);
   }
 
   return(
@@ -387,4 +387,4 @@ const DropDownMenuGenre = () => {
 )}
 
 
-export default DropDownMenuGenre;
+export default DropDownMenu;
