@@ -190,25 +190,25 @@ def get_world_genres_score(week):
 
     return jsonify([genre.serialize for genre in genres])
 
-# 국가 주차의 1위 데이터
+# # 국가 주차의 1위 데이터
 
 
-@bp.route('/netflix/<string:country_code>/<string:week>/top1', methods=['GET'])
-def get_netflix_top1_by_week(country_code, week):
-    rank = 1
+# @bp.route('/netflix/<string:country_code>/<string:week>/top1', methods=['GET'])
+# def get_netflix_top1_by_week(country_code, week):
+#     rank = 1
 
-    top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
-        filter(NetflixTop10.country_code == country_code,
-               NetflixTop10.week == week, NetflixTop10.rank == rank).all()
+#     top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
+#         filter(NetflixTop10.country_code == country_code,
+#                NetflixTop10.week == week, NetflixTop10.rank == rank).all()
 
-    x = random.randint(1, 3)
-    for content in top1_list:
-        if (content.poster == '') or ('img' in content.poster):
-            content.poster = f'../../frontend/src/img/{x}.png'
-            db.session.commit()
+#     x = random.randint(1, 3)
+#     for content in top1_list:
+#         if (content.poster == '') or ('img' in content.poster):
+#             content.poster = f'../../frontend/src/img/{x}.png'
+#             db.session.commit()
 
-    new_top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
-        filter(NetflixTop10.country_code == country_code,
-               NetflixTop10.week == week, NetflixTop10.rank == rank).all()
+#     new_top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
+#         filter(NetflixTop10.country_code == country_code,
+#                NetflixTop10.week == week, NetflixTop10.rank == rank).all()
 
-    return jsonify([top1.serialize2 for top1 in new_top1_list])
+#     return jsonify([top1.serialize2 for top1 in new_top1_list])
