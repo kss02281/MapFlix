@@ -25,7 +25,6 @@ function MovieBox () {
         setMovieList(movieData)
         if(movieData != null){
             setImgSrc(movieData[0]?.poster)
-
         }
     },[movieData])
 

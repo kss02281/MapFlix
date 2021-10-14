@@ -1,6 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { Dropdown, Flag, Menu } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { setDate } from '../Redux/actions/yearWeek'
+import { getContentShow } from '../Redux/actions/contentShow'
 
 const countryOptions = [
   { key: 'ar', value: 'ar', flag: 'ar', text: 'Argentina' },
@@ -90,22 +93,28 @@ const countryOptions = [
 ]
 
 const DropDownMenu = () => {
-  const dropdownRef = useRef();
-  const history = useHistory();
-  const flagRenderer = (item) => <Flag name={item.flag} />
+  const dispatch = useDispatch();
 
+  const history = useHistory();
   const clickhandler = (e, {value, nation}) => {
     console.log(value, nation)
-    history.push(`/timeLine/nationInfo?nation=${nation}&nationCode=${value}`)
+    
+    dispatch(setDate({
+      'year': '2021', 
+      'week': '39',
+      'date': 'Sep 27 - Oct 3',
+    }));
+    dispatch(getContentShow({nationCode: value,week: '2021-039'}));
+    history.push(`/timeLine/nationInfo?nation=${nation}&nationCode=${value}`);
   }
 
   return(
     <Menu compact style={{float: 'right' , marginRight: '30px', cursor: 'pointer', marginTop: '20px'}} >
       <Dropdown item text='Select Country'>
         <Dropdown.Menu>
-          <Dropdown.Item value="vn" nation="Vietnam" onClick={clickhandler}><Flag name='vn' />Vietnam</Dropdown.Item>
-          <Dropdown.Item value="vn" nation="Vietnam" onClick={clickhandler}><Flag name='vn' />Vietnam</Dropdown.Item>
-          <Dropdown.Item value="vn" nation="Vietnam" onClick={clickhandler}><Flag name='vn' />Vietnam</Dropdown.Item>
+          <Dropdown.Item value="ar" nation="Argentina" onClick={clickhandler}><Flag name='ar' />Argentina</Dropdown.Item>
+          <Dropdown.Item value="au" nation="Australia" onClick={clickhandler}><Flag name='au' />Vietnam</Dropdown.Item>
+          <Dropdown.Item value="vn" nation="Australia" onClick={clickhandler}><Flag name='vn' />Vietnam</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </Menu>
