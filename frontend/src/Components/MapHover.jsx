@@ -55,7 +55,7 @@ function MapHover(props) {
         console.log(movieURL);
       });
   });
-
+  const increase_Subscibes_Data = subscibes_data[1].pv - subscibes_data[0].pv;
   return (
     <div>
       <div className="countryName">{nationName}</div>
@@ -64,9 +64,7 @@ function MapHover(props) {
           <div className="leftText">
             <p className="subscibesText">Subscibes</p>
             <p className="total_Subscibes">{subscibes_data[1].pv}</p>
-            <p className="increase_Subscibes">
-              {subscibes_data[1].pv - subscibes_data[0].pv}
-            </p>
+            <p className="increase_Subscibes">{increase_Subscibes_Data}</p>
           </div>
           <div className="subscribes_Chart">
             <BarChart width={230} height={150} data={subscibes_data}>
