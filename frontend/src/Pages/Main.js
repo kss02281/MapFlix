@@ -3,6 +3,7 @@ import Title_logo from "../img/title.png";
 import Map from "../Components/Map";
 import { BsCircleFill } from "react-icons/bs";
 import "../css/main.scss";
+import MapHoverNodata from "../Components/MapHoverNodata";
 
 const Main = ({ history }) => {
   return (
@@ -37,6 +38,7 @@ const Main = ({ history }) => {
           <br />
           I'll show you the top 10 contents of weekly Netflix in each country.
         </p>
+        <MapHoverNodata></MapHoverNodata>
       </div>
     </div>
   );

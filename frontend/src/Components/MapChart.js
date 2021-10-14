@@ -9,7 +9,7 @@ import {
 } from "react-simple-maps";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { getTopContentList } from '../Redux/actions/topContentList' 
+import { getTopContentList } from "../Redux/actions/topContentList";
 
 import MapHover from "./MapHover";
 import MapHoverNodata from "./MapHoverNodata";
@@ -31,7 +31,6 @@ function colorScale(Status) {
 
 const MapChart = ({ setTooltipContent }) => {
   const [data, setData] = useState([]);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     csv(`/vulnerability.csv`).then((data) => {
@@ -67,9 +66,9 @@ const MapChart = ({ setTooltipContent }) => {
                       const { NAME, ISO_A2 } = geo.properties;
                       console.log(NAME, ISO_A2);
                       if (d["Status"] === "1") {
-                        dispatch(getTopContentList({nationCode: ISO_A2.toLowerCase()}))
-                        history.push(`/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`)
-
+                        history.push(
+                          `/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`
+                        );
                       }
                     }}
                     onMouseEnter={() => {

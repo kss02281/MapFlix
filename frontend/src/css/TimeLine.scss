@@ -106,18 +106,15 @@ body::-webkit-scrollbar {
 }
 
 #contentContainer {
-
-    height: 850px;
-    width: 100%;
-    background-color: white;
-    margin-top: 35px;
-    margin-bottom: 35px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-
+  height: 850px;
+  width: 100%;
+  background-color: white;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .contentBox {
@@ -153,14 +150,14 @@ body::-webkit-scrollbar {
 }
 
 .show {
-    width: 45%;
-    margin-left: 3%;
+  width: 45%;
+  margin-left: 3%;
 }
 
 .bottomArrow {
-    width: 100%;
-    background-color:black;
-    text-align: center;
+  width: 100%;
+  background-color: black;
+  text-align: center;
 }
 
 // .DaT {
