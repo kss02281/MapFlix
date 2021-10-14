@@ -4,12 +4,13 @@ import DrawBar from "../Components/DrawBar";
 import MovieBox from "../Components/MovieBox";
 import ShowBox from "../Components/ShowBox";
 import TimelineHoverBox from "../Components/TimelineHoverBox";
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactHover, { Trigger, Hover } from 'react-hover';
 import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-icons/fa';
 import { HiCursorClick } from 'react-icons/hi';
 import { BsCircleFill } from 'react-icons/bs';
+
 import { Genre_colors } from '../data/Genre_colors'
 import { setDate } from '../Redux/actions/yearWeek'
 import { getContentShow } from '../Redux/actions/contentShow'

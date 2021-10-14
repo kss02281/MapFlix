@@ -22,16 +22,16 @@ function TimelineHoverBox(props) {
 
 
     return (
-        <div className="hoverContainer">
+        <div className="hoverContainerT">
             <div>{year}, WEEK {week}</div>
             <div>New Confirmed : {confirmedCnt}</div>
             <hr></hr>
-            <div className="top1Content">
-                <div className="movie">
+            <div className="top1ContentT">
+                <div className="movieT">
                     MOVIE
                     {contentList[0]}
                 </div>
-                <div className="tvshows">
+                <div className="tvshowsT">
                     TVSHOWS
                 </div>
             </div>

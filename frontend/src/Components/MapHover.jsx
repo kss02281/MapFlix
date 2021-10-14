@@ -1,11 +1,14 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import React, { useState, useMemo} from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import "../css/MapHover.scss";
 
 function MapHover(props) {
   const [subscibesQ1, setSubscibesQ1] = useState(0);
   const [subscibesQ2, setSubscibesQ2] = useState(0);
+  const [movieURL, setMovieURL] = useState("");
+  const [showURL, setShowURL] = useState("");
+  const [movieTitle, setMovieTitle] = useState("");
+  const [showTitle, setShowTitle] = useState("");
   const nationName = props.nationName;
   const nationCode = props.nationCode;
 
@@ -24,17 +27,34 @@ function MapHover(props) {
     fetch("/netflix/" + nationCode)
       .then((response) => {
         if (response.ok) {
-          console.log("ok");
           return response.json();
         }
       })
       .then((data) => {
-        console.log(data)
         setSubscibesQ1(data.q1_subscribers);
         setSubscibesQ2(data.q2_subscribers);
       });
   });
 
+  useMemo(() => {
+    console.log("/netflix/" + nationCode + "/2021-040/top1");
+    fetch("/netflix/" + nationCode + "/2021-040/top1")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        const movie = data[0];
+        const show = data[1];
+        setMovieURL(movie.poster);
+        setShowURL(show.poster);
+        setMovieTitle(movie.title);
+        setShowTitle(show.title);
+        console.log(movieURL);
+      });
+  });
+  const increase_Subscibes_Data = subscibes_data[1].pv - subscibes_data[0].pv;
   return (
     <div>
       <div className="countryName">{nationName}</div>
@@ -43,9 +63,7 @@ function MapHover(props) {
           <div className="leftText">
             <p className="subscibesText">Subscibes</p>
             <p className="total_Subscibes">{subscibes_data[1].pv}</p>
-            <p className="increase_Subscibes">
-              {subscibes_data[1].pv - subscibes_data[0].pv}
-            </p>
+            <p className="increase_Subscibes">{increase_Subscibes_Data}</p>
           </div>
           <div className="subscribes_Chart">
             <BarChart width={230} height={150} data={subscibes_data}>
@@ -59,14 +77,14 @@ function MapHover(props) {
         <hr className="line"></hr>
         <div className="rightBox">
           <div className="topMovieBox">
-            <img className="movieImage"></img>
+            <img className="movieImage" src={movieURL}></img>
             <p className="topMovie">Top Movie</p>
-            <p className="movieTitle">Title </p>
+            <p className="movieTitle">Title : {movieTitle}</p>
           </div>
           <div className="topShowBox">
-            <img className="showImage"></img>
+            <img className="showImage" src={showURL}></img>
             <p className="topShow">Top Show</p>
-            <p className="ShowTitle">Title </p>
+            <p className="ShowTitle">Title : {showTitle}</p>
           </div>
         </div>
       </div>
@@ -75,3 +93,4 @@ function MapHover(props) {
 }
 
 export default MapHover;
+
