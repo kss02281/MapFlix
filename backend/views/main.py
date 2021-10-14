@@ -39,7 +39,7 @@ def get_netflix_top1(country_code):
     x = random.randint(1, 3)
     for content in top1_list:
         if (content.poster == '') or ('img' in content.poster):
-            content.poster = f'../../frontend/src/img/{x}.png'
+            content.poster = f'../img/{x}.png'
             db.session.commit()
 
     new_top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
@@ -70,7 +70,7 @@ def get_netflix_top1_by_week(country_code):
     x = random.randint(1, 3)
     for content in top1_list:
         if (content.poster == '') or ('img' in content.poster):
-            content.poster = f'../../frontend/src/img/{x}.png'
+            content.poster = f'../img/{x}.png'
             db.session.commit()
 
     new_top1_list = []
@@ -96,7 +96,7 @@ def get_netflix_top10(country_code, week):
 
     for movie in top10_movies:
         if 'img' in movie.poster == '':
-            movie.poster = f'../../frontend/src/img/{x}.png'
+            movie.poster = f'../img/{x}.png'
             db.session.commit()
 
     top10_tv_shows = db.session.query(NetflixContent).join(NetflixTop10).\
@@ -105,7 +105,7 @@ def get_netflix_top10(country_code, week):
 
     for tv in top10_tv_shows:
         if 'img' in tv.poster:
-            tv.poster = f'../../frontend/src/img/{x}.png'
+            tv.poster = f'../img/{x}.png'
             db.session.commit()
 
     new_top10_movies = db.session.query(NetflixContent).join(NetflixTop10).\
@@ -204,7 +204,7 @@ def get_world_genres_score(week):
 #     x = random.randint(1, 3)
 #     for content in top1_list:
 #         if (content.poster == '') or ('img' in content.poster):
-#             content.poster = f'../../frontend/src/img/{x}.png'
+#             content.poster = f'../img/{x}.png'
 #             db.session.commit()
 
 #     new_top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
