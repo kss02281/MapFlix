@@ -109,6 +109,11 @@ def get_netflix_top10(country_code, week):
 # 국가별 각 주차의 가장 인기있는 장르와 색상
 @bp.route('/netflix/<string:country_code>/<string:week>/genre',  methods=['GET'])
 def get_top_genre(country_code, week):
+    if country_code == 'world':
+        genre = db.session.query(WorldGenreScore).filter(WorldGenreScore.week == week).order_by(WorldGenreScore.score.desc()).first()
+
+        return jsonify({'genre': genre.genre, 'color': genre.color})
+
     contents = db.session.query(NetflixContent).join(NetflixTop10).\
         filter(NetflixTop10.country_code == country_code, NetflixTop10.week == week).all()
 
