@@ -60,16 +60,16 @@ styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css
 document.head.appendChild(styleLink);
 
   return (
-      <div className='timeline'>
-          <span className="nationName">{props.nation}'s</span>
-          <div className="DaT"> 
-          <span className="title"> confirmed people by week</span>
+      <div className='timelineG'>
+          <span className="nationNameG">{props.nation}'s</span>
+          <div className="DaTG"> 
+          <span className="titleG"> confirmed people by week</span>
           </div>
-          <ChartContainer maxHeight={maxVal}>
+          <ChartContainerG maxHeight={maxVal}>
             {
               coronaData.map((item, idx) => (
                 <>
-                  <Bar />
+                  <BarG />
                   <ReactHover options={optionsCursorTrueWithMargin}>
                     <Trigger type="trigger">
                       <GenreDrawBar
@@ -89,18 +89,18 @@ document.head.appendChild(styleLink);
                         }}
                       />
                     </Trigger>
-                    <Hover type='hover'>
-                      <div className='hoverContainer'>
-                        <p className='hover'>{props.nation}</p>
-                        <p className='hover'>{item.week}</p>
-                        <p className='hover'>Confirmed People : {item.confirmedCnt}</p>
+                    <Hover type='hoverG'>
+                      <div className='hoverContainerG'>
+                        <p className='hoverG'>{props.nation}</p>
+                        <p className='hoverG'>{item.week}</p>
+                        <p className='hoverG'>Confirmed People : {item.confirmedCnt}</p>
                       </div>
                     </Hover>
                   </ReactHover>
                 </>
               ))
             }
-          </ChartContainer>
+          </ChartContainerG>
           
       </div>
   )
@@ -118,44 +118,16 @@ const GenreTimeLine = ({ history, location, match, }) => {
     shallowEqual
   )
   
-  const clickToScrollUp = () => {
-    const root = document.getElementById('root');
-    window.scrollBy({top: root.getBoundingClientRect().top - 30, behavior: 'smooth'});
-  }
-
   return (
     <div>
       <DrawBarChart nation={nation} nationCode={nationCode}/>
-      <ContainerT>
-        <h1 className='guide'>Click on the stick for details by week <HiCursorClick/></h1>
-        <FaAngleDoubleDown className='arrowIcon'/>
-        <div id='contentContainerT'>
-          <h1>{year}, WEEK {week}</h1>
-          <div id='content'>
-            <div className='movie'>Movie</div>
-            <div className='updown'></div>
-            <div className='show'>Show</div>
-          </div>
-        </div>
-        
-        <button className='arrowButton' onClick={clickToScrollUp}><FaAngleDoubleUp className='arrowIcon'/></button>
-      </ContainerT>
     </div>
   );
 };
 
 export default GenreTimeLine;
 
-
-const ContainerT = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  align-items: center;
-  justify-content: center;
-`
-
-const ChartContainer = styled.div`
+const ChartContainerG = styled.div`
   display: flex;
   flex-direction: row;
   height: 700px;
@@ -164,7 +136,7 @@ const ChartContainer = styled.div`
   padding: 0;
   align-items: flex-start;
 `
-const Bar = styled.div`
+const BarG = styled.div`
     width: 2px;
     height: 300px;
 `
