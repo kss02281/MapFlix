@@ -1,0 +1,67 @@
+@charset 'utf-8';
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+$body-font: "Maven Pro", sans-serif;
+
+body {
+  background-color: black;
+}
+
+body {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.timelineG {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+    
+}
+
+.DaTG {
+    display: flex;
+    margin-top: 40px;
+    align-items: center;
+}
+
+
+
+.nationNameG {
+    color: white;
+    font-size: 4em;
+    font-family: $title-font;
+    text-align: center;
+    letter-spacing: 4px;
+    margin: 0;
+}
+
+.titleG {
+    color: white;
+    font-family: $body-font;
+    font-size: 1.5em;
+    margin-right: 20px;
+}
+
+
+
+.hoverContainerG {
+    width: 200px;
+    background-color: white;
+    border: 4px solid #8A2BE2;
+    border-radius: 20px 40px;
+    padding: 4px;
+    font-size: 2em;
+    font-weight: bold;
+    overflow: auto;
+}
+
+.hoverG {
+    font-family: $title-font;
+}
