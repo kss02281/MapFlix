@@ -56,7 +56,6 @@ function DrawBarChart(props) {
         )
       );
 
-<<<<<<< HEAD
     SetTopContentList(topContent)
     dispatch(setDate({
       'year': '2021', 
@@ -64,19 +63,12 @@ function DrawBarChart(props) {
       'date': 'Sep 27 - Oct 3',
     }));
     dispatch(getContentShow({nationCode: props.nationCode,week: '2021-039'}))
-=======
-    SetTopContentList(topContent);
->>>>>>> c248a8eaa6dc0256550790ac711e7081d68acaad
     // const sample = Object.values(topContent)[0]['2020-033'][0].title
     // console.log(sample);
 
     //console.log(topContent)
-<<<<<<< HEAD
     console.log('coronaData')
     console.log({coronaData})
-=======
-    console.log(coronaData);
->>>>>>> c248a8eaa6dc0256550790ac711e7081d68acaad
 
     setCnt(1);
   }, [cnt, props.nationCode]);
@@ -254,7 +246,7 @@ export default TimeLine;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 30px;
   align-items: center;
   justify-content: center;
 `;

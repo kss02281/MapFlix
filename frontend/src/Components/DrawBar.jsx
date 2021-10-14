@@ -68,7 +68,7 @@ function DrawBar(props) {
         confirmedCnt={confirmedCnt}
         ratio={ratio}
         onClick={onClickAction}
-        color={randomColor}
+        color={color}
       ></Bar>
     </>
   );

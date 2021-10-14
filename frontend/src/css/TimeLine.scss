@@ -106,10 +106,10 @@ body::-webkit-scrollbar {
 }
 
 #contentContainer {
-  height: 850px;
+  height: 770px;
   width: 100%;
   background-color: white;
-  margin-top: 35px;
+  margin-top: 40px;
   margin-bottom: 35px;
   display: flex;
   flex-direction: column;
@@ -118,7 +118,7 @@ body::-webkit-scrollbar {
 }
 
 .contentBox {
-  margin: 0;
+  padding: 0;
   font-family: $title-font;
   font-size: 3.5em;
   overflow: hidden;
