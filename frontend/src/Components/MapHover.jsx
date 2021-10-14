@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import React, { useState, useMemo} from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import "../css/MapHover.scss";
 
@@ -94,3 +93,4 @@ function MapHover(props) {
 }
 
 export default MapHover;
+

@@ -42,30 +42,30 @@ function ShowBox () {
             {tvshowData === null && !loading && <p>No movie ranking list!</p>}
             {error && !loading && <p>{error}</p>}
 
-            <h1 className="type">TVSHOWS</h1>
+            <h1 className="hoverTitle">TVSHOWS</h1>
             <hr></hr>
 
-            <div className="contentBox">
-                <div className="posterBox">
-                    <img className="poster" src={imgSrc}></img>
+            <div className="contentBoxT">
+                <div className="posterBoxT">
+                    <img className="posterT" src={imgSrc}></img>
                 </div>
-                <div className='space'>
+                <div className='spaceT'>
                 </div>
-                <div className="rankBox">
+                <div className="rankBoxT">
                     {
                         tvshowData?.map((movie, idx) => (
-                            <div className="rankContent">
-                                <div className="rankNum">
+                            <div className="rankContentT">
+                                <div className="rankNumT">
                                     {idx+1}
                                 </div>
-                                <a name={idx} className='rank' onClick={clickhandler}>
+                                <a name={idx} className='rankT' onClick={clickhandler}>
                                     {movie.title}
-                                    <Tooltip className="circleHover" title={movie.genre[0]} onClick='undefined'>
+                                    <Tooltip className="circleHoverT" title={movie.genre[0]} onClick='undefined'>
                                         <span>
                                             <BsCircleFill size='23' style={{color:`${Genre_colors[movie.genre[0]]}`, marginLeft: '10px'}} />
                                         </span>  
                                     </Tooltip>
-                                    <Tooltip className="circleHover" title={movie.genre[1]} onClick='undefined'>
+                                    <Tooltip className="circleHoverT" title={movie.genre[1]} onClick='undefined'>
                                         <span>
                                             <BsCircleFill size='23' style={{color:`${Genre_colors[movie.genre[1]]}`, marginLeft: '5px'}} />
                                         </span>  

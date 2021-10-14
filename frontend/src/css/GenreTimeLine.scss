@@ -1,174 +1,174 @@
 @charset 'utf-8';
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
 
-$title-font: 'Bebas Neue', sans-serif;
-$body-font: 'Maven Pro', sans-serif;
+$title-font: "Bebas Neue", sans-serif;
+$body-font: "Maven Pro", sans-serif;
 
 body {
-    background-color: black;
+  background-color: black;
 }
 
 body {
-    -ms-overflow-style: none; /* IE, Edge */
-    scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
 }
 body::-webkit-scrollbar {
-display: none; /* Chrome, Safari, Opera */
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .timeline {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 700px;
 }
 
 .nationName {
-    color: white;
-    font-size: 4em;
-    font-family: $title-font;
-    text-align: center;
-    letter-spacing: 4px;
-    margin: 0;
+  color: white;
+  font-size: 4em;
+  font-family: $title-font;
+  text-align: center;
+  letter-spacing: 4px;
+  margin: 0;
 
-    float: left;
+  float: left;
 }
 
 .title {
-    color: white;
-    font-family: $body-font;
-    font-size: 1.5em;
-    margin-right: 20px;
+  color: white;
+  font-family: $body-font;
+  font-size: 1.5em;
+  margin-right: 20px;
 }
 
 .hoverContainer {
-    width: 200px;
-    background-color: white;
-    border: 4px solid #8A2BE2;
-    border-radius: 20px 40px;
-    padding: 4px;
-    font-size: 2em;
-    font-weight: bold;
-    overflow: auto;
+  width: 200px;
+  background-color: white;
+  border: 4px solid #8a2be2;
+  border-radius: 20px 40px;
+  padding: 4px;
+  font-size: 2em;
+  font-weight: bold;
+  overflow: auto;
 }
 
 .hover {
-    font-family: $title-font;
+  font-family: $title-font;
 }
 
 .guide {
-    font-family: $title-font;
-    color: white;
-    font-size: 2.2em;
-    margin: 0;
+  font-family: $title-font;
+  color: white;
+  font-size: 2.2em;
+  margin: 0;
 }
 
 .arrowIcon {
-    color: white;
-    height: 40px;
-    width: 60px;
-    margin: 20px 0;
+  color: white;
+  height: 40px;
+  width: 60px;
+  margin: 20px 0;
 }
 
 .arrowButton {
-    background-color: transparent;
-    border: 0;
-    color: white;
-    font-size: 2em;
-    font-family: $title-font;
+  background-color: transparent;
+  border: 0;
+  color: white;
+  font-size: 2em;
+  font-family: $title-font;
 }
 
 .genrecolor {
-    font-family: $body-font;
-    color: whitesmoke;
-    margin-left: 50px;
-    background-color: rgba(233, 221, 221, 0.329);
-    border-radius: 40px;
-    width: 150px;
-    padding-top: 10px;
+  font-family: $body-font;
+  color: whitesmoke;
+  margin-left: 50px;
+  background-color: rgba(233, 221, 221, 0.329);
+  border-radius: 40px;
+  width: 150px;
+  padding-top: 10px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 }
 
 .colorlist {
-    font-size: 0.85em;
-    display: flex;
-    flex-direction: row;
-    align-items: left;
-    margin-left: 15px;
+  font-size: 0.85em;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  margin-left: 15px;
 }
 
 .circle {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 .year {
-    font-family: $title-font;
-    font-size: 2em;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 500px;
+  font-family: $title-font;
+  font-size: 2em;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 500px;
 }
 
-#contentContainer {
-    height: 850px;
-    width: 100%;
-    background-color: white;
-    margin-top: 35px;
+#contentContainerT {
+  height: 850px;
+  width: 100%;
+  background-color: white;
+  margin-top: 35px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    h1 {
-        margin: 0;
-        font-family: $title-font;
-        font-size: 4em;
-    }
+  h1 {
+    margin: 0;
+    font-family: $title-font;
+    font-size: 4em;
+  }
 }
 
 #content {
-    width: 100%;
-    height: 700px;
-    background-color: white;
-    margin-top: 20px;
+  width: 100%;
+  height: 700px;
+  background-color: white;
+  margin-top: 20px;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow: auto;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    text-align:center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  text-align: center;
 }
 
 .updown {
-    border: 1px solid rgb(179, 179, 179); 
-    width: 0.1px; 
-    height: 700px;
-    border-radius: 50px;
+  border: 1px solid rgb(179, 179, 179);
+  width: 0.1px;
+  height: 700px;
+  border-radius: 50px;
 }
 
 .movie {
-    width: 40%;
+  width: 40%;
 }
 
 .show {
-    width: 40%;
+  width: 40%;
 }
 
 .DaT {
-    display: flex;
-    margin-top: 40px;
-    align-items: center;
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
 }
