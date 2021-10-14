@@ -32,7 +32,7 @@ body::-webkit-scrollbar {
   font-family: $title-font;
   text-align: center;
   letter-spacing: 4px;
-  margin: 0;
+  margin-left: 150px;
   float: left;
 }
 
@@ -41,20 +41,20 @@ body::-webkit-scrollbar {
     font-family: $body-font;
     font-size: 1.5em;
     margin-top: 10px;
+    margin-left: 150px;
 }
 
 .guide {
   font-family: $title-font;
   color: white;
   font-size: 2.2em;
-  margin: 0;
+  margin-top: 20px;
 }
 
 .arrowIcon {
   color: white;
   height: 40px;
   width: 60px;
-  margin: 20px 0;
 }
 
 .arrowButton {
@@ -74,7 +74,7 @@ body::-webkit-scrollbar {
   background-color: rgba(233, 221, 221, 0.329);
   border-radius: 40px;
   width: 150px;
-  padding-top: 10px;
+  padding-top: 5px;
 
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: row;
   align-items: left;
-  margin-top: 5px;
+  margin-top: 4px;
   margin-left: 25px;
 }
 
@@ -154,14 +154,25 @@ body::-webkit-scrollbar {
   margin-left: 3%;
 }
 
-.bottomArrow {
-  width: 100%;
-  background-color: black;
+.bottomContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  margin-bottom: 30px;
 }
 
-// .DaT {
-//   display: flex;
-//   margin-top: 40px;
-//   align-items: center;
-// }
+.genreButton {
+  width: 300px;
+  height: 50px;
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.DaT {
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+}

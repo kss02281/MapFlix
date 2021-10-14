@@ -24,6 +24,9 @@ import queryString from "query-string";
 import "../css/TimeLine.scss";
 import DropDownMenu from "../Components/DropDownMenu";
 
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+
 function DrawBarChart(props) {
   const dispatch = useDispatch();
   const [cnt, setCnt] = useState(0);
@@ -93,8 +96,10 @@ function DrawBarChart(props) {
   return (
     <div className="timeline">
       <span className="nationName">{props.nation}'s</span>
+      <div className="DaT"></div>
       <span className="title"> confirmed people by week</span>
       <ChartContainer maxHeight={maxVal}>
+        <div style={{width: '380px'}}></div>
         {coronaData.map((item, idx) => (
           <>
             <Bar />
@@ -196,6 +201,10 @@ const TimeLine = ({ history, location }) => {
     });
   };
 
+  const handleGenreButton = () => {
+    history.push('/GenreAnalysis/nationInfo?nation=World&nationCode=world');
+  }
+
   const styleLink = document.createElement("link");
   styleLink.rel = "stylesheet";
   styleLink.href =
@@ -215,6 +224,7 @@ const TimeLine = ({ history, location }) => {
         <h1 className="guide">
           Click on the stick for details by week <HiCursorClick />
         </h1>
+        <div className="DaT"></div>
         <FaAngleDoubleDown className="arrowIcon" />
         <div id="contentContainer">
           <h1 className="contentBox">
@@ -231,10 +241,17 @@ const TimeLine = ({ history, location }) => {
             </div>
           </div>
         </div>
-        <div className="bottomArrow">
+        <div className="bottomContent">
+          <Stack direction="row" spacing={2}>
+            <Button variant="outlined" color='secondary' size='large' className="genreButton" onClick={handleGenreButton}>
+              Go To Genre-Analysis Page
+            </Button>
+          </Stack>
+          <div style={{width: '500px'}}></div>
           <button className="arrowButton" onClick={clickToScrollUp}>
             <FaAngleDoubleUp className="arrowIcon" />
           </button>
+          <div style={{width: '800px'}}></div>
         </div>
       </Container>
     </div>

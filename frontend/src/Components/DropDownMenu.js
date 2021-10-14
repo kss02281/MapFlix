@@ -22,7 +22,7 @@ const DropDownMenuGenre = () => {
   }
 
   return(
-    <Menu compact style={{float: 'right' , marginRight: '30px', cursor: 'pointer', marginTop: '20px'}} >
+    <Menu compact style={{float: 'right' , marginRight: '20px', cursor: 'pointer', marginTop: '20px'}} >
       <Dropdown selection item text='Select Country'>
         <Dropdown.Menu>
           <Dropdown.Item value="ar" nation="Argentina" onClick={clickhandler}>
