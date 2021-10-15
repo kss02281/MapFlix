@@ -23,22 +23,16 @@ function DrawBar(props) {
   );
 
   useEffect(() => {
-    if (year === 2020 && week < 14) {
-      setColor("#ffffff");
-    } else if (year === 2021 && week === 1 && countryCode != "kr") {
-      setColor("#ffffff");
-    } else {
-      fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-        })
-        .then((data) => {
-          console.log(data?.color);
-          setColor(data?.color);
-        });
-    }
+    fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        console.log(data?.color);
+        setColor(data?.color);
+      });
   }, [week, countryCode]);
 
   const optionsCursorTrueWithMargin = {
