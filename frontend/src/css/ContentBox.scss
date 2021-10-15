@@ -49,6 +49,12 @@ $body-font: 'Maven Pro', sans-serif;
     flex-wrap: nowrap;
     overflow: auto;
     margin-top: 20px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.rankBoxT::-webkit-scrollbar {
+    display: none;
 }
 
 .rankContentT {
@@ -60,6 +66,12 @@ $body-font: 'Maven Pro', sans-serif;
     flex-wrap: nowrap;
     overflow: auto;
     margin: 5px 0 0 10px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.rankContentT::-webkit-scrollbar {
+    display: none;
 }
 
 .rankT {
