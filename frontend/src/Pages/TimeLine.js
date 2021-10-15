@@ -165,7 +165,6 @@ const TimeLine = ({ history, location }) => {
     shallowEqual
   );
 
-
   const goToMain = () => {
     history.push("/");
   };
@@ -194,7 +193,7 @@ const TimeLine = ({ history, location }) => {
     <div>
       <button className="arrowButton" onClick={goToMain}>
         <FaAngleDoubleLeft className="arrowIcon" />
-        Go To Main Page
+        <a href="/">Go To Main Page</a>
       </button>
       <DropDownMenu />
       <DrawBarChart nation={nation} nationCode={nationCode} />
