@@ -145,9 +145,9 @@ const DropDownMenuGenre = () => {
             <Flag name="is" />
             Iceland
           </Dropdown.Item>
-          <Dropdown.Item value="id" nation="Indonesia" onClick={clickhandler}>
-            <Flag name="id" />
-            Indonesia
+          <Dropdown.Item value="in" nation="India" onClick={clickhandler}>
+            <Flag name="in" />
+            India
           </Dropdown.Item>
           <Dropdown.Item value="ie" nation="Ireland" onClick={clickhandler}>
             <Flag name="ie" />
@@ -160,10 +160,6 @@ const DropDownMenuGenre = () => {
           <Dropdown.Item value="it" nation="Italy" onClick={clickhandler}>
             <Flag name="it" />
             Italy
-          </Dropdown.Item>
-          <Dropdown.Item value="jm" nation="Jamaica" onClick={clickhandler}>
-            <Flag name="jm" />
-            Jamaica
           </Dropdown.Item>
           <Dropdown.Item value="jp" nation="Japan" onClick={clickhandler}>
             <Flag name="jp" />
@@ -200,10 +196,6 @@ const DropDownMenuGenre = () => {
           <Dropdown.Item value="my" nation="Malaysia" onClick={clickhandler}>
             <Flag name="my" />
             Malaysia
-          </Dropdown.Item>
-          <Dropdown.Item value="mt" nation="Malta" onClick={clickhandler}>
-            <Flag name="mt" />
-            Malta
           </Dropdown.Item>
           <Dropdown.Item value="mx" nation="Mexico" onClick={clickhandler}>
             <Flag name="mx" />

@@ -66,12 +66,15 @@ function DrawBarChart(props) {
       'date': 'Sep 27 - Oct 3',
     }));
     dispatch(getContentShow({nationCode: props.nationCode,week: '2021-039'}))
-    // const sample = Object.values(topContent)[0]['2020-033'][0].title
-    // console.log(sample);
 
-    //console.log(topContent)
-    console.log('coronaData')
-    console.log({coronaData})
+    // setTimeout(() => {
+    //   console.log('topContent')
+    //   console.log(JSON.parse(topContent))
+    //   console.log('coronaData')
+    //   console.log({coronaData})
+
+    // }, 2000)
+
 
     setCnt(1);
   }, [cnt, props.nationCode]);

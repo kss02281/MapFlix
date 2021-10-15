@@ -8,7 +8,7 @@ function TimelineHoverBox(props) {
     const nationCode = props.nationCode;
     const fullWeek = props.week;
     const confirmedCnt = props.confirmedCnt;
-    const [top1List, setTop1List] = useState(['genre','Comedy']);
+    const [top1List, setTop1List] = useState([]);
 
 
     const contentList = useSelector(
@@ -21,10 +21,16 @@ function TimelineHoverBox(props) {
 
 
     // useMemo(() => {
-    //     if(!(contentList == null || contentList === undefined))
-    //     setTop1List(Object.keys(contentList.fullWeek || ['null']));
-    //     console.log(top1List)
-    // },[ fullWeek ])
+    //     // if(!(Object.isNull(contentList)))
+    //     // {        
+    //     //     console.log(Object.toString)
+    //     //     // setTimeout(() => {
+    //     //     //         setTop1List(Object.keys(contentList.fullWeek || ['null']));
+    //     //     //         console.log(top1List)
+    //     //     //     },2000)
+    //     // }
+    //     console.log(Object.toString)
+    // },[ fullWeek, confirmedCnt ])
 
     const [year, week] = [parseInt(fullWeek.slice(0,4)), parseInt(fullWeek.slice(5,8))];
 

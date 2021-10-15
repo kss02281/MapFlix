@@ -27,7 +27,10 @@ function MovieBox () {
 
     const clickhandler=(e) => {
         const idx = parseInt(e.target.id);
-        setImgSrc(movieData[idx]?.poster);
+        setTimeout(() => {
+            setImgSrc(movieData[idx]?.poster);
+        }, 500)
+        
     }
 
     return (
