@@ -56,19 +56,23 @@ function DrawBarChart(props) {
         )
       );
 
-    SetTopContentList(topContent)
-    dispatch(setDate({
-      'year': '2021', 
-      'week': '39',
-      'date': 'Sep 27 - Oct 3',
-    }));
-    dispatch(getContentShow({nationCode: props.nationCode,week: '2021-039'}))
+    SetTopContentList(topContent);
+    dispatch(
+      setDate({
+        year: "2021",
+        week: "39",
+        date: "Sep 27 - Oct 3",
+      })
+    );
+    dispatch(
+      getContentShow({ nationCode: props.nationCode, week: "2021-039" })
+    );
     // const sample = Object.values(topContent)[0]['2020-033'][0].title
     // console.log(sample);
 
     //console.log(topContent)
-    console.log('coronaData')
-    console.log({coronaData})
+    console.log("coronaData");
+    console.log({ coronaData });
 
     setCnt(1);
   }, [cnt, props.nationCode]);
@@ -183,7 +187,6 @@ const TimeLine = ({ history, location }) => {
     shallowEqual
   );
 
-
   const goToMain = () => {
     history.push("/");
   };
@@ -206,7 +209,7 @@ const TimeLine = ({ history, location }) => {
     <div>
       <button className="arrowButton" onClick={goToMain}>
         <FaAngleDoubleLeft className="arrowIcon" />
-        Go To Main Page
+        <a href="/">Go To Main Page</a>
       </button>
       <DropDownMenu />
       <DrawBarChart nation={nation} nationCode={nationCode} />
