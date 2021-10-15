@@ -16,15 +16,15 @@ import { BsCircleFill } from "react-icons/bs";
 import { Genre_colors } from "../data/Genre_colors";
 import { setDate } from "../Redux/actions/yearWeek";
 import { getContentShow } from "../Redux/actions/contentShow";
-import { getTopContentList } from '../Redux/actions/topContentList';
+import { getTopContentList } from "../Redux/actions/topContentList";
 
 import { weekDate } from "../data/Week_date";
 import queryString from "query-string";
 import "../css/TimeLine.scss";
 import DropDownMenu from "../Components/DropDownMenu";
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 function DrawBarChart(props) {
   const dispatch = useDispatch();
@@ -57,27 +57,32 @@ function DrawBarChart(props) {
         )
       );
 
-    dispatch(setDate({
-      'year': '2021', 
-      'week': '39',
-      'date': 'Sep 27 - Oct 3',
-    }));
-    dispatch(getContentShow({nationCode: props.nationCode, week: '2021-039'}));
+    dispatch(
+      setDate({
+        year: "2021",
+        week: "39",
+        date: "Sep 27 - Oct 3",
+      })
+    );
+    dispatch(
+      getContentShow({ nationCode: props.nationCode, week: "2021-039" })
+    );
 
     setCnt(1);
 
-    console.log(topContent['2020-040'])
+    console.log(topContent["2020-040"]);
   }, [cnt, props.nationCode]);
 
   useEffect(() => {
     const confirmedList = coronaData.map((item) => item.confirmedCnt);
+    console.log(confirmedList);
     confirmedList.sort(function (a, b) {
       return parseInt(a - b);
     });
-    setMaxVal(confirmedList[confirmedList.length - 1]);
+    setMaxVal(confirmedList[confirmedList.length - 2]);
 
     setRatio(maxVal / 400);
-    console.log(confirmedList[confirmedList.length - 1]);
+    console.log(confirmedList[confirmedList.length - 2]);
   }, [coronaData]);
 
   return (
@@ -86,45 +91,44 @@ function DrawBarChart(props) {
       <div className="DaT"></div>
       <span className="title"> confirmed people by week</span>
       <ChartContainer maxHeight={maxVal}>
-        <div style={{width: '380px'}}></div>
+        <div style={{ width: "380px" }}></div>
         {coronaData.map((item, idx) => (
           <>
             <Bar />
-                <DrawBar
-                  countryCode={props.nationCode}
-                  fullweek={item.week}
-                  year={parseInt(item.week.slice(0, 4))}
-                  week={parseInt(item.week.slice(5, 8))}
-                  confirmedCnt={item.confirmedCnt}
-                  maxHeight={maxVal}
-                  ratio={ratio}
-                  onClick={() => {
-                    const [year, week] = [
-                      parseInt(item.week.slice(0, 4)),
-                      parseInt(item.week.slice(5, 8)),
-                    ];
-                    dispatch(
-                      setDate({
-                        year: year,
-                        week: week,
-                        date: weekDate[item.week],
-                      })
-                    );
-                    dispatch(
-                      getContentShow({
-                        nationCode: props.nationCode,
-                        week: item.week,
-                      })
-                    );
+            <DrawBar
+              countryCode={props.nationCode}
+              fullweek={item.week}
+              year={parseInt(item.week.slice(0, 4))}
+              week={parseInt(item.week.slice(5, 8))}
+              confirmedCnt={item.confirmedCnt}
+              maxHeight={maxVal}
+              ratio={ratio}
+              onClick={() => {
+                const [year, week] = [
+                  parseInt(item.week.slice(0, 4)),
+                  parseInt(item.week.slice(5, 8)),
+                ];
+                dispatch(
+                  setDate({
+                    year: year,
+                    week: week,
+                    date: weekDate[item.week],
+                  })
+                );
+                dispatch(
+                  getContentShow({
+                    nationCode: props.nationCode,
+                    week: item.week,
+                  })
+                );
 
-                    const content = document.getElementById("content");
-                    window.scrollBy({
-                      top: content.getBoundingClientRect().top,
-                      behavior: "smooth",
-                    });
-                  }
-                }
-                />
+                const content = document.getElementById("content");
+                window.scrollBy({
+                  top: content.getBoundingClientRect().top,
+                  behavior: "smooth",
+                });
+              }}
+            />
           </>
         ))}
         <div className="genrecolor">
@@ -174,9 +178,12 @@ const TimeLine = ({ history, location }) => {
 
   const handleGenreButton = () => {
     const root = document.getElementById("root");
-    window.scrollBy({top:root.getBoundingClientRect().top, behavior: 'smooth'})
-    history.push('/GenreAnalysis/nationInfo?nation=World&nationCode=world');
-  }
+    window.scrollBy({
+      top: root.getBoundingClientRect().top,
+      behavior: "smooth",
+    });
+    history.push("/GenreAnalysis/nationInfo?nation=World&nationCode=world");
+  };
 
   const styleLink = document.createElement("link");
   styleLink.rel = "stylesheet";
@@ -216,15 +223,21 @@ const TimeLine = ({ history, location }) => {
         </div>
         <div className="bottomContent">
           <Stack direction="row" spacing={2}>
-            <Button variant="outlined" color='secondary' size='large' className="genreButton" onClick={handleGenreButton}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="large"
+              className="genreButton"
+              onClick={handleGenreButton}
+            >
               Go To Genre-Analysis Page
             </Button>
           </Stack>
-          <div style={{width: '500px'}}></div>
+          <div style={{ width: "500px" }}></div>
           <button className="arrowButton" onClick={clickToScrollUp}>
             <FaAngleDoubleUp className="arrowIcon" />
           </button>
-          <div style={{width: '800px'}}></div>
+          <div style={{ width: "800px" }}></div>
         </div>
       </Container>
     </div>

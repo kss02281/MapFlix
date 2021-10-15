@@ -1,12 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+
 .MapHoverRedGray_Wrap {
-  width: 215px;
+  width: 150px;
   height: 70px;
   background-color: #212529;
   border-radius: 20px;
   .countryName {
-    margin-top: 15px;
+    margin-top: 20px;
     display: inline-block;
-    font-size: 22px;
+    font-size: 20px;
     color: whitesmoke;
+    font-family: $title-font;
   }
 }

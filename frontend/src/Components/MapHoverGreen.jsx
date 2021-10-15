@@ -51,11 +51,11 @@ function MapHoverGreen(props) {
   const subscibes_data = [
     {
       name: "2021 Q1",
-      pv: subscibesQ1 / 100,
+      pv: subscibesQ1,
     },
     {
       name: "2021 Q2",
-      pv: subscibesQ2 / 100,
+      pv: subscibesQ2,
     },
   ];
   useMemo(() => {
