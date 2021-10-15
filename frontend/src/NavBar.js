@@ -11,7 +11,8 @@ const NavBars = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Container>
-  <Navbar.Brand href="/"><img src={Title_logo} width="150px" class="d-inline-block align-text-top" alt=""/></Navbar.Brand>
+  <Navbar.Brand href="/"><img  src={Title_logo} width="150px" class="d-inline-block align-text-top" alt=""/></Navbar.Brand>
+  
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="me-auto">

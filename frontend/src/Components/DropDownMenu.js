@@ -4,6 +4,7 @@ import { useHistory } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { setDate } from '../Redux/actions/yearWeek'
 import { getContentShow } from '../Redux/actions/contentShow'
+import { getTopContentList } from '../Redux/actions/topContentList'
 
 const DropDownMenuGenre = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const DropDownMenuGenre = () => {
       'date': 'Sep 27 - Oct 3',
     }));
     dispatch(getContentShow({nationCode: value,week: '2021-039'}));
+    dispatch(getTopContentList({nationCode: value}));
     history.push(`/timeLine/nationInfo?nation=${nation}&nationCode=${value}`);
   }
 

@@ -16,6 +16,7 @@ import { BsCircleFill } from "react-icons/bs";
 import { Genre_colors } from "../data/Genre_colors";
 import { setDate } from "../Redux/actions/yearWeek";
 import { getContentShow } from "../Redux/actions/contentShow";
+import { getTopContentList } from '../Redux/actions/topContentList';
 
 import { weekDate } from "../data/Week_date";
 import queryString from "query-string";
@@ -29,7 +30,6 @@ function DrawBarChart(props) {
   const dispatch = useDispatch();
   const [cnt, setCnt] = useState(0);
   const [coronaData, setCoronaData] = useState([]);
-  //const [topContentList, SetTopContentList] = useState([]);
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
@@ -62,7 +62,8 @@ function DrawBarChart(props) {
       'week': '39',
       'date': 'Sep 27 - Oct 3',
     }));
-    dispatch(getContentShow({nationCode: props.nationCode, week: '2021-039'}))
+    dispatch(getContentShow({nationCode: props.nationCode, week: '2021-039'}));
+
     setCnt(1);
 
     console.log(topContent['2020-040'])
@@ -78,12 +79,6 @@ function DrawBarChart(props) {
     setRatio(maxVal / 400);
     console.log(confirmedList[confirmedList.length - 1]);
   }, [coronaData]);
-
-  const optionsCursorTrueWithMargin = {
-    followCursor: true,
-    shiftX: 20,
-    shiftY: 0,
-  };
 
   return (
     <div className="timeline">
