@@ -145,9 +145,9 @@ const DropDownMenu = () => {
             <Flag name="is" />
             Iceland
           </Dropdown.Item>
-          <Dropdown.Item value="id" nation="India" onClick={clickhandler}>
+          <Dropdown.Item value="id" nation="Indonesia" onClick={clickhandler}>
             <Flag name="id" />
-            India
+            Indonesia
           </Dropdown.Item>
           <Dropdown.Item value="ie" nation="Ireland" onClick={clickhandler}>
             <Flag name="ie" />
