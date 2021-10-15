@@ -31,7 +31,7 @@ function DrawBarChart(props) {
   const dispatch = useDispatch();
   const [cnt, setCnt] = useState(0);
   const [coronaData, setCoronaData] = useState([]);
-  const [topContentList, SetTopContentList] = useState([]);
+  //const [topContentList, SetTopContentList] = useState([]);
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
@@ -59,24 +59,15 @@ function DrawBarChart(props) {
         )
       );
 
-    SetTopContentList(topContent)
     dispatch(setDate({
       'year': '2021', 
       'week': '39',
       'date': 'Sep 27 - Oct 3',
     }));
-    dispatch(getContentShow({nationCode: props.nationCode,week: '2021-039'}))
-
-    // setTimeout(() => {
-    //   console.log('topContent')
-    //   console.log(JSON.parse(topContent))
-    //   console.log('coronaData')
-    //   console.log({coronaData})
-
-    // }, 2000)
-
-
+    dispatch(getContentShow({nationCode: props.nationCode, week: '2021-039'}))
     setCnt(1);
+
+    console.log(topContent['2020-040'])
   }, [cnt, props.nationCode]);
 
   useEffect(() => {
@@ -152,7 +143,8 @@ function DrawBarChart(props) {
                 <TimelineHoverBox
                   nation={props.nation}
                   nationCode={props.nationCode}
-                  week={item.week}
+                  fullWeek={item.week}
+                  content={topContent[item.week]}
                   confirmedCnt={parseInt(item.confirmedCnt ** 2)}
                 />
               </Hover>
@@ -206,6 +198,8 @@ const TimeLine = ({ history, location }) => {
   };
 
   const handleGenreButton = () => {
+    const root = document.getElementById("root");
+    window.scrollBy({top:root.getBoundingClientRect().top, behavior: 'smooth'})
     history.push('/GenreAnalysis/nationInfo?nation=World&nationCode=world');
   }
 

@@ -73,14 +73,14 @@ def get_netflix_top1_by_week(country_code):
             content.poster = f'../img/{x}.png'
             db.session.commit()
 
-    new_top1_list = []
+    new_top1_list = {}
 
     for week in week_list:
         top1_contents = db.session.query(NetflixContent).join(NetflixTop10).\
             filter(NetflixTop10.country_code == country_code,
                    NetflixTop10.week == week, NetflixTop10.rank == rank).all()
         serialized = {week: [content.serialize2 for content in top1_contents]}
-        new_top1_list.append(serialized)
+        new_top1_list.update(serialized)
 
     return jsonify(new_top1_list)
 
