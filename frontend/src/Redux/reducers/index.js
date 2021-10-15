@@ -6,7 +6,7 @@ import topContentList from './topContentList';
 const rootReducer = combineReducers({
   yearWeek: yearWeek,
   contentShow: contentShow,
-  topContentList: topContentList
+  topContentList: topContentList,
 });
 
 export default rootReducer;

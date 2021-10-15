@@ -3,10 +3,8 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import DrawBar from "../Components/DrawBar";
 import MovieBox from "../Components/MovieBox";
 import ShowBox from "../Components/ShowBox";
-import TimelineHoverBox from "../Components/TimelineHoverBox";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReactHover, { Trigger, Hover } from "react-hover";
 import {
   FaAngleDoubleDown,
   FaAngleDoubleUp,
@@ -97,8 +95,6 @@ function DrawBarChart(props) {
         {coronaData.map((item, idx) => (
           <>
             <Bar />
-            <ReactHover options={optionsCursorTrueWithMargin}>
-              <Trigger type="trigger">
                 <DrawBar
                   countryCode={props.nationCode}
                   fullweek={item.week}
@@ -131,24 +127,9 @@ function DrawBarChart(props) {
                       top: content.getBoundingClientRect().top,
                       behavior: "smooth",
                     });
-                  }}
+                  }
+                }
                 />
-              </Trigger>
-              <Hover type="hover">
-                {/* {
-                      !(parseInt(item.week.slice(0,4)) == 2020 && parseInt(item.week.slice(5,8))<33)? 
-                      (<div>{Object?.values(topContent)[idx][item.week]}</div>)
-                      :(<div></div>)
-                      } */}
-                <TimelineHoverBox
-                  nation={props.nation}
-                  nationCode={props.nationCode}
-                  fullWeek={item.week}
-                  content={topContent[item.week]}
-                  confirmedCnt={parseInt(item.confirmedCnt ** 2)}
-                />
-              </Hover>
-            </ReactHover>
           </>
         ))}
         <div className="genrecolor">

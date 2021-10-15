@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from "react";
+import { useSelector, shallowEqual } from "react-redux";
 import styled, { css } from "styled-components";
+import TimelineHoverBox from "./TimelineHoverBox";
+import ReactHover, { Trigger, Hover } from "react-hover";
 
 function DrawBar(props) {
-  const maxHeight = props.maxHeight;
-  const idx = props.idx;
-
 
   const confirmedCnt = props.confirmedCnt;
   const onClickAction = props.onClick;
@@ -15,6 +15,17 @@ function DrawBar(props) {
   const year = props.year;
   const countryCode = props.countryCode;
   const [color, setColor] = useState("#ffffff");
+  const [ movie, setMovie ] = useState([])
+  const [ show, setShow ] = useState([]);
+  
+
+  const contentList = useSelector(
+      state => (
+          state.topContentList.topContent
+      ),
+      shallowEqual
+  )
+
 
   useEffect(() => {
     if (year === 2020 && week < 33) {
@@ -36,15 +47,43 @@ function DrawBar(props) {
     }
   }, [week, countryCode]);
 
+  const optionsCursorTrueWithMargin = {
+    followCursor: true,
+    shiftX: 20,
+    shiftY: 0,
+  };
+
 
   return (
     <>
-      <Bar
-        confirmedCnt={confirmedCnt}
-        ratio={ratio}
-        onClick={onClickAction}
-        color={color}
-      ></Bar>
+    <ReactHover options={optionsCursorTrueWithMargin}>
+      <Trigger>
+        <Bar
+          confirmedCnt={confirmedCnt}
+          ratio={ratio}
+          onClick={onClickAction}
+          color={color}
+          onMouseEnter={() => {
+            console.log('hi')
+            console.log(contentList[fullweek]);
+            if(contentList[fullweek]){
+              setMovie(contentList[fullweek][0]);
+              setShow(contentList[fullweek][1])
+            }
+          }}
+        ></Bar>
+      </Trigger>
+      <Hover>
+        <TimelineHoverBox
+          nation={props.nation}
+          nationCode={props.nationCode}
+          fullWeek={fullweek}
+          movie={movie}
+          show={show}
+          confirmedCnt={parseInt(confirmedCnt ** 2)}
+        />
+      </Hover>
+    </ReactHover>
     </>
   );
 }
