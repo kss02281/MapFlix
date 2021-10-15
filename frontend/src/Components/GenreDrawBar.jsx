@@ -26,7 +26,7 @@ function GenreDrawBar(props) {
                 setColor(data?.color);
             });
         }
-    }, [week]);
+    }, [week, countryCode]);
 
     const confirmedCnt = props.confirmedCnt;
     const onClickAction = props.onClick;

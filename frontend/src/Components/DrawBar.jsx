@@ -29,11 +29,12 @@ function DrawBar(props) {
           }
         })
         .then((data) => {
-          //console.log(data?.color);
+          console.log(data?.color);
           setColor(data?.color);
+          
         });
     }
-  }, [week]);
+  }, [week, countryCode]);
 
 
   return (
