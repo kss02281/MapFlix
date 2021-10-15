@@ -11,6 +11,7 @@ function GenreAnalysis({history, location}) {
 
   const { nation, nationCode } = query;
   const dispatch = useDispatch();
+  
   const genreScore = useSelector(
     (state) => state.genreScore.genreScore,
     shallowEqual
