@@ -1,3 +1,10 @@
+@charset 'utf-8';
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+$body-font: "Maven Pro", sans-serif;
+
 .Title{
     margin: auto;
     width: 50vw;
@@ -29,7 +36,7 @@
 }
 
 .Sunye{
-    height: 500px;
+    height: 400px;
     background-color: #1b1a1a;
 }
 
@@ -67,4 +74,8 @@
     width: 10px;
     height: 20px;
     background-color: #111111;
+}
+
+.NoOverflow{
+    overflow: hidden;
 }

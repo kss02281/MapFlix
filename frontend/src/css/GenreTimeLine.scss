@@ -21,8 +21,16 @@ body::-webkit-scrollbar {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
+    padding-top: 70px;
+    height: 600px;
+    padding-top: 40px;
     
+}
+
+.DropDownGenre{
+  position: absolute;
+  margin-right: -940px !important;
+  margin-top: -570px;
 }
 
 .DaTG {
