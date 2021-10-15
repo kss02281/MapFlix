@@ -13,7 +13,7 @@ import { getTopContentList } from "../Redux/actions/topContentList";
 
 import MapHoverGreen from "./MapHoverGreen";
 import MapHoverYellow from "./MapHoverYellow";
-import MapHoverRed from "./MapHoverRed";
+import MapHoverRedGray from "./MapHoverRed";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -26,7 +26,7 @@ function colorScale(Status) {
   } else if (Status === "3") {
     return "rgb(220, 38, 38)";
   } else {
-    return "gray";
+    return "#aaaaaa";
   }
 }
 
@@ -62,7 +62,7 @@ const MapChart = ({ setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={d ? colorScale(d["Status"]) : "gray"}
+                    fill={d ? colorScale(d["Status"]) : "#ffffff"}
                     onClick={(Status) => {
                       const { NAME, ISO_A2 } = geo.properties;
                       console.log(NAME, ISO_A2);
@@ -82,12 +82,12 @@ const MapChart = ({ setTooltipContent }) => {
                             nationCode={ISO_A2.toLowerCase()}
                           ></MapHoverGreen>
                         );
-                      } else if (d["Status"] === "3") {
+                      } else if (d["Status"] === "3" || d["Status"] === "4") {
                         setTooltipContent(
-                          <MapHoverRed
+                          <MapHoverRedGray
                             nationName={NAME}
                             nationCode={ISO_A2.toLowerCase()}
-                          ></MapHoverRed>
+                          ></MapHoverRedGray>
                         );
                       } else if (d["Status"] === "2") {
                         setTooltipContent(

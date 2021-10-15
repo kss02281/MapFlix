@@ -3,6 +3,7 @@ import Title_logo from "../img/title.png";
 import Map from "../Components/Map";
 import { BsCircleFill } from "react-icons/bs";
 import "../css/main.scss";
+import MapHoverGreen from "../Components/MapHoverGreen";
 
 const Main = ({ history }) => {
   return (
@@ -30,12 +31,16 @@ const Main = ({ history }) => {
               <BsCircleFill color="rgb(220, 38, 38)" />
               <p>No Ranking</p>
             </div>
+            <div className="Explanation_gray">
+              <BsCircleFill color="#aaaaaa" />
+              <p>No Netflix</p>
+            </div>
           </div>
         </div>
         <p className="Explanation_text">
           How many Netflix subscribers have increased before and after Covid-19?{" "}
           <br />
-          I'll show you the top 10 contents of weekly Netflix in each country.
+          We'll show you the top 10 contents of weekly Netflix in each country.
         </p>
       </div>
     </div>

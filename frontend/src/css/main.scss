@@ -63,6 +63,16 @@ circle {
             // color: rgb(220, 38, 38);
           }
         }
+        .Explanation_gray {
+          display: flex;
+          align-items: center;
+          p {
+            margin-left: 5px;
+            margin-bottom: 0;
+            color: rgba(233, 221, 221, 0.781);
+            // color: rgb(220, 38, 38);
+          }
+        }
       }
     }
     .Explanation_text {
