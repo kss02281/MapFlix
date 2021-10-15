@@ -5,34 +5,29 @@ import TimelineHoverBox from "./TimelineHoverBox";
 import ReactHover, { Trigger, Hover } from "react-hover";
 
 function DrawBar(props) {
-
   const confirmedCnt = props.confirmedCnt;
   const onClickAction = props.onClick;
   const ratio = props.ratio;
- 
+
   const fullweek = props.fullweek;
   const week = props.week;
   const year = props.year;
   const countryCode = props.countryCode;
   const [color, setColor] = useState("#ffffff");
-  const [ movie, setMovie ] = useState([])
-  const [ show, setShow ] = useState([]);
-  
+  const [movie, setMovie] = useState([]);
+  const [show, setShow] = useState([]);
 
   const contentList = useSelector(
-      state => (
-          state.topContentList.topContent
-      ),
-      shallowEqual
-  )
-
+    (state) => state.topContentList.topContent,
+    shallowEqual
+  );
 
   useEffect(() => {
-    if (year === 2020 && week < 33) {
-      setColor('#ffffff')
-    }else if (year === 2021 && week === 1 && countryCode != 'kr'){
-      setColor('#ffffff')
-    }else {
+    if (year === 2020 && week < 14) {
+      setColor("#ffffff");
+    } else if (year === 2021 && week === 1 && countryCode != "kr") {
+      setColor("#ffffff");
+    } else {
       fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
         .then((response) => {
           if (response.ok) {
@@ -42,7 +37,6 @@ function DrawBar(props) {
         .then((data) => {
           console.log(data?.color);
           setColor(data?.color);
-          
         });
     }
   }, [week, countryCode]);
@@ -53,37 +47,36 @@ function DrawBar(props) {
     shiftY: 0,
   };
 
-
   return (
     <>
-    <ReactHover options={optionsCursorTrueWithMargin}>
-      <Trigger>
-        <Bar
-          confirmedCnt={confirmedCnt}
-          ratio={ratio}
-          onClick={onClickAction}
-          color={color}
-          onMouseEnter={() => {
-            console.log('hi')
-            console.log(contentList[fullweek]);
-            if(contentList[fullweek]){
-              setMovie(contentList[fullweek][0]);
-              setShow(contentList[fullweek][1])
-            }
-          }}
-        ></Bar>
-      </Trigger>
-      <Hover>
-        <TimelineHoverBox
-          nation={props.nation}
-          nationCode={props.nationCode}
-          fullWeek={fullweek}
-          movie={movie}
-          show={show}
-          confirmedCnt={parseInt(confirmedCnt ** 2)}
-        />
-      </Hover>
-    </ReactHover>
+      <ReactHover options={optionsCursorTrueWithMargin}>
+        <Trigger>
+          <Bar
+            confirmedCnt={confirmedCnt}
+            ratio={ratio}
+            onClick={onClickAction}
+            color={color}
+            onMouseEnter={() => {
+              console.log("hi");
+              console.log(contentList[fullweek]);
+              if (contentList[fullweek]) {
+                setMovie(contentList[fullweek][0]);
+                setShow(contentList[fullweek][1]);
+              }
+            }}
+          ></Bar>
+        </Trigger>
+        <Hover>
+          <TimelineHoverBox
+            nation={props.nation}
+            nationCode={props.nationCode}
+            fullWeek={fullweek}
+            movie={movie}
+            show={show}
+            confirmedCnt={parseInt(confirmedCnt ** 2)}
+          />
+        </Hover>
+      </ReactHover>
     </>
   );
 }
