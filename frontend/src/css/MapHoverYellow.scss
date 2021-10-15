@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+
 .__react_component_tooltip {
   width: 1px !important;
   height: 1px !important;
@@ -14,12 +18,15 @@ tspan {
   .countryName {
     display: inline-block;
     font-size: 30px;
-    margin-bottom: 6px;
     color: whitesmoke;
+    font-family: $title-font;
+    letter-spacing: 2px;
   }
   .noSubscibesData {
     margin-bottom: 6px;
-    font-size: 15px;
+    font-size: 18px;
+    font-family: $title-font;
+    letter-spacing: 2px;
   }
   .hover_Wrap {
     display: grid;
@@ -33,6 +40,7 @@ tspan {
       background-color: whitesmoke;
       border-radius: 20px;
       color: black;
+      font-family: $title-font;
       .topMovieBox {
         display: grid;
         grid-template-columns: 1fr 100px 1fr;
@@ -49,13 +57,14 @@ tspan {
         }
         .movieTextBox {
           text-align: left;
-          font-size: 14px;
+          font-size: 15px;
           margin-top: 70px;
           margin-bottom: 5px;
 
           .topMovie {
             font-weight: 900;
             display: block;
+            letter-spacing: 3px;
           }
           .movieTitle {
             display: block;
@@ -72,6 +81,7 @@ tspan {
       background-color: whitesmoke;
       border-radius: 20px;
       color: black;
+      font-family: $title-font;
 
       .topShowBox {
         display: grid;
@@ -90,12 +100,13 @@ tspan {
         .showTextBox {
           margin-top: 70px;
           text-align: left;
-          font-size: 14px;
+          font-size: 15px;
           margin-bottom: 5px;
 
           .topShow {
             font-weight: 900;
             display: block;
+            letter-spacing: 3px;
           }
           .showTitle {
             display: block;

@@ -1,9 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+
 .navbar-brand {
   margin-left: -8vw !important;
 }
 
 .navbar-nav {
   margin-right: -8vw;
+  font-family: $title-font;
+  letter-spacing: 2px;
 }
 
 .nav-link {
