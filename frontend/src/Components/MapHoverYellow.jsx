@@ -1,12 +1,14 @@
 import React, { useState, useMemo } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import "../css/MapHoverYellow.scss";
+import Title from "./Title";
 
 function MapHoverYellow(props) {
   const [movieURL, setMovieURL] = useState("");
   const [showURL, setShowURL] = useState("");
   const [movieTitle, setMovieTitle] = useState("");
   const [showTitle, setShowTitle] = useState("");
+  const [movieId, setMovieId] = useState("");
+  const [showId, setShowId] = useState("");
   const nationName = props.nationName;
   const nationCode = props.nationCode;
 
@@ -25,6 +27,8 @@ function MapHoverYellow(props) {
         setShowURL(show.poster);
         setMovieTitle(movie.title);
         setShowTitle(show.title);
+        setMovieId(movie.id);
+        setShowId(show.id);
       });
   });
   return (
@@ -39,7 +43,9 @@ function MapHoverYellow(props) {
             </div>
             <div className="movieTextBox">
               <div className="topMovie">Top Movie</div>
-              <div className="movieTitle">{movieTitle}</div>
+              <div className="movieTitle">
+                <Title title={movieTitle} id={movieId} />
+              </div>
             </div>
           </div>
         </div>
@@ -51,7 +57,9 @@ function MapHoverYellow(props) {
             </div>
             <div className="showTextBox">
               <div className="topShow">Top Show</div>
-              <div className="ShowTitle">{showTitle}</div>
+              <div className="ShowTitle">
+                <Title title={showTitle} id={showId} />
+              </div>
             </div>
           </div>
         </div>

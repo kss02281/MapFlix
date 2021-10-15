@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import "../css/MapHoverGreen.scss";
 import { IoCaretDown, IoCaretUp } from "react-icons/io5";
+import Title from "./Title";
 
 function Icrease_Subscibes(props) {
   const increase_Subscibes_Data = props.subscibesQ2 - props.subscibesQ1;
@@ -42,6 +43,8 @@ function MapHoverGreen(props) {
   const [showURL, setShowURL] = useState("");
   const [movieTitle, setMovieTitle] = useState("");
   const [showTitle, setShowTitle] = useState("");
+  const [movieId, setMovieId] = useState("");
+  const [showId, setShowId] = useState("");
   const nationName = props.nationName;
   const nationCode = props.nationCode;
 
@@ -84,6 +87,8 @@ function MapHoverGreen(props) {
         setShowURL(show.poster);
         setMovieTitle(movie.title);
         setShowTitle(show.title);
+        setMovieId(movie.id);
+        setShowId(show.id);
       });
   });
 
@@ -121,7 +126,9 @@ function MapHoverGreen(props) {
             </div>
             <div className="movieTextBox">
               <div className="topMovie">Top Movie</div>
-              <div className="movieTitle">{movieTitle}</div>
+              <div className="movieTitle">
+                <Title title={movieTitle} id={movieId} />
+              </div>
             </div>
           </div>
           <div className="topShowBox">
@@ -130,7 +137,9 @@ function MapHoverGreen(props) {
             </div>
             <div className="showTextBox">
               <div className="topShow">Top Show</div>
-              <div className="ShowTitle">{showTitle}</div>
+              <div className="ShowTitle">
+                <Title title={showTitle} id={showId} />
+              </div>
             </div>
           </div>
         </div>
