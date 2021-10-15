@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
-import "../css/MapHoverNodata.scss";
+import "../css/MapHoverRed.scss";
 
-function MapHoverNodata(props) {
+function MapHoverRed(props) {
   const nationName = props.nationName;
   const nationCode = props.nationCode;
   return (
@@ -14,4 +14,4 @@ function MapHoverNodata(props) {
   );
 }
 
-export default MapHoverNodata;
+export default MapHoverRed;

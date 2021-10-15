@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
-import "../css/MapHover.scss";
+import "../css/MapHoverYellow.scss";
 
-function MapHover(props) {
+function MapHoverYellow(props) {
   const [subscibesQ1, setSubscibesQ1] = useState(0);
   const [subscibesQ2, setSubscibesQ2] = useState(0);
   const [movieURL, setMovieURL] = useState("");
@@ -15,11 +15,11 @@ function MapHover(props) {
   const subscibes_data = [
     {
       name: "2021 Q1",
-      pv: subscibesQ1,
+      pv: subscibesQ1 / 100,
     },
     {
       name: "2021 Q2",
-      pv: subscibesQ2,
+      pv: subscibesQ2 / 100,
     },
   ];
   useMemo(() => {
@@ -53,7 +53,7 @@ function MapHover(props) {
         setShowTitle(show.title);
       });
   });
-  const increase_Subscibes_Data = subscibes_data[1].pv - subscibes_data[0].pv;
+  const increase_Subscibes_Data = subscibesQ2 - subscibesQ1;
   const increase_Color =
     increase_Subscibes_Data > 0
       ? "red"
@@ -61,30 +61,11 @@ function MapHover(props) {
       ? "black"
       : "blue";
   return (
-    <div className="MapHover_Wrap">
+    <div className="MapHoverYellow_Wrap">
       <div className="countryName">{nationName}</div>
+      <div className="noSubscibesData">No Subscibes Data</div>
       <div className="hover_Wrap">
         <div className="leftBox">
-          <div className="leftText">
-            <p className="subscibesText">Subscibes</p>
-            <p className="total_Subscibes">{subscibes_data[1].pv}</p>
-            <p className="increase_Subscibes" style={{ color: increase_Color }}>
-              {increase_Subscibes_Data}
-            </p>
-          </div>
-          <div className="subscribes_Chart">
-            <div className="subscribes_Chart_Box">
-              <BarChart width={250} height={200} data={subscibes_data}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Bar dataKey="pv" fill="#8884d8" />
-              </BarChart>
-            </div>
-          </div>
-        </div>
-        <hr className="line"></hr>
-        <div className="rightBox">
           <div className="topMovieBox">
             <div className="movieImageBox">
               <img className="movieImage" src={movieURL}></img>
@@ -94,6 +75,9 @@ function MapHover(props) {
               <div className="movieTitle">{movieTitle}</div>
             </div>
           </div>
+        </div>
+        <hr className="line"></hr>
+        <div className="rightBox">
           <div className="topShowBox">
             <div className="showImageBox">
               <img className="showImage" src={showURL}></img>
@@ -109,4 +93,4 @@ function MapHover(props) {
   );
 }
 
-export default MapHover;
+export default MapHoverYellow;

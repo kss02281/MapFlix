@@ -11,8 +11,9 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { getTopContentList } from "../Redux/actions/topContentList";
 
-import MapHover from "./MapHover";
-import MapHoverNodata from "./MapHoverNodata";
+import MapHoverGreen from "./MapHoverGreen";
+import MapHoverYellow from "./MapHoverYellow";
+import MapHoverRed from "./MapHoverRed";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -66,8 +67,9 @@ const MapChart = ({ setTooltipContent }) => {
                     onClick={(Status) => {
                       const { NAME, ISO_A2 } = geo.properties;
                       console.log(NAME, ISO_A2);
-                      if (d["Status"] === "1") {
-                      dispatch(getTopContentList({ nationCode : ISO_A2.toLowerCase()}))
+
+                      if (d["Status"] === "1" || d["Status"] === "2") {
+                        dispatch(getTopContentList({ nationCode : ISO_A2.toLowerCase()}))
                         history.push(
                           `/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`
                         );
@@ -78,17 +80,24 @@ const MapChart = ({ setTooltipContent }) => {
                       console.log(NAME, ISO_A2);
                       if (d["Status"] === "1") {
                         setTooltipContent(
-                          <MapHover
+                          <MapHoverGreen
                             nationName={NAME}
                             nationCode={ISO_A2.toLowerCase()}
-                          ></MapHover>
+                          ></MapHoverGreen>
                         );
-                      } else if (d["Status"] === "3" || d["Status"] === "2") {
+                      } else if (d["Status"] === "3") {
                         setTooltipContent(
-                          <MapHoverNodata
+                          <MapHoverRed
                             nationName={NAME}
                             nationCode={ISO_A2.toLowerCase()}
-                          ></MapHoverNodata>
+                          ></MapHoverRed>
+                        );
+                      } else if (d["Status"] === "2") {
+                        setTooltipContent(
+                          <MapHoverYellow
+                            nationName={NAME}
+                            nationCode={ISO_A2.toLowerCase()}
+                          ></MapHoverYellow>
                         );
                       }
                     }}
