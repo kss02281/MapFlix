@@ -3,6 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { BsCircleFill } from 'react-icons/bs';
 import { Genre_colors } from '../data/Genre_colors'
 import {Tooltip, IconButton} from '@mui/material';
+import Title from './Title';
 //import {DeleteIcon} from '@mui/icons-material/Delete';
 import '../css/ContentBox.scss';
 
@@ -16,13 +17,11 @@ function ShowBox () {
     const loading = useSelector(state => state.contentShow.loading);
     const error = useSelector(state => state.contentShow.error);
 
-    const [showList, setShowList] = useState([]);
     const [imgSrc, setImgSrc] = useState("");
 
     useEffect(() => {
         console.log('saga result of movie')
         console.log(tvshowData)
-        setShowList(tvshowData)
         if(tvshowData != null){
             setImgSrc(tvshowData[0]?.poster)
 
@@ -30,10 +29,7 @@ function ShowBox () {
     },[tvshowData])
 
     const clickhandler=(e) => {
-        const idx = parseInt(e.target.name);
-        console.log(idx)
-        console.log(tvshowData[idx]?.poster)
-        
+        const idx = parseInt(e.target.id);
         setImgSrc(tvshowData[idx]?.poster);
     }
 
@@ -53,21 +49,21 @@ function ShowBox () {
                 </div>
                 <div className="rankBoxT">
                     {
-                        tvshowData?.map((movie, idx) => (
+                        tvshowData?.map((show, idx) => (
                             <div className="rankContentT">
                                 <div className="rankNumT">
                                     {idx+1}
                                 </div>
-                                <a name={idx} className='rankT' onClick={clickhandler}>
-                                    {movie.title}
-                                    <Tooltip className="circleHoverT" title={movie.genre[0]} onClick='undefined'>
+                                <a className='rankT'>
+                                    <button className="titleButton" name={idx} onClick={clickhandler}><Title id={idx} title={show.title} /></button>
+                                    <Tooltip className="circleHoverT" title={show.genre[0]} onClick='undefined'>
                                         <span>
-                                            <BsCircleFill size='23' style={{color:`${Genre_colors[movie.genre[0]]}`, marginLeft: '10px'}} />
+                                            <BsCircleFill size='23' style={{color:`${Genre_colors[show.genre[0]]}`, marginLeft: '10px'}} />
                                         </span>  
                                     </Tooltip>
-                                    <Tooltip className="circleHoverT" title={movie.genre[1]} onClick='undefined'>
+                                    <Tooltip className="circleHoverT" title={show.genre[1]} onClick='undefined'>
                                         <span>
-                                            <BsCircleFill size='23' style={{color:`${Genre_colors[movie.genre[1]]}`, marginLeft: '5px'}} />
+                                            <BsCircleFill size='23' style={{color:`${Genre_colors[show.genre[1]]}`, marginLeft: '5px'}} />
                                         </span>  
                                     </Tooltip>
                                 </a>

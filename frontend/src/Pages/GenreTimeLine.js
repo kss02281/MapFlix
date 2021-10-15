@@ -85,7 +85,7 @@ document.head.appendChild(styleLink);
                       <div className='hoverContainerG'>
                         <p className='hoverG'>{props.nation}</p>
                         <p className='hoverG'>{item.week}</p>
-                        <p className='hoverG'>Confirmed People : {item.confirmedCnt}</p>
+                        <p className='hoverG'>Confirmed People : {parseInt(item.confirmedCnt ** 2)}</p>
                       </div>
                     </Hover>
                   </ReactHover>

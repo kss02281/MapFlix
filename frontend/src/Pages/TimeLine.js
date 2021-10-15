@@ -148,8 +148,9 @@ function DrawBarChart(props) {
                       } */}
                 <TimelineHoverBox
                   nation={props.nation}
+                  nationCode={props.nationCode}
                   week={item.week}
-                  confirmedCnt={item.confirmedCnt}
+                  confirmedCnt={parseInt(item.confirmedCnt ** 2)}
                 />
               </Hover>
             </ReactHover>

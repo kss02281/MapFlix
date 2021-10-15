@@ -194,7 +194,7 @@ def get_world_genres_score(week):
 
 
 # @bp.route('/netflix/<string:country_code>/<string:week>/top1', methods=['GET'])
-# def get_netflix_top1_by_week(country_code, week):
+# def get_netflix_top1_by_week_tohover(country_code, week):
 #     rank = 1
 
 #     top1_list = db.session.query(NetflixContent).join(NetflixTop10).\
