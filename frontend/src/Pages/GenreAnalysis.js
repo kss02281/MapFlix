@@ -5,6 +5,7 @@ import { GenreTimeLine } from ".";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import queryString from "query-string";
 import { getGenreScore } from "../Redux/actions/genreScore";
+import GenreBar from "../Components/GenreBar";
 
 function GenreAnalysis({history, location}) {
   const query = queryString.parse(location.search);
@@ -26,10 +27,12 @@ function GenreAnalysis({history, location}) {
     console.log(genreScore)
   },[])
 
+  
   return (
-    <div>
+    <div className="NoOverflow" style={{height:"94%"}}>
         <div className="Sunye">
             <GenreTimeLine location={location} history={history}/>
+             <GenreBar genreScore={genreScore}/>
         </div>
         <div></div>
     </div>

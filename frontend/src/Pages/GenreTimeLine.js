@@ -57,7 +57,11 @@ styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css
 document.head.appendChild(styleLink);
 
   return (
+    <div >
       <div className='timelineG'>
+        <div className="DropDownGenre">
+      <DropDownMenuGenre/>
+      </div>
           <span className="nationNameG">{props.nation}'s</span>
           <div className="DaTG"> 
           <span className="titleG"> confirmed people by week</span>
@@ -95,6 +99,7 @@ document.head.appendChild(styleLink);
           </ChartContainerG>
           
       </div>
+      </div>
   )
 }
 
@@ -112,7 +117,7 @@ const GenreTimeLine = ({ history, location, match, }) => {
   
   return (
     <div>
-      <DropDownMenuGenre />
+      
       <DrawBarChart nation={nation} nationCode={nationCode}/>
     </div>
   );

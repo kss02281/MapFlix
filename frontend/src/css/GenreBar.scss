@@ -1,0 +1,205 @@
+@charset 'utf-8';
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+$body-font: "Maven Pro", sans-serif;
+
+
+.GapGS{
+
+}
+
+.GenreAScore{
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    grid-template-rows: 30px 450px;
+    background-color: #2b2b2b;
+    border-radius: 5px;
+    margin-bottom: 100px;
+}
+
+.GenreGraph{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    grid-template-rows: 1fr 30px;
+}
+
+.drawGenreGraph{
+    padding-left: 50px;
+}
+
+.GenreGrpahPosition{
+    width: 45vw;
+    height: 310px;
+    margin-left: 8.5%;
+    margin-top: 1vw;
+    background-color: #ffffff;
+    border: 2px solid #111111;
+    display: flex;
+    
+    flex-direction: column;
+}
+.GenreName{
+    width: 45vw;
+    margin-left: 4.5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    
+}
+
+.dGenreGraph{
+    padding-top: 2.5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    
+}
+
+.GenreTitle{
+    padding-top: 5px;
+    text-align: center;
+    background-color: rgb(160, 244, 255);
+    border-radius: 5px 0px 0px 0px;
+    font-weight: 700;
+}
+
+.ScoreTitle{
+    width: 100%;
+    text-align: center;
+    background-color: rgb(77, 199, 247);
+    border-radius: 0px 5px 0px 0px;
+    display: none;
+}
+
+.addCell{
+ display: grid;
+ grid-column: 3 / -3;
+ height: 450px;
+ overflow:auto;
+ grid-template-columns: 6fr 4fr;
+ &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sideScore{
+    text-align: center;
+    margin: auto;
+    margin-top: 12px;
+    margin-left: 1.2vw;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+#nowWeek{
+    width: 120px;
+    font-size:30px;
+    margin-bottom: 110px;
+    font-family:$title-font;
+    text-align: center;
+    letter-spacing: 2px;
+
+}
+
+#rotateP{
+    color: black;
+    transform: rotate(270deg);
+    margin-left: 4vw;
+    margin-top: -45px;
+}
+
+.underGenre{
+    text-align: center;
+    
+    font-size: 25px;
+    font-weight: 700;
+    margin-left: 110px;
+    margin-top: -10px;
+}
+
+.GenreContainer{
+    color: aliceblue;
+    
+    
+    border-radius: 0px 0px 0px 5px;
+}
+
+.ScoreContainer{
+    width:5.9vw;
+    background-color: rgb(160, 244, 255);
+    border-radius: 0px 0px 5px 0px;
+}
+
+.GenreItems{
+    padding-top: 5px;
+    height: 30px;
+    text-align: center;
+    transition: all 0.5s;
+    &:hover{
+        box-shadow: 0 0 12px rgba(70,150,240,0.7) inset;
+        border: 1px solid rgba(255,255,255,1);
+        color: rgba(255,255,255,1);
+    }
+}
+
+.ScoreItems{
+    padding-top: 5px;
+    height: 30px;
+    text-align: center;
+    transition: all 0.5s;
+    &:hover{
+        box-shadow: 0 0 12px rgba(70,150,240,0.7) inset;
+        border: 1px solid rgba(255,255,255,1);
+        color: brown;
+    }
+}
+
+.GenreGraphText{
+    width:10px !important;
+    font-size: 15px;
+    letter-spacing: 1px !important;
+    font-weight: 700;
+}
+
+.GenreGrpahBar{
+    
+    transition: all 0.5s;
+    &:hover{
+        box-shadow: rgba(70,150,240,0.7) inset;
+        border: 1px solid black;
+        color: black;
+    }
+}
+
+.GenreBox{
+    padding-top: 50px;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-bottom: 50px;
+    display: grid;
+    grid-template-columns: 4fr 0.2fr 15fr;
+    height: 450px;
+    margin-top: -210px;
+}
+#dropdown-basic-button{
+    align-items: center;
+
+    width: 5.9vw !important;
+    height: 100%;
+    border-radius: 0px 5px 0px 0px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 5px !important;
+    :hover:focus:active:link::-webkit-scrollbar::selection{
+        width: 100% !important;
+    }
+}
