@@ -1,6 +1,39 @@
 import React, { useState, useMemo } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import "../css/MapHoverGreen.scss";
+import { IoCaretDown, IoCaretUp } from "react-icons/io5";
+
+function Icrease_Subscibes(props) {
+  const increase_Subscibes_Data = props.subscibesQ2 - props.subscibesQ1;
+  const increase_Color =
+    increase_Subscibes_Data > 0
+      ? "red"
+      : increase_Subscibes_Data == 0
+      ? "black"
+      : "blue";
+  console.log(increase_Color);
+  if (increase_Subscibes_Data > 0) {
+    return (
+      <div className="increase_Subscibes" style={{ color: increase_Color }}>
+        <IoCaretUp />
+        {increase_Subscibes_Data}
+      </div>
+    );
+  } else if (increase_Subscibes_Data == 0) {
+    return (
+      <div className="increase_Subscibes" style={{ color: increase_Color }}>
+        {increase_Subscibes_Data}
+      </div>
+    );
+  } else {
+    return (
+      <div className="increase_Subscibes" style={{ color: increase_Color }}>
+        <IoCaretDown />
+        {increase_Subscibes_Data}
+      </div>
+    );
+  }
+}
 
 function MapHoverGreen(props) {
   const [subscibesQ1, setSubscibesQ1] = useState(0);
@@ -53,13 +86,7 @@ function MapHoverGreen(props) {
         setShowTitle(show.title);
       });
   });
-  const increase_Subscibes_Data = subscibesQ2 - subscibesQ1;
-  const increase_Color =
-    increase_Subscibes_Data > 0
-      ? "red"
-      : increase_Subscibes_Data == 0
-      ? "black"
-      : "blue";
+
   return (
     <div className="MapHoverGreen_Wrap">
       <div className="countryName">{nationName}</div>
@@ -68,9 +95,12 @@ function MapHoverGreen(props) {
           <div className="leftText">
             <p className="subscibesText">Subscibes</p>
             <p className="total_Subscibes">{subscibesQ2}</p>
-            <p className="increase_Subscibes" style={{ color: increase_Color }}>
-              {increase_Subscibes_Data}
-            </p>
+            <div>
+              <Icrease_Subscibes
+                subscibesQ1={subscibesQ1}
+                subscibesQ2={subscibesQ2}
+              ></Icrease_Subscibes>
+            </div>
           </div>
           <div className="subscribes_Chart">
             <div className="subscribes_Chart_Box">
