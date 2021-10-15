@@ -3,7 +3,6 @@ import Title_logo from "../img/title.png";
 import Map from "../Components/Map";
 import { BsCircleFill } from "react-icons/bs";
 import "../css/main.scss";
-import MapHoverNodata from "../Components/MapHoverNodata";
 
 const Main = ({ history }) => {
   return (
@@ -25,11 +24,11 @@ const Main = ({ history }) => {
             </div>
             <div className="Explanation_yellow">
               <BsCircleFill color="rgb(245, 158, 11)" />
-              <p>No Ranking</p>
+              <p>No Subscribes</p>
             </div>
             <div className="Explanation_red">
               <BsCircleFill color="rgb(220, 38, 38)" />
-              <p>No Netflix</p>
+              <p>No Ranking</p>
             </div>
           </div>
         </div>
@@ -38,7 +37,6 @@ const Main = ({ history }) => {
           <br />
           I'll show you the top 10 contents of weekly Netflix in each country.
         </p>
-        <MapHoverNodata></MapHoverNodata>
       </div>
     </div>
   );
