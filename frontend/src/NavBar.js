@@ -18,7 +18,6 @@ const NavBars = () => {
       
     </Nav>
     <Nav>
-    <Nav.Link href="/dicerec">Dice-Rec</Nav.Link>
       <Nav.Link href="/timeLine/nationInfo?nation=South Korea&nationCode=kr">TimeLine</Nav.Link>
       <NavDropdown title="Data-Analysis" id="collasible-nav-dropdown">
         <NavDropdown.Item href="/dataComparison">Data-Comparison</NavDropdown.Item>
