@@ -6,6 +6,8 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import queryString from "query-string";
 import { getGenreScore } from "../Redux/actions/genreScore";
 import GenreBar from "../Components/GenreBar";
+import { setDate } from "../Redux/actions/yearWeek";
+import {weekDate} from '../data/Week_date';
 
 function GenreAnalysis({history, location}) {
   const query = queryString.parse(location.search);
@@ -23,6 +25,14 @@ function GenreAnalysis({history, location}) {
       nationCode: nationCode,
       week: '2021-039',
     }))
+
+    dispatch(
+      setDate({
+        year: '2021',
+        week: '39',
+        date: weekDate['2021-039'],
+      })
+    );
     
     console.log(genreScore)
   },[])
