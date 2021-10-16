@@ -3,7 +3,7 @@ import { Dropdown, Flag, Menu } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { setDate } from '../Redux/actions/yearWeek'
-import { getContentShow } from '../Redux/actions/contentShow'
+import { getGenreScore } from '../Redux/actions/genreScore'
 
 const DropDownMenu = () => {
   const dispatch = useDispatch();
@@ -18,6 +18,10 @@ const DropDownMenu = () => {
     //   'date': 'Sep 27 - Oct 3',
     // }));
     // dispatch(getContentShow({nationCode: value,week: '2021-039'}));
+    dispatch(getGenreScore({
+      nationCode: value,
+      week: '2021-039',
+    }))
     history.push(`/GenreAnalysis/nationInfo?nation=${nation}&nationCode=${value}`);
   }
 

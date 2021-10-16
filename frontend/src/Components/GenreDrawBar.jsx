@@ -4,29 +4,29 @@ import styled from 'styled-components'
 
 function GenreDrawBar(props) {
     const fullweek = props.fullweek;
-    const week = props.week;
-    const year = props.year;
+    // const week = props.week;
+    // const year = props.year;
     const countryCode = props.countryCode;
     const [color, setColor] = useState("#ffffff");
 
     useEffect(() => {
-        if (year === 2020 && week < 33) {
-            setColor('#ffffff')
-        }else if (year === 2021 && week === 1 && countryCode != 'kr'){
-            setColor('#ffffff')
-        }else {
-            fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
-                .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                })
-                .then((data) => {
-                //console.log(data?.color);
-                setColor(data?.color);
-            });
-        }
-    }, [week, countryCode]);
+        fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
+            .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            else {
+                throw new Error('no data')
+            }
+            })
+            .then((data) => {
+            //console.log(data?.color);
+            setColor(data?.color);
+            }).catch((error) => {
+                console.log(error)
+            })
+        ;
+    }, [fullweek, countryCode]);
 
     const confirmedCnt = props.confirmedCnt;
     const onClickAction = props.onClick;

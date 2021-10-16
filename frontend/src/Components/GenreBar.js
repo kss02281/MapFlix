@@ -1,4 +1,15 @@
 import React, { useEffect, useState } from "react";
+import {
+    ResponsiveContainer,
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    Cell
+} from "recharts";
 import {Dropdown, DropdownButton } from "react-bootstrap";
 import "../css/GenreBar.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,7 +21,7 @@ const SORT_TYPE = {
 }
 
 const GenreBar = ( {genreScore = []} ) => {
-    console.log(genreScore)
+    
     const [sortType, setSortType] = useState(SORT_TYPE.NONE);
     const [genreScores, setGenreScores] = useState([...genreScore])
 
@@ -75,7 +86,7 @@ const GenreBar = ( {genreScore = []} ) => {
 
     const genreTitle = genreScores.map((genreInfo) => (<div className="GenreItems">{genreInfo.genre}</div>));
     const genreScoreN = genreScores.map((genreInfo) => (<div className="ScoreItems" style={{backgroundColor:genreInfo.color}}>{genreInfo.score}</div>));
-    const dGenreGraph = genreScores.map((genreInfo) => (<div className="GenreGrpahBar" style={{width:"20px",height:genreInfo.score/2.7, backgroundColor:genreInfo.color, marginTop:"20px"}}></div>));
+    const dGenreGraph = genreScores.map((genreInfo) => (<div className="GenreGrpahBar" style={{width:"20px",height:genreInfo.score, backgroundColor:genreInfo.color, marginTop:"20px"}}></div>));
     const GenreName = genreScores.map((genreInfo) => (<div className="GenreGraphText" style={{transform: "rotate(-270deg)",whiteSpace:"nowrap"}}>{genreInfo.genre}</div>));
 return (
     <div className="GenreBox">
@@ -96,9 +107,34 @@ return (
             
         </div>
         <div className="GapGS"/>
-        <div className="GenreGraph">
+        {/* <div className="GenreGraph"> */}
             
-            <div className="sideScore"> <p id="nowWeek">2020<br/>Week 38</p>
+            <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                width={600}
+                height={400}
+                data={genreScores}
+                margin={{
+                    top: 50,
+                    right: 0,
+                    left: 0,
+                    bottom: 150
+                }}
+                barSize={40}
+                >
+                <XAxis dataKey="genre" stroke="white" angle={-45} textAnchor="end" scale="point" padding={{ left: 20, right: 16}} />
+                <YAxis dataKey="score" />
+                <Tooltip />
+                <Legend stroke="white"/>
+                <CartesianGrid strokeDasharray="3 3" />
+                <Bar dataKey="score">
+                    {genreScore.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                </Bar>
+                </BarChart>
+            </ResponsiveContainer>
+            {/* <div className="sideScore"> <p id="nowWeek">2020<br/>Week 38</p>
                 <p id="rotateP">Score</p>
                 </div>
             <div className="drawGenreGraph">
@@ -109,8 +145,8 @@ return (
                 <div className="GenreName">{GenreName}</div>
                 </div>
             <div className=""></div>
-            <div className="underGenre">Genre</div>
-        </div>
+            <div className="underGenre">Genre</div> */}
+        {/* </div> */}
     </div>
 );
 }

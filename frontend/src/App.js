@@ -23,7 +23,7 @@ class App extends Component {
             </Switch>
             <Route path="/makers" component={Makers} />
             <Route path="/dataComparison" component={DataComparison} />
-            <Route path="/genreanalysis" component={GenreAnalysis} />
+            <Route path="/GenreAnalysis" component={GenreAnalysis} />
           </BrowserRouter>
         </div>
       </Provider>

@@ -10,7 +10,7 @@ function GenreItem(props) {
         <>
         <div></div>
     </>
-  );
+
     </div>
   );
 }

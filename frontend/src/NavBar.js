@@ -22,7 +22,7 @@ const NavBars = () => {
       <Nav.Link href="/timeLine/nationInfo?nation=South Korea&nationCode=kr">TimeLine</Nav.Link>
       <NavDropdown title="Data-Analysis" id="collasible-nav-dropdown">
         <NavDropdown.Item href="/dataComparison">Data-Comparison</NavDropdown.Item>
-        <NavDropdown.Item href="/GenreAnalysis/nationInfo?nation=World&nationCode=world">Genre-Analysis</NavDropdown.Item>
+        <NavDropdown.Item href="/GenreAnalysis/nationInfo?nation=South Korea&nationCode=kr">Genre-Analysis</NavDropdown.Item>
       </NavDropdown>
       <Nav.Link eventKey={2} href="/makers">
         Makers

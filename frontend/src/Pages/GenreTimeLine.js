@@ -40,10 +40,15 @@ function DrawBarChart(props) {
     confirmedList.sort(function(a,b){
       return parseInt(a-b);
     });
-    setMaxVal(confirmedList[confirmedList.length-1]);
+    if(props.nationCode == 'fr' || props.nationCode == 'lb' || props.nationCode == 'lk' || props.nationCode == 'es'){
+      setMaxVal(confirmedList[confirmedList.length-2]);
+    }else{
+      setMaxVal(confirmedList[confirmedList.length-1]);
+    }
     
-    setRatio(maxVal/400);
-    console.log(confirmedList[confirmedList.length-1]);
+    
+    setRatio(maxVal/330);
+    console.log(confirmedList[confirmedList.length-2]);
   },[ coronaData ])
 
   const optionsCursorTrueWithMargin = {
@@ -117,8 +122,8 @@ const GenreTimeLine = ({ history, location, match, }) => {
   
   return (
     <div>
-      
       <DrawBarChart nation={nation} nationCode={nationCode}/>
+      <div> <p id="nowWeek">{year} Week {week}</p></div>
     </div>
   );
 };
@@ -128,14 +133,14 @@ export default GenreTimeLine;
 const ChartContainerG = styled.div`
   display: flex;
   flex-direction: row;
-  height: 700px;
+  height: 400px;
   flex-wrap: nowrap;
   overflow: auto;
   padding: 0;
   align-items: flex-start;
-  margin-top: 50px;
+  margin-top: 30px;
 `
 const BarG = styled.div`
     width: 2px;
-    height: 300px;
+    height: 200px;
 `
