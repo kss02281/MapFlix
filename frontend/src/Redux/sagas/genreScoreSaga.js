@@ -6,7 +6,7 @@ import {
 } from "../types";
 
 function getGenreScoreApi(params) {
-  return fetch(`/netflix/${params.nationCode}/${params.week}/genres`).then(response => {
+  return fetch(`/api/netflix/${params.nationCode}/${params.week}/genres`).then(response => {
     if(response.ok){
       return response.json()
     }

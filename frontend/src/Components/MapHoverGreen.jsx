@@ -60,7 +60,7 @@ function MapHoverGreen(props) {
   ];
   useMemo(() => {
     console.log("/netflix/" + nationCode);
-    fetch("/netflix/" + nationCode)
+    fetch("/api/netflix/" + nationCode)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -74,7 +74,7 @@ function MapHoverGreen(props) {
 
   useMemo(() => {
     console.log("/netflix/" + nationCode + "/2021-040/top1");
-    fetch("/netflix/" + nationCode + "/2021-040/top1")
+    fetch("/api/netflix/" + nationCode + "/2021-040/top1")
       .then((response) => {
         if (response.ok) {
           return response.json();

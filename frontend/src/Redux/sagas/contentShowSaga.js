@@ -6,7 +6,7 @@ import {
 } from "../types";
 
 function getContentShowtApi(params) {
-  return fetch(`/netflix/${params.nationCode}/${params.week}/top10`).then(response => {
+  return fetch(`/api/netflix/${params.nationCode}/${params.week}/top10`).then(response => {
     if(response.ok){
       return response.json()
     }
