@@ -8,6 +8,3 @@ export const getContentShow = params => ({
     여기의 params로 들어갑니다. */
     params
   });
-  
-  //export const setTicket = ticket => ({ type: SET_TICKET, ticket });
-  

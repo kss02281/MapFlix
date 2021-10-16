@@ -153,3 +153,26 @@ class GenreColor(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     genre = db.Column(db.String(240))
     color = db.Column(db.String(240))
+
+    def __init__(self, genre, color):
+        self.genre = genre
+        self.color = color
+
+# 전세계 주차별 장르 점수
+class WorldGenreScore(db.Model):
+    __tablename__ = 'world_genre_score'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    week = db.Column(db.String(240))
+    genre = db.Column(db.String(240))
+    score = db.Column(db.Integer)
+    color = db.Column(db.String(240))
+
+    @property
+    def serialize(self):
+        return {
+            'genre': self.genre,
+            'score': self.score,
+            'color': self.color
+        }
+

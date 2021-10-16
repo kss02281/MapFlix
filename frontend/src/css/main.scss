@@ -1,0 +1,83 @@
+@charset 'utf-8';
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+$body-font: "Maven Pro", sans-serif;
+body {
+  background-color: #111111;
+}
+p {
+  color: rgb(173, 173, 173);
+}
+circle {
+  padding-right: 3px;
+}
+
+.mainWrap {
+  // background-color: #111111;
+  text-align: center;
+  .header {
+    text-align: center;
+    margin-top: 30px;
+  }
+  .Explanation_Wrap {
+    .Explanation {
+      display: flex;
+      justify-content: center;
+      .Explanation_list {
+        font-family: $body-font;
+        font-size: 0.85em;
+        background-color: rgba(233, 221, 221, 0.329);
+        border-radius: 40px;
+        width: 500px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 30px;
+        .Explanation_green {
+          display: flex;
+          align-items: center;
+          p {
+            margin-left: 5px;
+            margin-bottom: 0;
+            color: rgba(233, 221, 221, 0.781);
+            // color: rgb(5, 150, 105);
+          }
+        }
+        .Explanation_yellow {
+          display: flex;
+          align-items: center;
+          p {
+            margin-left: 5px;
+            margin-bottom: 0;
+            color: rgba(233, 221, 221, 0.781);
+            // color: rgb(245, 158, 11);
+          }
+        }
+        .Explanation_red {
+          display: flex;
+          align-items: center;
+          p {
+            margin-left: 5px;
+            margin-bottom: 0;
+            color: rgba(233, 221, 221, 0.781);
+            // color: rgb(220, 38, 38);
+          }
+        }
+        .Explanation_gray {
+          display: flex;
+          align-items: center;
+          p {
+            margin-left: 5px;
+            margin-bottom: 0;
+            color: rgba(233, 221, 221, 0.781);
+            // color: rgb(220, 38, 38);
+          }
+        }
+      }
+    }
+    .Explanation_text {
+      font-size: 1.5em;
+      text-align: center;
+    }
+  }
+}

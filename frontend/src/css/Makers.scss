@@ -1,4 +1,9 @@
 @charset 'utf-8';
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+$body-font: "Maven Pro", sans-serif;
 
 .All{
     background-color: #111111;
@@ -23,13 +28,14 @@
 }
 
 .Team{
-    
+ font-family: $title-font;
  color:white;
  font-size:50px;
  padding-top: 200px;
  text-align:center;
  font-size: 70px;
  font-weight: 500;
+ letter-spacing: 6px;
 }
 
 .people{
@@ -58,7 +64,7 @@
 .MpositionF{
  font-size: 20px;
  font-weight: 900;
- color: #15ff00;
+ color: #e5ff00;
 }
 
 .MpositionB{
@@ -76,7 +82,7 @@
 .SpositionF{
     font-size: 15px;
     font-weight: 300;
-    color: #15ff00;
+    color: #e5ff00;
 }
 
 .SpositionD{
@@ -97,6 +103,7 @@
     border-radius: 3px;
     text-align: center;
     background-color: white;
+    object-fit: cover;
 }
 .Profile:hover{
     border: 3px solid white;

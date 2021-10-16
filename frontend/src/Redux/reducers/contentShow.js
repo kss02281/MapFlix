@@ -1,4 +1,3 @@
-// reducers/userTicket.js
 import produce from "immer";
 import * as type from '../types';
 
