@@ -12,11 +12,11 @@ const DropDownMenu = () => {
   const clickhandler = (e, {value, nation}) => {
     console.log(value, nation)
     
-    // dispatch(setDate({
-    //   'year': '2021', 
-    //   'week': '39',
-    //   'date': 'Sep 27 - Oct 3',
-    // }));
+    dispatch(setDate({
+      'year': '2021', 
+      'week': '39',
+      'date': 'Sep 27 - Oct 3',
+    }));
     // dispatch(getContentShow({nationCode: value,week: '2021-039'}));
     dispatch(getGenreScore({
       nationCode: value,

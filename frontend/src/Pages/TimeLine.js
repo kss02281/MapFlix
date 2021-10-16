@@ -43,7 +43,7 @@ function DrawBarChart(props) {
     console.log(props.nationCode);
     console.log(props.nation);
 
-    fetch("/api/timeline/" + props.nationCode)
+    fetch("/timeline/" + props.nationCode)
       .then((response) => {
         if (response.ok) {
           return response.json();

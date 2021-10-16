@@ -23,7 +23,7 @@ function DrawBar(props) {
   );
 
   useEffect(() => {
-    fetch("/api/netflix/" + countryCode + "/" + fullweek + "/genre")
+    fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
       .then((response) => {
         if (response.ok) {
           return response.json();
