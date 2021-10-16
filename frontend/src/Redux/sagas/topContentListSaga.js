@@ -6,7 +6,7 @@ import {
 } from "../types";
 
 function getTopContentListApi(params) {
-  return fetch(`/netflix/${params.nationCode}/top1`).then(response => {
+  return fetch(`.api/netflix/${params.nationCode}/top1`).then(response => {
     if(response.ok){
       return response.json()
     }
