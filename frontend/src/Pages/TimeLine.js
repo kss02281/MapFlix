@@ -110,9 +110,9 @@ function DrawBarChart(props) {
                 ];
                 dispatch(
                   setDate({
-                    year: year,
-                    week: week,
-                    date: weekDate[item.week],
+                    year: '2021',
+                    week: '39',
+                    date: weekDate['2021-039'],
                   })
                 );
                 dispatch(
