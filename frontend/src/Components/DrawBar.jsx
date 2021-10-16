@@ -1,23 +1,78 @@
-import React from "react"
-import styled from 'styled-components'
-
+import React, { memo, useEffect, useState } from "react";
+import { useSelector, shallowEqual } from "react-redux";
+import styled, { css } from "styled-components";
+import TimelineHoverBox from "./TimelineHoverBox";
+import ReactHover, { Trigger, Hover } from "react-hover";
 
 function DrawBar(props) {
-    
+  const confirmedCnt = props.confirmedCnt;
+  const onClickAction = props.onClick;
+  const ratio = props.ratio;
 
-    const colors = [
-        '#FFFF96','#FFE650','#FFE5CB','#FFCAD5','#FFB900','#FF9E9B','#FF88A7','#FF5675','#F0B469','#FF6666','#DDDDDD','#D27D32','#BECDFF','#ACF3FF','#AAEBAA','#A8F552','#9D71BD','#93DAFF','#78A9ED','#68D168','#65FFBA','#369F36','#14D3FF','#00BFFF','#CAB2DB'
-        ]
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    const confirmedCnt = props.confirmedCnt;
-    const onClickAction = props.onClick;
-    const ratio = props.ratio;
+  const fullweek = props.fullweek;
+  const week = props.week;
+  const year = props.year;
+  const countryCode = props.countryCode;
+  const [color, setColor] = useState("#ffffff");
+  const [movie, setMovie] = useState([]);
+  const [show, setShow] = useState([]);
 
-    return (
-        <>
-            <Bar confirmedCnt={confirmedCnt} ratio={ratio} onClick={onClickAction} color={randomColor}></Bar>
-        </>
-    )
+  const contentList = useSelector(
+    (state) => state.topContentList.topContent,
+    shallowEqual
+  );
+
+  useEffect(() => {
+    fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        console.log(data?.color);
+        setColor(data?.color);
+      });
+  }, [week, countryCode]);
+
+  const optionsCursorTrueWithMargin = {
+    followCursor: true,
+    shiftX: 20,
+    shiftY: 0,
+  };
+
+  return (
+    <>
+      <ReactHover options={optionsCursorTrueWithMargin}>
+        <Trigger>
+          <Bar
+            confirmedCnt={confirmedCnt}
+            ratio={ratio}
+            onClick={onClickAction}
+            color={color}
+            onMouseEnter={() => {
+              console.log("hi");
+              console.log(contentList[fullweek]);
+              if (contentList[fullweek]) {
+                setMovie(contentList[fullweek][0]);
+                setShow(contentList[fullweek][1]);
+              }
+            }}
+          ></Bar>
+        </Trigger>
+        <Hover>
+          <TimelineHoverBox
+            nation={props.nation}
+            nationCode={props.nationCode}
+            fullWeek={fullweek}
+            movie={movie}
+            show={show}
+            confirmedCnt={parseInt(confirmedCnt ** 2)}
+          />
+        </Hover>
+      </ReactHover>
+    </>
+  );
 }
 
 export default memo(DrawBar);

@@ -1,149 +1,146 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import DrawBar from "../Components/DrawBar";
-import styled  from 'styled-components';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ReactHover, { Trigger, Hover } from 'react-hover';
-import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-icons/fa';
-import { HiCursorClick } from 'react-icons/hi';
-import { BsCircleFill } from 'react-icons/bs';
+import MovieBox from "../Components/MovieBox";
+import ShowBox from "../Components/ShowBox";
+import styled from "styled-components";
+import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  FaAngleDoubleDown,
+  FaAngleDoubleUp,
+  FaAngleDoubleLeft,
+} from "react-icons/fa";
+import { HiCursorClick } from "react-icons/hi";
+import { BsCircleFill } from "react-icons/bs";
 
-import { Genre_colors } from '../data/Genre_colors'
-import { setDate } from '../Redux/actions/yearWeek'
-import { getContentShow } from '../Redux/actions/contentShow'
-
-
+import { Genre_colors } from "../data/Genre_colors";
+import { setDate } from "../Redux/actions/yearWeek";
+import { getContentShow } from "../Redux/actions/contentShow";
+import { getGenreScore } from "../Redux/actions/genreScore";
 
 import { weekDate } from "../data/Week_date";
-
-import DropdownNation from "../Components/DropdownNation";
-
-import queryString from 'query-string'; 
-import '../css/TimeLine.scss';
+import queryString from "query-string";
+import "../css/TimeLine.scss";
 import DropDownMenu from "../Components/DropDownMenu";
 
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 function DrawBarChart(props) {
   const dispatch = useDispatch();
   const [cnt, setCnt] = useState(0);
   const [coronaData, setCoronaData] = useState([]);
-  const [topContentList, SetTopContentList] = useState([]);
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
   const topContent = useSelector(
-    state => (
-        state.topContentList.topContent
-    ),
+    (state) => state.topContentList.topContent,
     shallowEqual
-  )
+  );
 
   useMemo(() => {
     console.log("/timeline/" + props.nationCode);
     console.log(props.nationCode);
     console.log(props.nation);
 
-    fetch('/timeline/'+props.nationCode).then(response => {
-      if(response.ok){
-        return response.json()
-      }
-    }).then(data => setCoronaData(data.map(item => {
-        return {week: item.week, confirmedCnt: item.confirmed}
-    })))
+    fetch("/timeline/" + props.nationCode)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then((data) =>
+        setCoronaData(
+          data.map((item) => {
+            return { week: item.week, confirmedCnt: Math.sqrt(item.confirmed) };
+          })
+        )
+      );
 
-
-
-    SetTopContentList(topContent)
-    // const sample = Object.values(topContent)[0]['2020-033'][0].title
-    // console.log(sample);
-
-    //console.log(topContent)
-    console.log(coronaData)
+    dispatch(
+      setDate({
+        year: "2021",
+        week: "39",
+        date: "Sep 27 - Oct 3",
+      })
+    );
+    dispatch(
+      getContentShow({ nationCode: props.nationCode, week: "2021-039" })
+    );
 
     setCnt(1);
-  }, [cnt]);
+
+    console.log(topContent["2020-040"]);
+  }, [cnt, props.nationCode]);
 
   useEffect(() => {
     const confirmedList = coronaData.map((item) => item.confirmedCnt);
+    console.log(confirmedList);
     confirmedList.sort(function (a, b) {
       return parseInt(a - b);
     });
-    setMaxVal(confirmedList[confirmedList.length - 1]);
+    setMaxVal(confirmedList[confirmedList.length - 2]);
 
     setRatio(maxVal / 400);
-    console.log(confirmedList[confirmedList.length - 1]);
+    console.log(confirmedList[confirmedList.length - 2]);
   }, [coronaData]);
 
-  const optionsCursorTrueWithMargin = {
-
-    followCursor:true,
-    shiftX:20,
-    shiftY:0
-}
-const styleLink = document.createElement("link");
-styleLink.rel = "stylesheet";
-styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-document.head.appendChild(styleLink);
-
   return (
-      <div className='timeline'>
-          <span className="nationName">{props.nation}'s</span>
-          <div className="DaT"> 
-          <span className="title"> confirmed people by week</span>
-          {/* <span><DropdownNation /></span> */}
-          </div>
-          <ChartContainer maxHeight={maxVal}>
-            {
-              coronaData.map((item, idx) => (
-                <>
-                  <Bar />
-                  <ReactHover options={optionsCursorTrueWithMargin}>
-                    <Trigger type="trigger">
-                      <DrawBar
-                        countryCode={props.nationCode}
-                        fullweek={item.week}
-                        year={parseInt(item.week.slice(0,4))}
-                        week={parseInt(item.week.slice(5,8))}
-                        confirmedCnt={item.confirmedCnt}
-                        maxHeight={maxVal}
-                        ratio={ratio}
-                        onClick={() => {
-                          const [year, week] = [parseInt(item.week.slice(0,4)), parseInt(item.week.slice(5,8))];
-                          dispatch(setDate({
-                            'year': year, 
-                            'week': week,
-                            'date': weekDate[item.week],
-                          }))
-                          dispatch(getContentShow({nationCode: props.nationCode,week: item.week}))
+    <div className="timeline">
+      <span className="nationName">{props.nation}'s</span>
+      <div className="DaT"></div>
+      <span className="title"> confirmed people by week</span>
+      <ChartContainer maxHeight={maxVal}>
+        <div style={{ width: "380px" }}></div>
+        {coronaData.map((item, idx) => (
+          <>
+            <Bar />
+            <DrawBar
+              countryCode={props.nationCode}
+              fullweek={item.week}
+              year={parseInt(item.week.slice(0, 4))}
+              week={parseInt(item.week.slice(5, 8))}
+              confirmedCnt={item.confirmedCnt}
+              maxHeight={maxVal}
+              ratio={ratio}
+              onClick={() => {
+                const [year, week] = [
+                  parseInt(item.week.slice(0, 4)),
+                  parseInt(item.week.slice(5, 8)),
+                ];
+                dispatch(
+                  setDate({
+                    year: year,
+                    week: week,
+                    date: weekDate[item.week],
+                  })
+                );
+                dispatch(
+                  getContentShow({
+                    nationCode: props.nationCode,
+                    week: item.week,
+                  })
+                );
 
-                          const content = document.getElementById('content');
-                          window.scrollBy({top: content.getBoundingClientRect().top, behavior: 'smooth'});
-                        }}
-                      />
-                    </Trigger>
-                    <Hover type='hover'>
-                      {/* {
-                      !(parseInt(item.week.slice(0,4)) == 2020 && parseInt(item.week.slice(5,8))<33)? 
-                      (<div>{Object?.values(topContent)[idx][item.week]}</div>)
-                      :(<div></div>)
-                      } */}
-                      <TimelineHoverBox nation={props.nation} week={item.week} confirmedCnt={item.confirmedCnt}/>
-                    </Hover>
-                  </ReactHover>
-                </>
-              ))
-            }
-            <div className='genrecolor'>
-
-              {
-                Object.entries(Genre_colors).map(([key, value])=>(
-                  <div className='colorlist'>
-                    {key}
-                    <div className='circle'><BsCircleFill color={value}/></div>
-                  </div>
-                ))
-              }
+                const content = document.getElementById("content");
+                window.scrollBy({
+                  top: content.getBoundingClientRect().top,
+                  behavior: "smooth",
+                });
+              }}
+            />
+          </>
+        ))}
+        <div className="genrecolor">
+          {Object.entries(Genre_colors).map(([key, value]) => (
+            <div className="colorlist">
+              {key}
+              <div className="circle">
+                <BsCircleFill color={value} />
+              </div>
             </div>
+          ))}
+        </div>
       </ChartContainer>
       <div className="year">
         <div>2020</div>
@@ -153,9 +150,10 @@ document.head.appendChild(styleLink);
   );
 }
 
-const TimeLine = ({ history, location, match, }) => {
-  const query = queryString.parse(location.search)
-  console.log(query)
+const TimeLine = ({ history, location }) => {
+  const dispatch2 = useDispatch();
+  const query = queryString.parse(location.search);
+  console.log(query);
   const { nation, nationCode } = query;
 
   const { year, week, date } = useSelector(
@@ -179,20 +177,36 @@ const TimeLine = ({ history, location, match, }) => {
     });
   };
 
+  const handleGenreButton = () => {
+    const root = document.getElementById("root");
+    window.scrollBy({
+      top: root.getBoundingClientRect().top,
+      behavior: "smooth",
+    });
+
+    history.push(`/GenreAnalysis/nationInfo?nation=${nation}&nationCode=${nationCode}`);
+  };
+
   const styleLink = document.createElement("link");
   styleLink.rel = "stylesheet";
-  styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  styleLink.href =
+    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
   document.head.appendChild(styleLink);
 
   return (
     <div>
-      <button className='arrowButton' onClick={goToMain}><FaAngleDoubleLeft className='arrowIcon'/>Go To Main Page</button>
+      <button className="arrowButton" onClick={goToMain}>
+        <FaAngleDoubleLeft className="arrowIcon" />
+        <a href="/">Go To Main Page</a>
+      </button>
       <DropDownMenu />
-      <DrawBarChart nation={nation} nationCode={nationCode}/>
-      <ContainerT>
+      <DrawBarChart nation={nation} nationCode={nationCode} />
+
+      <Container>
         <h1 className="guide">
           Click on the stick for details by week <HiCursorClick />
         </h1>
+        <div className="DaT"></div>
         <FaAngleDoubleDown className="arrowIcon" />
         <div id="contentContainer">
           <h1 className="contentBox">
@@ -209,20 +223,35 @@ const TimeLine = ({ history, location, match, }) => {
             </div>
           </div>
         </div>
-        <div className='bottomArrow'>
-          <button className='arrowButton' onClick={clickToScrollUp}><FaAngleDoubleUp className='arrowIcon'/></button>
-       </div>
-      </ContainerT>
+        <div className="bottomContent">
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="large"
+              className="genreButton"
+              onClick={handleGenreButton}
+            >
+              Go To Genre-Analysis Page
+            </Button>
+          </Stack>
+          <div style={{ width: "500px" }}></div>
+          <button className="arrowButton" onClick={clickToScrollUp}>
+            <FaAngleDoubleUp className="arrowIcon" />
+          </button>
+          <div style={{ width: "800px" }}></div>
+        </div>
+      </Container>
     </div>
   );
 };
 
 export default TimeLine;
 
-const ContainerT = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 30px;
   align-items: center;
   justify-content: center;
 `;

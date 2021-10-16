@@ -3,28 +3,30 @@ import { Dropdown, Flag, Menu } from 'semantic-ui-react'
 import { useHistory } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { setDate } from '../Redux/actions/yearWeek'
-import { getContentShow } from '../Redux/actions/contentShow'
-import { getTopContentList } from '../Redux/actions/topContentList'
+import { getGenreScore } from '../Redux/actions/genreScore'
 
-const DropDownMenuGenre = () => {
+const DropDownMenu = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
   const clickhandler = (e, {value, nation}) => {
     console.log(value, nation)
     
-    dispatch(setDate({
-      'year': '2021', 
-      'week': '39',
-      'date': 'Sep 27 - Oct 3',
-    }));
-    dispatch(getContentShow({nationCode: value,week: '2021-039'}));
-    dispatch(getTopContentList({nationCode: value}));
-    history.push(`/timeLine/nationInfo?nation=${nation}&nationCode=${value}`);
+    // dispatch(setDate({
+    //   'year': '2021', 
+    //   'week': '39',
+    //   'date': 'Sep 27 - Oct 3',
+    // }));
+    // dispatch(getContentShow({nationCode: value,week: '2021-039'}));
+    dispatch(getGenreScore({
+      nationCode: value,
+      week: '2021-039',
+    }))
+    history.push(`/GenreAnalysis/nationInfo?nation=${nation}&nationCode=${value}`);
   }
 
   return(
-    <Menu compact style={{float: 'right' , marginRight: '20px', cursor: 'pointer', marginTop: '20px'}} >
+    <Menu compact style={{float: 'right' , marginRight: '30px', cursor: 'pointer', marginTop: '20px'}} >
       <Dropdown selection item text='Select Country'>
         <Dropdown.Menu>
           <Dropdown.Item value="ar" nation="Argentina" onClick={clickhandler}>
@@ -381,4 +383,4 @@ const DropDownMenuGenre = () => {
 )}
 
 
-export default DropDownMenuGenre;
+export default DropDownMenu;

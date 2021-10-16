@@ -1,59 +1,37 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import GenreDrawBar from "../Components/GenreDrawBar";
+import DropDownMenuGenre from '../Components/DropDownMenuGenre';
 import styled  from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactHover, { Trigger, Hover } from 'react-hover';
-import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-icons/fa';
-import { HiCursorClick } from 'react-icons/hi';
-import { BsCircleFill } from 'react-icons/bs';
-import { setDate } from '../Redux/actions/yearWeek'
-
-import DropdownNation from "../Components/DropdownNation";
 
 import queryString from 'query-string'; 
 import '../css/GenreTimeLine.scss';
+import { useLocation } from "react-router";
+import { getGenreScore } from "../Redux/actions/genreScore";
+import { setDate } from "../Redux/actions/yearWeek";
+import { weekDate } from "../data/Week_date";
 
 
 function DrawBarChart(props) {
   const dispatch = useDispatch();
+  const location = useLocation();
   const [cnt, setCnt] = useState(0);
   const [coronaData, setCoronaData] = useState([]);
   const [maxVal, setMaxVal] = useState(0);
 
   const [ratio, setRatio] = useState(1);
+  const query = queryString.parse(location.search)
+  console.log(query)
+  const { nation, nationCode } = query;
 
-
-  const genre_colors = {
-    'Comedy':'#FFFF96',
-    'Adventure':'#FFE650',
-    'Talk-Show':'#FFE5CB',
-    'Family':'#FFCAD5',
-    'Animation':'#FFB900',
-    'Reality-TV':'#FF9E9B',
-    'Romance':'#FF88A7',
-    'Action':'#FF5675',
-    'Musical':'#F0B469',
-    'Western':'#FF6666',
-    'Sci-Fi':'#DDDDDD',
-    'War':'#D27D32',
-    'Crime':'#CAB2DB',
-    'Thriller':'#BECDFF',
-    'Fantasy':'#ACF3FF',
-    'Horror':'#AAEBAA',
-    'Biography':'#A8F552',
-    'Mystery':'#9D71BD',
-    'Drama':'#93DAFF',
-    'Documentary':'#78A9ED',
-    'News':'#68D168',
-    'Game-Show':'#65FFBA',
-    'Military':'#369F36',
-    'History':'#14D3FF',
-    'Sport':'#00BFFF'
-  }
-
-
-
+  const { year, week } = useSelector(
+    state => ({
+      year: state.yearWeek.year, week: state.yearWeek.week
+    }),
+    shallowEqual
+  )
   useMemo(() => {
     console.log('/timeline/'+props.nationCode);
     console.log(props.nationCode);
@@ -63,12 +41,12 @@ function DrawBarChart(props) {
         return response.json()
       }
     }).then(data => setCoronaData(data.map(item => {
-        return {week: item.week, confirmedCnt: item.confirmed}
+        return {week: item.week, confirmedCnt: Math.sqrt(item.confirmed)}
     })))
     
     console.log(coronaData)
     setCnt(1);
-  },[cnt])
+  },[cnt, props.nationCode])
 
 
   useEffect(()=>{
@@ -76,10 +54,15 @@ function DrawBarChart(props) {
     confirmedList.sort(function(a,b){
       return parseInt(a-b);
     });
-    setMaxVal(confirmedList[confirmedList.length-1]);
+    if(props.nationCode == 'fr' || props.nationCode == 'lb' || props.nationCode == 'lk' || props.nationCode == 'es'){
+      setMaxVal(confirmedList[confirmedList.length-2]);
+    }else{
+      setMaxVal(confirmedList[confirmedList.length-1]);
+    }
     
-    setRatio(maxVal/400);
-    console.log(confirmedList[confirmedList.length-1]);
+    
+    setRatio(maxVal/330);
+    console.log(confirmedList[confirmedList.length-2]);
   },[ coronaData ])
 
   const optionsCursorTrueWithMargin = {
@@ -93,49 +76,59 @@ styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css
 document.head.appendChild(styleLink);
 
   return (
-      <div className='timeline'>
-          <span className="nationName">{props.nation}'s</span>
-          <div className="DaT"> 
-          <span className="title"> confirmed people by week</span>
-          <span><DropdownNation /></span>
+    <div >
+      <div className='timelineG'>
+        <div className="DropDownGenre">
+      <DropDownMenuGenre/>
+      </div>
+          <span className="nationNameG">{props.nation}'s</span>
+          <div className="DaTG"> 
+          <span className="titleG"> confirmed people by week</span>
           </div>
-          <ChartContainer maxHeight={maxVal}>
+          <ChartContainerG maxHeight={maxVal}>
             {
               coronaData.map((item, idx) => (
                 <>
-                  <Bar />
+                  <BarG />
                   <ReactHover options={optionsCursorTrueWithMargin}>
                     <Trigger type="trigger">
                       <GenreDrawBar
+                        countryCode={props.nationCode}
+                        fullweek={item.week}
+                        year={parseInt(item.week.slice(0,4))}
+                        week={parseInt(item.week.slice(5,8))}
                         confirmedCnt={item.confirmedCnt}
                         maxHeight={maxVal}
                         ratio={ratio}
                         onClick={() => {
-                          console.log(item.week);
-                          const [year, week] = [parseInt(item.week.slice(0,4)), parseInt(item.week.slice(5,8))];
-                          console.log(year, week)
                           dispatch(setDate({
-                            'year': year, 
-                            'week': week
+                            year: item.week.slice(0,4),
+                            week: parseInt(item.week.slice(5,8)).toString(),
+                            date: weekDate[item.week]
                           }))
-                          const content = document.getElementById('content');
-                          window.scrollBy({top: content.getBoundingClientRect().top, behavior: 'smooth'});
+                          dispatch(getGenreScore({
+                            nationCode: props.nationCode,
+                            week: item.week
+                          }))
                         }}
                       />
                     </Trigger>
-                    <Hover type='hover'>
-                      <div className='hoverContainer'>
-                        <p className='hover'>{props.nation}</p>
-                        <p className='hover'>{item.week}</p>
-                        <p className='hover'>Confirmed People : {item.confirmedCnt}</p>
+                    
+                    
+                    <Hover type='hoverG'>
+                      <div className='hoverContainerG'>
+                        <p className='hoverG'>{props.nation}</p>
+                        <p className='hoverG'>{item.week}</p>
+                        <p className='hoverG'>Confirmed People : {parseInt(item.confirmedCnt ** 2)}</p>
                       </div>
                     </Hover>
                   </ReactHover>
                 </>
               ))
             }
-          </ChartContainer>
-          
+          </ChartContainerG>
+          <p id="yearAweek">{year} week {week}</p>
+      </div>
       </div>
   )
 }
@@ -152,58 +145,27 @@ const GenreTimeLine = ({ history, location, match, }) => {
     shallowEqual
   )
   
-
-  const goToMain = () => {
-    history.push("/");
-  }
-
-  const clickToScrollUp = () => {
-    const root = document.getElementById('root');
-    window.scrollBy({top: root.getBoundingClientRect().top - 30, behavior: 'smooth'});
-  }
-
   return (
     <div>
       <DrawBarChart nation={nation} nationCode={nationCode}/>
-      <ContainerT>
-        <h1 className='guide'>Click on the stick for details by week <HiCursorClick/></h1>
-        <FaAngleDoubleDown className='arrowIcon'/>
-        <div id='contentContainer'>
-          <h1>{year}, WEEK {week}</h1>
-          <div id='content'>
-            <div className='movie'>Movie</div>
-            <div className='updown'></div>
-            <div className='show'>Show</div>
-          </div>
-        </div>
-        
-        <button className='arrowButton' onClick={clickToScrollUp}><FaAngleDoubleUp className='arrowIcon'/></button>
-      </ContainerT>
+      
     </div>
   );
 };
 
 export default GenreTimeLine;
 
-
-const ContainerT = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  align-items: center;
-  justify-content: center;
-`
-
-const ChartContainer = styled.div`
+const ChartContainerG = styled.div`
   display: flex;
   flex-direction: row;
-  height: 700px;
+  height: 200px;
   flex-wrap: nowrap;
-  overflow: auto;
+  overflow: hidden;
   padding: 0;
   align-items: flex-start;
+  margin-top: 30px;
 `
-const Bar = styled.div`
+const BarG = styled.div`
     width: 2px;
-    height: 300px;
+    height: 200px;
 `

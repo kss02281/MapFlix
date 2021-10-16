@@ -1,9 +1,9 @@
 import * as type from '../types';
 
 const initialState = {
-  year: '',
-  week: '',
-  date: ''
+  year: '2021',
+  week: '39',
+  date: 'Sep 27 - Oct 3'
 }
 
 export default function yearWeek(state = initialState, action) {
