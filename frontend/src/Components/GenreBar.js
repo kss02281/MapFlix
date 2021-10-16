@@ -128,25 +128,12 @@ return (
                 <Tooltip />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Bar dataKey="score">
-                    {genreScore.map((entry, index) => (
+                    {genreScores.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                 </Bar>
                 </BarChart>
             </ResponsiveContainer>
-            {/* <div className="sideScore"> <p id="nowWeek">2020<br/>Week 38</p>
-                <p id="rotateP">Score</p>
-                </div>
-            <div className="drawGenreGraph">
-                <div className="GenreGrpahPosition">
-                <div className="dGenreGraph">{dGenreGraph}</div>
-                </div>
-                
-                <div className="GenreName">{GenreName}</div>
-                </div>
-            <div className=""></div>
-            <div className="underGenre">Genre</div> */}
-        {/* </div> */}
     </div>
     </div>
 );

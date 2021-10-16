@@ -61,18 +61,20 @@ body::-webkit-scrollbar {
 
 
 .hoverContainerG {
-    width: 200px;
+    width: 150px;
     background-color: white;
-    border: 4px solid #8A2BE2;
+    border: 1px solid #8A2BE2;
     border-radius: 20px 40px;
+    justify-content: center;
+    align-items: center;
     padding: 4px;
-    font-size: 2em;
-    font-weight: bold;
     overflow: auto;
 }
 
 .hoverG {
     font-family: $title-font;
+    text-align: center;
+    color: black;
 }
 
 #yearAweek{

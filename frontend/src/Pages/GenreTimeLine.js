@@ -9,6 +9,9 @@ import ReactHover, { Trigger, Hover } from 'react-hover';
 import queryString from 'query-string'; 
 import '../css/GenreTimeLine.scss';
 import { useLocation } from "react-router";
+import { getGenreScore } from "../Redux/actions/genreScore";
+import { setDate } from "../Redux/actions/yearWeek";
+import { weekDate } from "../data/Week_date";
 
 
 function DrawBarChart(props) {
@@ -98,6 +101,15 @@ document.head.appendChild(styleLink);
                         maxHeight={maxVal}
                         ratio={ratio}
                         onClick={() => {
+                          dispatch(setDate({
+                            year: item.week.slice(0,4),
+                            week: parseInt(item.week.slice(5,8)).toString(),
+                            date: weekDate[item.week]
+                          }))
+                          dispatch(getGenreScore({
+                            nationCode: props.nationCode,
+                            week: item.week
+                          }))
                         }}
                       />
                     </Trigger>

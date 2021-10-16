@@ -16,7 +16,7 @@ import { BsCircleFill } from "react-icons/bs";
 import { Genre_colors } from "../data/Genre_colors";
 import { setDate } from "../Redux/actions/yearWeek";
 import { getContentShow } from "../Redux/actions/contentShow";
-import { getTopContentList } from "../Redux/actions/topContentList";
+import { getGenreScore } from "../Redux/actions/genreScore";
 
 import { weekDate } from "../data/Week_date";
 import queryString from "query-string";
@@ -151,6 +151,7 @@ function DrawBarChart(props) {
 }
 
 const TimeLine = ({ history, location }) => {
+  const dispatch2 = useDispatch();
   const query = queryString.parse(location.search);
   console.log(query);
   const { nation, nationCode } = query;
@@ -182,7 +183,8 @@ const TimeLine = ({ history, location }) => {
       top: root.getBoundingClientRect().top,
       behavior: "smooth",
     });
-    history.push("/GenreAnalysis/nationInfo?nation=World&nationCode=world");
+
+    history.push(`/GenreAnalysis/nationInfo?nation=${nation}&nationCode=${nationCode}`);
   };
 
   const styleLink = document.createElement("link");
