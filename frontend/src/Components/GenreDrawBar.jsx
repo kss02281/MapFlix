@@ -10,7 +10,7 @@ function GenreDrawBar(props) {
     const [color, setColor] = useState("#ffffff");
 
     useEffect(() => {
-        fetch("/api/netflix/" + countryCode + "/" + fullweek + "/genre")
+        fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
             .then((response) => {
             if (response.ok) {
                 return response.json();
