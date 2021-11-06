@@ -32,4 +32,3 @@ function* watchGenreScoreApi() {
 export default function* contentShowSaga() {
   yield all([fork(watchGenreScoreApi)]);
 }
- 

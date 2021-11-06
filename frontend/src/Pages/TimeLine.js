@@ -1,49 +1,37 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import DrawBar from "../Components/DrawBar";
-import MovieBox from "../Components/MovieBox";
-import ShowBox from "../Components/ShowBox";
-import styled from "styled-components";
-import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  FaAngleDoubleDown,
-  FaAngleDoubleUp,
-  FaAngleDoubleLeft,
-} from "react-icons/fa";
-import { HiCursorClick } from "react-icons/hi";
-import { BsCircleFill } from "react-icons/bs";
+import React, { useState, useEffect, useMemo } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import DrawBar from '../Components/DrawBar';
+import MovieBox from '../Components/MovieBox';
+import ShowBox from '../Components/ShowBox';
+import styled from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { FaAngleDoubleDown, FaAngleDoubleUp, FaAngleDoubleLeft } from 'react-icons/fa';
+import { HiCursorClick } from 'react-icons/hi';
+import { BsCircleFill } from 'react-icons/bs';
 
-import { Genre_colors } from "../data/Genre_colors";
-import { setDate } from "../Redux/actions/yearWeek";
-import { getContentShow } from "../Redux/actions/contentShow";
-import { getGenreScore } from "../Redux/actions/genreScore";
+import { Genre_colors } from '../data/Genre_colors';
+import { setDate } from '../Redux/actions/yearWeek';
+import { getContentShow } from '../Redux/actions/contentShow';
+import { getTopContentList } from '../Redux/actions/topContentList';
 
-import { weekDate } from "../data/Week_date";
-import queryString from "query-string";
-import "../css/TimeLine.scss";
-import DropDownMenu from "../Components/DropDownMenu";
+import { weekDate } from '../data/Week_date';
+import queryString from 'query-string';
+import '../css/TimeLine.scss';
+import DropDownMenu from '../Components/DropDownMenu';
 
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 function DrawBarChart(props) {
   const dispatch = useDispatch();
-  const [cnt, setCnt] = useState(0);
-  const [coronaData, setCoronaData] = useState([]);
   const [maxVal, setMaxVal] = useState(0);
-
   const [ratio, setRatio] = useState(1);
-  const topContent = useSelector(
-    (state) => state.topContentList.topContent,
-    shallowEqual
-  );
+  const [coronaData, setCoronaData] = useState([]);
+
+  const topContent = useSelector((state) => state.topContentList.topContent, shallowEqual);
 
   useMemo(() => {
-    console.log("/timeline/" + props.nationCode);
-    console.log(props.nationCode);
-    console.log(props.nation);
-
-    fetch("/timeline/" + props.nationCode)
+    fetch('/timeline/' + props.nationCode)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -52,26 +40,25 @@ function DrawBarChart(props) {
       .then((data) =>
         setCoronaData(
           data.map((item) => {
-            return { week: item.week, confirmedCnt: Math.sqrt(item.confirmed) };
+            return { week: item.week, confirmedCnt: item.confirmed };
           })
         )
       );
+    dispatch(getTopContentList({ nationCode: props.nationCode }));
+    console.log(coronaData);
+  }, [props.nationCode]);
 
+  useEffect(() => {
     dispatch(
       setDate({
-        year: "2021",
-        week: "39",
-        date: "Sep 27 - Oct 3",
+        year: '2021',
+        week: '39',
+        date: 'Sep 27 - Oct 3',
       })
     );
-    dispatch(
-      getContentShow({ nationCode: props.nationCode, week: "2021-039" })
-    );
-
-    setCnt(1);
-
-    console.log(topContent["2020-040"]);
-  }, [cnt, props.nationCode]);
+    dispatch(getContentShow({ nationCode: props.nationCode, week: '2021-039' }));
+    console.log(topContent['2020-040']);
+  });
 
   useEffect(() => {
     const confirmedList = coronaData.map((item) => item.confirmedCnt);
@@ -79,11 +66,16 @@ function DrawBarChart(props) {
     confirmedList.sort(function (a, b) {
       return parseInt(a - b);
     });
-    setMaxVal(confirmedList[confirmedList.length - 2]);
+
+    if (props.nationCode === 'fr' || props.nationCode === 'lb' || props.nationCode === 'lk' || props.nationCode === 'es') {
+      setMaxVal(confirmedList[confirmedList.length - 2]);
+    } else {
+      setMaxVal(confirmedList[confirmedList.length - 1]);
+    }
 
     setRatio(maxVal / 400);
     console.log(confirmedList[confirmedList.length - 2]);
-  }, [coronaData]);
+  }, [maxVal, coronaData, props.nationCode]);
 
   return (
     <div className="timeline">
@@ -91,7 +83,7 @@ function DrawBarChart(props) {
       <div className="DaT"></div>
       <span className="title"> confirmed people by week</span>
       <ChartContainer maxHeight={maxVal}>
-        <div style={{ width: "380px" }}></div>
+        <div style={{ width: '380px' }}></div>
         {coronaData.map((item, idx) => (
           <>
             <Bar />
@@ -104,14 +96,10 @@ function DrawBarChart(props) {
               maxHeight={maxVal}
               ratio={ratio}
               onClick={() => {
-                const [year, week] = [
-                  parseInt(item.week.slice(0, 4)),
-                  parseInt(item.week.slice(5, 8)),
-                ];
                 dispatch(
                   setDate({
-                    year: year,
-                    week: week,
+                    year: item.week.slice(0, 4),
+                    week: parseInt(item.week.slice(5, 8)).toString(),
                     date: weekDate[item.week],
                   })
                 );
@@ -122,10 +110,10 @@ function DrawBarChart(props) {
                   })
                 );
 
-                const content = document.getElementById("content");
+                const content = document.getElementById('content');
                 window.scrollBy({
                   top: content.getBoundingClientRect().top,
-                  behavior: "smooth",
+                  behavior: 'smooth',
                 });
               }}
             />
@@ -151,9 +139,8 @@ function DrawBarChart(props) {
 }
 
 const TimeLine = ({ history, location }) => {
-  const dispatch2 = useDispatch();
   const query = queryString.parse(location.search);
-  console.log(query);
+
   const { nation, nationCode } = query;
 
   const { year, week, date } = useSelector(
@@ -166,31 +153,30 @@ const TimeLine = ({ history, location }) => {
   );
 
   const goToMain = () => {
-    history.push("/");
+    history.push('/');
   };
 
   const clickToScrollUp = () => {
-    const root = document.getElementById("root");
+    const root = document.getElementById('root');
     window.scrollBy({
       top: root.getBoundingClientRect().top - 30,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
   const handleGenreButton = () => {
-    const root = document.getElementById("root");
+    const root = document.getElementById('root');
     window.scrollBy({
       top: root.getBoundingClientRect().top,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
 
     history.push(`/GenreAnalysis/nationInfo?nation=${nation}&nationCode=${nationCode}`);
   };
 
-  const styleLink = document.createElement("link");
-  styleLink.rel = "stylesheet";
-  styleLink.href =
-    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  const styleLink = document.createElement('link');
+  styleLink.rel = 'stylesheet';
+  styleLink.href = 'https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css';
   document.head.appendChild(styleLink);
 
   return (
@@ -225,21 +211,15 @@ const TimeLine = ({ history, location }) => {
         </div>
         <div className="bottomContent">
           <Stack direction="row" spacing={2}>
-            <Button
-              variant="outlined"
-              color="secondary"
-              size="large"
-              className="genreButton"
-              onClick={handleGenreButton}
-            >
+            <Button variant="outlined" color="secondary" size="large" className="genreButton" onClick={handleGenreButton}>
               Go To Genre-Analysis Page
             </Button>
           </Stack>
-          <div style={{ width: "500px" }}></div>
+          <div style={{ width: '500px' }}></div>
           <button className="arrowButton" onClick={clickToScrollUp}>
             <FaAngleDoubleUp className="arrowIcon" />
           </button>
-          <div style={{ width: "800px" }}></div>
+          <div style={{ width: '800px' }}></div>
         </div>
       </Container>
     </div>
