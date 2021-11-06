@@ -1,8 +1,8 @@
-import React, { memo, useEffect, useState } from "react";
-import { useSelector, shallowEqual } from "react-redux";
-import styled, { css } from "styled-components";
-import TimelineHoverBox from "./TimelineHoverBox";
-import ReactHover, { Trigger, Hover } from "react-hover";
+import React, { memo, useEffect, useState } from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
+import styled from 'styled-components';
+import TimelineHoverBox from './TimelineHoverBox';
+import ReactHover, { Trigger, Hover } from 'react-hover';
 
 function DrawBar(props) {
   const confirmedCnt = props.confirmedCnt;
@@ -13,17 +13,14 @@ function DrawBar(props) {
   const week = props.week;
   const year = props.year;
   const countryCode = props.countryCode;
-  const [color, setColor] = useState("#ffffff");
+  const [color, setColor] = useState('#ffffff');
   const [movie, setMovie] = useState([]);
   const [show, setShow] = useState([]);
 
-  const contentList = useSelector(
-    (state) => state.topContentList.topContent,
-    shallowEqual
-  );
+  const contentList = useSelector((state) => state.topContentList.topContent, shallowEqual);
 
   useEffect(() => {
-    fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
+    fetch('/netflix/' + countryCode + '/' + fullweek + '/genre')
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -33,7 +30,7 @@ function DrawBar(props) {
         console.log(data?.color);
         setColor(data?.color);
       });
-  }, [week, countryCode]);
+  }, [week, countryCode, fullweek]);
 
   const optionsCursorTrueWithMargin = {
     followCursor: true,
@@ -51,7 +48,7 @@ function DrawBar(props) {
             onClick={onClickAction}
             color={color}
             onMouseEnter={() => {
-              console.log("hi");
+              console.log('hi');
               console.log(contentList[fullweek]);
               if (contentList[fullweek]) {
                 setMovie(contentList[fullweek][0]);
@@ -80,8 +77,7 @@ export default memo(DrawBar);
 const Bar = styled.div`
   width: 12px;
   height: ${(props) => Math.round(props.confirmedCnt / props.ratio)}px;
-  margin-top: ${(props) =>
-    280 - Math.round(props.confirmedCnt / props.ratio) / 2}px;
+  margin-top: ${(props) => 280 - Math.round(props.confirmedCnt / props.ratio) / 2}px;
   background-color: ${(props) => props.color};
   cursor: pointer;
   border-radius: 60px 60px;

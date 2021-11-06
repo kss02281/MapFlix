@@ -1,32 +1,22 @@
-import React, { memo, useEffect, useState } from "react";
-import { csv } from "d3-fetch";
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Sphere,
-  Graticule,
-} from "react-simple-maps";
-import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import { getTopContentList } from "../Redux/actions/topContentList";
+import React, { memo, useEffect, useState } from 'react';
+import { csv } from 'd3-fetch';
+import { ComposableMap, Geographies, Geography, Sphere, Graticule } from 'react-simple-maps';
+import { useHistory } from 'react-router';
+import MapHoverGreen from './MapHoverGreen';
+import MapHoverYellow from './MapHoverYellow';
+import MapHoverRedGray from './MapHoverRed';
 
-import MapHoverGreen from "./MapHoverGreen";
-import MapHoverYellow from "./MapHoverYellow";
-import MapHoverRedGray from "./MapHoverRed";
-
-const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+const geoUrl = 'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
 
 function colorScale(Status) {
-  if (Status === "1") {
-    return "rgb(5, 150, 105)";
-  } else if (Status === "2") {
-    return "rgb(245, 158, 11)";
-  } else if (Status === "3") {
-    return "rgb(220, 38, 38)";
+  if (Status === '1') {
+    return 'rgb(5, 150, 105)';
+  } else if (Status === '2') {
+    return 'rgb(245, 158, 11)';
+  } else if (Status === '3') {
+    return 'rgb(220, 38, 38)';
   } else {
-    return "#aaaaaa";
+    return '#aaaaaa';
   }
 }
 
@@ -40,7 +30,7 @@ const MapChart = ({ setTooltipContent }) => {
   }, []);
 
   const history = useHistory();
-  const dispatch = useDispatch();
+
   return (
     <>
       <ComposableMap
@@ -63,59 +53,41 @@ const MapChart = ({ setTooltipContent }) => {
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={d ? colorScale(d["Status"]) : "#ffffff"}
+                    fill={d ? colorScale(d['Status']) : '#ffffff'}
                     onClick={(Status) => {
                       const { NAME, ISO_A2 } = geo.properties;
                       console.log(NAME, ISO_A2);
 
-                      if (d["Status"] === "1" || d["Status"] === "2") {
-                        dispatch(getTopContentList({ nationCode : ISO_A2.toLowerCase()}))
-                        history.push(
-                          `/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`
-                        );
+                      if (d['Status'] === '1' || d['Status'] === '2') {
+                        history.push(`/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`);
                       }
                     }}
                     onMouseEnter={() => {
                       const { NAME, ISO_A2 } = geo.properties;
                       console.log(NAME, ISO_A2);
-                      if (d["Status"] === "1") {
-                        setTooltipContent(
-                          <MapHoverGreen
-                            nationName={NAME}
-                            nationCode={ISO_A2.toLowerCase()}
-                          ></MapHoverGreen>
-                        );
-                      } else if (d["Status"] === "3" || d["Status"] === "4") {
-                        setTooltipContent(
-                          <MapHoverRedGray
-                            nationName={NAME}
-                            nationCode={ISO_A2.toLowerCase()}
-                          ></MapHoverRedGray>
-                        );
-                      } else if (d["Status"] === "2") {
-                        setTooltipContent(
-                          <MapHoverYellow
-                            nationName={NAME}
-                            nationCode={ISO_A2.toLowerCase()}
-                          ></MapHoverYellow>
-                        );
+                      if (d['Status'] === '1') {
+                        setTooltipContent(<MapHoverGreen nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverGreen>);
+                      } else if (d['Status'] === '3' || d['Status'] === '4') {
+                        setTooltipContent(<MapHoverRedGray nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverRedGray>);
+                      } else if (d['Status'] === '2') {
+                        setTooltipContent(<MapHoverYellow nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverYellow>);
                       }
                     }}
                     onMouseLeave={() => {
-                      setTooltipContent("");
+                      setTooltipContent('');
                     }}
                     style={{
                       hover: {
-                        fill: "#F53",
-                        outline: "none",
-                        cursor: "pointer",
+                        fill: '#F53',
+                        outline: 'none',
+                        cursor: 'pointer',
                       },
                       default: {
-                        outline: "none",
+                        outline: 'none',
                       },
                       pressed: {
-                        outline: "none",
-                        cursor: "pointer",
+                        outline: 'none',
+                        cursor: 'pointer',
                       },
                     }}
                   />

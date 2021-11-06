@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   yearWeek: yearWeek,
   contentShow: contentShow,
   topContentList: topContentList,
-  genreScore: genreScore
+  genreScore: genreScore,
 });
 
 export default rootReducer;
