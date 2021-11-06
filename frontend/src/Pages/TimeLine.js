@@ -58,7 +58,7 @@ function DrawBarChart(props) {
     );
     dispatch(getContentShow({ nationCode: props.nationCode, week: '2021-039' }));
     console.log(topContent['2020-040']);
-  });
+  }, []);
 
   useEffect(() => {
     const confirmedList = coronaData.map((item) => item.confirmedCnt);
