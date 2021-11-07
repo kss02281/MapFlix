@@ -32,6 +32,7 @@ const MapChart = ({ setTooltipContent }) => {
   const history = useHistory();
 
   var timer;
+  var hoverCheck = false;
 
   return (
     <>
@@ -66,23 +67,27 @@ const MapChart = ({ setTooltipContent }) => {
                     }}
 
                     onMouseEnter={() => {
+                      hoverCheck = true
                       if(timer){
                         clearTimeout(timer);
                       }
                       timer = setTimeout(function(){
                         const { NAME, ISO_A2 } = geo.properties;
                         console.log(NAME, ISO_A2);
-                        if (d['Status'] === '1') {
-                          setTooltipContent(<MapHoverGreen nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverGreen>);
-                        } else if (d['Status'] === '3' || d['Status'] === '4') {
-                          setTooltipContent(<MapHoverRedGray nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverRedGray>);
-                          } else if (d['Status'] === '2') {
-                          setTooltipContent(<MapHoverYellow nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverYellow>);
+                        if (hoverCheck == true){
+                          if (d['Status'] === '1') {
+                            setTooltipContent(<MapHoverGreen nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverGreen>);
+                          } else if (d['Status'] === '3' || d['Status'] === '4') {
+                            setTooltipContent(<MapHoverRedGray nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverRedGray>);
+                            } else if (d['Status'] === '2') {
+                            setTooltipContent(<MapHoverYellow nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverYellow>);
+                          }
                         }
                       }, 200);
                     }}
 
                     onMouseLeave={() => {
+                      hoverCheck = false
                       setTooltipContent('');
                     }}
                     style={{
