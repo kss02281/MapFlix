@@ -4,8 +4,6 @@ import "../css/MapHoverGreen.scss";
 import { IoCaretDown, IoCaretUp } from "react-icons/io5";
 import Title from "./Title";
 
-//ㅁㅇㄹㄴㅇㄹ
-
 function Icrease_Subscibes(props) {
   const increase_Subscibes_Data = props.subscibesQ2 - props.subscibesQ1;
   const increase_Color =
@@ -37,7 +35,7 @@ function Icrease_Subscibes(props) {
     );
   }
 }
-//adfkjhfkjewfk
+
 function MapHoverGreen(props) {
   const [subscibesQ1, setSubscibesQ1] = useState(0);
   const [subscibesQ2, setSubscibesQ2] = useState(0);
