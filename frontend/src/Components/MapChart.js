@@ -34,15 +34,15 @@ const MapChart = ({ setTooltipContent }) => {
   return (
     <>
       <ComposableMap
-        width={400}
+        width={300}
         height={130}
         data-tip=""
         projectionConfig={{
           scale: 40,
         }}
       >
-        <Sphere stroke="#ffffff" strokeWidth={0.5} />
-        <Graticule stroke="#ffffff" strokeWidth={0.5} />
+        <Sphere stroke="rgba(233, 221, 221, 0.781)" strokeWidth={0.5} />
+        <Graticule stroke="rgba(233, 221, 221, 0.781)" strokeWidth={0.5} />
         {data.length > 0 && (
           <Geographies geography={geoUrl}>
             {({ geographies }) =>

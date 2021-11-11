@@ -60,7 +60,8 @@ function MapHoverGreen(props) {
   ];
   useMemo(() => {
     console.log("/netflix/" + nationCode);
-    fetch("/netflix/" + nationCode)
+    console.log(process.env.REACT_APP_DB_HOST)
+    fetch(process.env.REACT_APP_DB_HOST + "/api/netflix/" + nationCode)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -73,8 +74,8 @@ function MapHoverGreen(props) {
   });
 
   useMemo(() => {
-    console.log("/netflix/" + nationCode + "/2021-040/top1");
-    fetch("/netflix/" + nationCode + "/2021-040/top1")
+    console.log("/api/netflix/" + nationCode + "/2021-040/top1");
+    fetch(process.env.REACT_APP_DB_HOST + "/api/netflix/" + nationCode + "/2021-040/top1")
       .then((response) => {
         if (response.ok) {
           return response.json();

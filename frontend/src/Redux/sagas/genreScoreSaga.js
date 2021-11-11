@@ -6,7 +6,8 @@ import {
 } from "../types";
 
 function getGenreScoreApi(params) {
-  return fetch(`/netflix/${params.nationCode}/${params.week}/genres`).then(response => {
+  return fetch(process.env.REACT_APP_DB_HOST + `/api/netflix/${params.nationCode}/${params.week}/genres`)
+  .then((response) => {
     if(response.ok){
       return response.json()
     }
@@ -17,7 +18,6 @@ function* getGenreScore(action) {
   try {
     // api 통신할때는 call
     const result = yield call(getGenreScoreApi, action.params);
-    console.log('result saga',result)
     // 아래와 같이 api 결과를 핸들링하여 dispatch 가능
     yield put({ type: GET_GENRE_SCORE_SUCCESS, data: result });
   } catch (err) {

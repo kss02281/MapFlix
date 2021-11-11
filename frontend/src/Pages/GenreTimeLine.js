@@ -19,7 +19,6 @@ function DrawBarChart(props) {
   const [cnt, setCnt] = useState(0);
   const [coronaData, setCoronaData] = useState([]);
   const [maxVal, setMaxVal] = useState(0);
-
   const [ratio, setRatio] = useState(1);
   const query = queryString.parse(location.search);
   console.log(query);
@@ -36,7 +35,7 @@ function DrawBarChart(props) {
     console.log('/timeline/' + props.nationCode);
     console.log(props.nationCode);
     console.log(props.nation);
-    fetch('/timeline/' + props.nationCode)
+    fetch(process.env.REACT_APP_DB_HOST + '/api/timeline/' + props.nationCode)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -78,6 +77,7 @@ function DrawBarChart(props) {
   styleLink.rel = 'stylesheet';
   styleLink.href = 'https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css';
   document.head.appendChild(styleLink);
+
 
   return (
     <div>
@@ -163,16 +163,16 @@ const GenreTimeLine = ({ history, location, match }) => {
 export default GenreTimeLine;
 
 const ChartContainerG = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 200px;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  padding: 0;
-  align-items: flex-start;
-  margin-top: 30px;
+display: flex;
+flex-direction: row;
+height: 200px;
+flex-wrap: nowrap;
+overflow: hidden;
+padding: 0;
+align-items: flex-start;
+margin-top: 30px;
 `;
 const BarG = styled.div`
-  width: 2px;
-  height: 200px;
+width: 2px;
+height: 200px;
 `;

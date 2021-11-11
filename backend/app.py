@@ -2,11 +2,11 @@ from flask import Flask
 from db_connect import db
 import config
 from models import SubscribersByCountry
-
+from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
-
+    CORS(app)
     app.config.from_object(config)
 
     db.init_app(app)

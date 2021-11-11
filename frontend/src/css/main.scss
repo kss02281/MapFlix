@@ -12,6 +12,30 @@ circle {
   padding-right: 3px;
 }
 
+.mainBackground{
+}
+
+.mainBackgroundBlack{
+  height: 18vw;
+  background-color: #111111;
+}
+
+.mainBackgroundWhite{
+  height: 100vh;
+  background-color: white;
+}
+
+.mapContainer{
+  position: absolute;
+  top: 34vh;
+  left: 25vw;
+  width: 50%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  
+}
+
 .mainWrap {
   // background-color: #111111;
   text-align: center;

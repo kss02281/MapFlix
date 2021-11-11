@@ -42,7 +42,7 @@ function GenreAnalysis({history, location}) {
     <div className="NoOverflow" style={{height:"94%"}}>
         <div className="Sunye">
             <GenreTimeLine location={location} history={history}/>
-             <GenreBar genreScore={genreScore}/>
+            <GenreBar genreScore={genreScore}/>
         </div>
         <div></div>
     </div>

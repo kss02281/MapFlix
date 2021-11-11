@@ -17,17 +17,18 @@ function DrawBar(props) {
   const [movie, setMovie] = useState([]);
   const [show, setShow] = useState([]);
 
-  const contentList = useSelector((state) => state.topContentList.topContent, shallowEqual);
+  const contentList = useSelector((state) => {
+    return state.topContentList.topContent;
+  }, shallowEqual);
 
   useEffect(() => {
-    fetch('/netflix/' + countryCode + '/' + fullweek + '/genre')
+    fetch(process.env.REACT_APP_DB_HOST + '/api/netflix/' + countryCode + '/' + fullweek + '/genre')
       .then((response) => {
         if (response.ok) {
           return response.json();
         }
       })
       .then((data) => {
-        console.log(data?.color);
         setColor(data?.color);
       });
   }, [week, countryCode, fullweek]);
@@ -37,6 +38,7 @@ function DrawBar(props) {
     shiftX: 20,
     shiftY: 0,
   };
+
 
   return (
     <>
@@ -48,7 +50,6 @@ function DrawBar(props) {
             onClick={onClickAction}
             color={color}
             onMouseEnter={() => {
-              console.log('hi');
               console.log(contentList[fullweek]);
               if (contentList[fullweek]) {
                 setMovie(contentList[fullweek][0]);
@@ -72,17 +73,17 @@ function DrawBar(props) {
   );
 }
 
-export default memo(DrawBar);
+export default DrawBar;
 
 const Bar = styled.div`
-  width: 12px;
-  height: ${(props) => Math.round(props.confirmedCnt / props.ratio)}px;
-  margin-top: ${(props) => 280 - Math.round(props.confirmedCnt / props.ratio) / 2}px;
-  background-color: ${(props) => props.color};
-  cursor: pointer;
-  border-radius: 60px 60px;
+width: 12px;
+height: ${(props) => Math.round(props.confirmedCnt / props.ratio)}px;
+margin-top: ${(props) => 280 - Math.round(props.confirmedCnt / props.ratio) / 2}px;
+background-color: ${(props) => props.color};
+cursor: pointer;
+border-radius: 60px 60px;
 
-  &:hover {
-    opacity: 0.7;
-  }
+&:hover {
+  opacity: 0.7;
+}
 `;

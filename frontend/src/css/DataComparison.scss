@@ -13,13 +13,10 @@ body{background-color: #111111;}
     margin-bottom: -12vw;
 }
 .DCGraph button{
-    
-    margin-top: -7vw !important;
-    
 }
 .slick-arrow slick-next{
     
-    margin-top: -7vw !important;
+    margin-top: -5vw !important;
     
 }
 .DCGap{
@@ -59,7 +56,7 @@ body{background-color: #111111;}
 .DCDescription{
     padding-top: 40px;
     margin: auto;
-    width: 37vw;
+    width: 39vw;
     background-color: #111111;
     color: aliceblue;
     font-size: 20px;
@@ -75,7 +72,6 @@ body{background-color: #111111;}
 .img1{
     display: inline !important;
     width:40vw;
-    margin-top: 9%;
     border: 5px solid #1b1a1a;
     transition: all 0.5s;
     &:hover{
@@ -87,7 +83,6 @@ body{background-color: #111111;}
 .img2{
     display: inline !important;
     width:39.5vw;
-    margin-top: 15%;
     border: 5px solid #1b1a1a;
     transition: all 0.5s;
     &:hover{
@@ -99,6 +94,18 @@ body{background-color: #111111;}
 
 .img3{
     display: inline !important;
+    width:33vw;
+    border: 5px solid #1b1a1a;
+    transition: all 0.5s;
+    &:hover{
+        box-shadow: 0 0 12px rgba(70,150,240,0.7) inset;
+        border: 1px solid rgba(255,255,255,1);
+        color: rgba(255,255,255,1);
+    }
+}
+
+.img4{
+    display: inline-block !important;
     width:33vw;
     border: 5px solid #1b1a1a;
     transition: all 0.5s;

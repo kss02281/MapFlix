@@ -6,7 +6,8 @@ import {
 } from "../types";
 
 function getContentShowtApi(params) {
-  return fetch(`/netflix/${params.nationCode}/${params.week}/top10`).then(response => {
+  return fetch(process.env.REACT_APP_DB_HOST + `/api/netflix/${params.nationCode}/${params.week}/top10`)
+  .then((response) => {
     if(response.ok){
       return response.json()
     }
@@ -17,10 +18,10 @@ function* getContentShow(action) {
   try {
     // api 통신할때는 call
     const result = yield call(getContentShowtApi, action.params);
-    console.log('result saga',result)
     // 아래와 같이 api 결과를 핸들링하여 dispatch 가능
     yield put({ type: GET_CONTENT_SHOW_SUCCESS, data: result });
   } catch (err) {
+    console.log(err)
     yield put({ type: GET_CONTENT_SHOW_FAILURE, data: err.response.data });
   }
 }
