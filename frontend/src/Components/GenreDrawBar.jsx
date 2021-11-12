@@ -8,11 +8,15 @@ function GenreDrawBar(props) {
     // const year = props.year;
     const countryCode = props.countryCode;
     const [color, setColor] = useState("#ffffff");
+    const confirmedCnt = props.confirmedCnt;
+    const onClickAction = props.onClick;
+    const ratio = props.ratio;
 
     useEffect(() => {
-        fetch("/netflix/" + countryCode + "/" + fullweek + "/genre")
+        fetch(process.env.REACT_APP_DB_HOST + "/api/netflix/" + countryCode + "/" + fullweek + "/genre")
             .then((response) => {
             if (response.ok) {
+                console.log( ratio)
                 return response.json();
             }
             else {
@@ -26,11 +30,7 @@ function GenreDrawBar(props) {
                 console.log(error)
             })
         ;
-    }, [fullweek, countryCode]);
-
-    const confirmedCnt = props.confirmedCnt;
-    const onClickAction = props.onClick;
-    const ratio = props.ratio;
+    }, [countryCode, fullweek]);
 
     return (
         <div className="BarContainer">
@@ -42,13 +42,13 @@ function GenreDrawBar(props) {
 export default GenreDrawBar;
 
 const Bar = styled.div`
-    width: 12px;
-    height: ${(props) => Math.round(props.confirmedCnt/props.ratio)/2}px;
-    margin-top : ${(props) => 200 - Math.round(props.confirmedCnt/props.ratio)/2}px;
-    background-color: ${(props) => props.color};
-    cursor: pointer;
-    border-radius: 60px 60px;
-    &:hover {
-        opacity: 0.7;
+width: 12px;
+height: ${(props) => Math.round(props.confirmedCnt/props.ratio)/2}px;
+margin-top : ${(props) => 200 - Math.round(props.confirmedCnt/props.ratio)/2}px;
+background-color: ${(props) => props.color};
+cursor: pointer;
+border-radius: 60px 60px;
+&:hover {
+    opacity: 0.7;
     }
 `

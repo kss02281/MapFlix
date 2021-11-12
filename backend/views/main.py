@@ -7,7 +7,7 @@ bp = Blueprint('main', __name__, url_prefix='/')
 # 국가별로 전체 week 확진자 수 불러오기
 
 
-@bp.route('/timeline/<string:country_code>', methods=['GET'])
+@bp.route('/api/timeline/<string:country_code>', methods=['GET'])
 def get_confirmed_num(country_code):
 
     confirmed_list = db.session.query(CovidConfirmed).filter(
@@ -18,7 +18,7 @@ def get_confirmed_num(country_code):
 # 국가별로 넷플릭스 구독자/매출 불러오기
 
 
-@bp.route('/netflix/<string:country_code>', methods=['GET'])
+@bp.route('/api/netflix/<string:country_code>', methods=['GET'])
 def get_subscribers_num(country_code):
     data = db.session.query(SubscribersByCountry).filter(
         SubscribersByCountry.country_code == country_code).first()
@@ -28,7 +28,7 @@ def get_subscribers_num(country_code):
 # 국가별 가장 최신 주차(21년 40번째 주)의 1위 영화, tv쇼 불러오기
 
 
-@bp.route('/netflix/<string:country_code>/2021-040/top1', methods=['GET'])
+@bp.route('/api/netflix/<string:country_code>/2021-040/top1', methods=['GET'])
 def get_netflix_top1(country_code):
     rank = 1
 
@@ -51,7 +51,7 @@ def get_netflix_top1(country_code):
 # 국가별 각 주차의 1위 영화, tv쇼 불러오기
 
 
-@bp.route('/netflix/<string:country_code>/top1', methods=['GET'])
+@bp.route('/api/netflix/<string:country_code>/top1', methods=['GET'])
 def get_netflix_top1_by_week(country_code):
     rank = 1
 
@@ -86,7 +86,7 @@ def get_netflix_top1_by_week(country_code):
 
 
 # 국가별 각 주차의 top10 영화리스트, tv쇼 리스트
-@bp.route('/netflix/<string:country_code>/<string:week>/top10', methods=['GET'])
+@bp.route('/api/netflix/<string:country_code>/<string:week>/top10', methods=['GET'])
 def get_netflix_top10(country_code, week):
     x = random.randint(1, 3)
 
@@ -124,7 +124,7 @@ def get_netflix_top10(country_code, week):
 # 국가별 각 주차의 가장 인기있는 장르와 색상
 
 
-@bp.route('/netflix/<string:country_code>/<string:week>/genre',  methods=['GET'])
+@bp.route('/api/netflix/<string:country_code>/<string:week>/genre',  methods=['GET'])
 def get_top_genre(country_code, week):
     if country_code == 'world':
         genre = db.session.query(WorldGenreScore).filter(
@@ -156,7 +156,7 @@ def get_top_genre(country_code, week):
 # 국가별 각 주차의 장르 스코어
 
 
-@bp.route('/netflix/<string:country_code>/<string:week>/genres',  methods=['GET'])
+@bp.route('/api/netflix/<string:country_code>/<string:week>/genres',  methods=['GET'])
 def get_genres_score(country_code, week):
     contents = db.session.query(NetflixContent).join(NetflixTop10).\
         filter(NetflixTop10.country_code == country_code,
@@ -183,7 +183,7 @@ def get_genres_score(country_code, week):
     # 전세계 통합 주차별 장르 스코어
 
 
-@bp.route('/netflix/world/<string:week>/genres', methods=['GET'])
+@bp.route('/api/netflix/world/<string:week>/genres', methods=['GET'])
 def get_world_genres_score(week):
     genres = db.session.query(WorldGenreScore).filter(
         WorldGenreScore.week == week).all()

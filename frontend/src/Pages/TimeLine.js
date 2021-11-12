@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useMemo } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import DrawBar from '../Components/DrawBar';
@@ -31,7 +32,8 @@ function DrawBarChart(props) {
   const topContent = useSelector((state) => state.topContentList.topContent, shallowEqual);
 
   useMemo(() => {
-    fetch('/timeline/' + props.nationCode)
+    console.log(process.env.REACT_APP_DB_HOST)
+    fetch(process.env.REACT_APP_DB_HOST + '/api/timeline/' + props.nationCode)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -62,7 +64,6 @@ function DrawBarChart(props) {
 
   useEffect(() => {
     const confirmedList = coronaData.map((item) => item.confirmedCnt);
-    console.log(confirmedList);
     confirmedList.sort(function (a, b) {
       return parseInt(a - b);
     });
