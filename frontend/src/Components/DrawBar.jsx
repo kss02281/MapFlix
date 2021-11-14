@@ -55,8 +55,10 @@ const DrawBar = React.memo(function DrawBar(props) {
             color={color}
             onMouseEnter={() => {
               if (contentList[fullweek]) {
-                setMovie(contentList[fullweek][0]);
-                setShow(contentList[fullweek][1]);
+                setTimeout(() => {
+                  setMovie(contentList[fullweek][0]);
+                  setShow(contentList[fullweek][1]);
+                }, 200);
               }
             }}
           ></Bar>
