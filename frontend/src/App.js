@@ -16,6 +16,7 @@ class App extends Component {
             <Route path="/" exact component={Main} />
             <Switch>
               <Route path="/timeLine/:nation/:nationCode" component={TimeLine} />
+              <Route path="/timeLine/loading" component={Loading} />
               <Route path="/timeLine" component={TimeLine} />
             </Switch>
             <Route path="/makers" component={Makers} />

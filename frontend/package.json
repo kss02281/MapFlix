@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://127.0.0.1:5000/",
+  "proxy": "https://localhost:5000",
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
@@ -29,6 +29,7 @@
     "react-scripts": "^4.0.3",
     "react-simple-maps": "^2.3.0",
     "react-slick": "^0.28.1",
+    "react-spinners": "^0.11.0",
     "react-svg-worldmap": "^2.0.0-alpha.0",
     "react-tooltip": "^4.2.21",
     "recharts": "^2.1.4",

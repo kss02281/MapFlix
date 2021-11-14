@@ -42,11 +42,12 @@ function DrawBarChart(props) {
       .then((data) =>
         setCoronaData(
           data.map((item) => {
-            return { week: item.week, confirmedCnt: item.confirmed };
+            return { week: item.week, confirmedCnt: Math.sqrt(item.confirmed) };
           })
         )
       )
       .catch(function (error) {
+        history.push('./loading');
         console.log(error);
       });
     dispatch(getTopContentList({ nationCode: props.nationCode }));

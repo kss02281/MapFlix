@@ -7,9 +7,6 @@ function getContentShowtApi(params) {
       if (response.ok) {
         return response.json();
       }
-    })
-    .catch(function (error) {
-      console.log(error);
     });
 }
 
