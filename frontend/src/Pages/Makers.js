@@ -14,7 +14,7 @@ function Makers() {
     <div className="All">
       <div className="Team">
         Who made it?
-        </div>
+      </div>
         
       <div className="people">
         <div className="person">
@@ -48,7 +48,7 @@ function Makers() {
         <div className="person">
           
         <div className="Remainder">-</div>
-          <img className="Profile" src={Jae} alt="" onClick={() => window.open('https://github.com/Jaenk-99', '_blank')}/>
+          <img className="Profile" src={Jae} alt="" onClick={() => window.open('https://github.com/my970524', '_blank')}/>
           
         <div className="NAME">김재현</div>
         <div className="MpositionF">FRONTEND</div>
@@ -56,7 +56,8 @@ function Makers() {
         <div className="person">
           
         <div className="Remainder">-</div>
-          <img className="Profile" src="https://pbs.twimg.com/profile_images/1301872241773142016/a50FgV9S_400x400.jpg"alt="" onClick={() => window.open('https://github.com/Jaenk-99', '_blank')}/>
+          <img className="Profile" src="https://pbs.twimg.com/profile_images/1301872241773142016/a50FgV9S_400x400.jpg"alt="" 
+          onClick={() => window.open('https://github.com/Jaenk-99', '_blank')}/>
         <div className="NAME">김민지</div>
         <div className="MpositionB">BACKEND</div>
       </div>

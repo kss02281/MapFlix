@@ -31,6 +31,10 @@ const DropDownMenu = () => {
     <Menu compact style={{ float: 'right', marginRight: '30px', cursor: 'pointer', marginTop: '20px' }}>
       <Dropdown selection item text="Select Country">
         <Dropdown.Menu>
+        <Dropdown.Item value="world" nation="World" onClick={clickhandler}>
+            <Flag name="world" />
+            World
+          </Dropdown.Item>
           <Dropdown.Item value="ar" nation="Argentina" onClick={clickhandler}>
             <Flag name="ar" />
             Argentina

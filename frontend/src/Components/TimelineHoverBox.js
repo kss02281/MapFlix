@@ -35,7 +35,6 @@ function TimelineHoverBox(props) {
                 </div>
             </div>
         </div>
-        
     )
     
 }

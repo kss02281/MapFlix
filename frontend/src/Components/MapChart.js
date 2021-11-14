@@ -78,7 +78,7 @@ const MapChart = ({ setTooltipContent }) => {
                             setTooltipContent(<MapHoverYellow nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverYellow>);
                           }
                         }
-                      }, 200);
+                      }, 50);
                     }}
                     onMouseLeave={() => {
                       hoverCheck = false;
@@ -88,7 +88,7 @@ const MapChart = ({ setTooltipContent }) => {
                       hover: {
                         fill: '#F53',
                         outline: 'none',
-                        cursor: 'pointer',
+                        cursor: 'none',
                       },
                       default: {
                         outline: 'none',

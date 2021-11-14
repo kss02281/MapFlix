@@ -15,7 +15,7 @@ const Main = ({ history }) => {
             Covid-19? <br />
             We'll show you the top 10 contents of weekly Netflix in each
             country.
-          </p>
+        </p>
       </div>
       <div className='mainBackground'>
         <div className='mainBackgroundBlack'></div>
