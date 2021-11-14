@@ -1,33 +1,35 @@
-import React from 'react'
-import { Dropdown, Flag, Menu } from 'semantic-ui-react'
-import { useHistory } from 'react-router'
-import { useDispatch } from 'react-redux'
-import { setDate } from '../Redux/actions/yearWeek'
-import { getGenreScore } from '../Redux/actions/genreScore'
+import React from 'react';
+import { Dropdown, Flag, Menu } from 'semantic-ui-react';
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { setDate } from '../Redux/actions/yearWeek';
+import { getGenreScore } from '../Redux/actions/genreScore';
 
 const DropDownMenu = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  const clickhandler = (e, {value, nation}) => {
-    console.log(value, nation)
-    
-    dispatch(setDate({
-      'year': '2021', 
-      'week': '39',
-      'date': 'Sep 27 - Oct 3',
-    }));
+  const clickhandler = (e, { value, nation }) => {
+    dispatch(
+      setDate({
+        year: '2021',
+        week: '39',
+        date: 'Sep 27 - Oct 3',
+      })
+    );
     // dispatch(getContentShow({nationCode: value,week: '2021-039'}));
-    dispatch(getGenreScore({
-      nationCode: value,
-      week: '2021-039',
-    }))
+    dispatch(
+      getGenreScore({
+        nationCode: value,
+        week: '2021-039',
+      })
+    );
     history.push(`/GenreAnalysis/nationInfo?nation=${nation}&nationCode=${value}`);
-  }
+  };
 
-  return(
-    <Menu compact style={{float: 'right' , marginRight: '30px', cursor: 'pointer', marginTop: '20px'}} >
-      <Dropdown selection item text='Select Country'>
+  return (
+    <Menu compact style={{ float: 'right', marginRight: '30px', cursor: 'pointer', marginTop: '20px' }}>
+      <Dropdown selection item text="Select Country">
         <Dropdown.Menu>
           <Dropdown.Item value="ar" nation="Argentina" onClick={clickhandler}>
             <Flag name="ar" />
@@ -81,11 +83,7 @@ const DropDownMenu = () => {
             <Flag name="cy" />
             Cyprus
           </Dropdown.Item>
-          <Dropdown.Item
-            value="cz"
-            nation="Czech Republic"
-            onClick={clickhandler}
-          >
+          <Dropdown.Item value="cz" nation="Czech Republic" onClick={clickhandler}>
             <Flag name="cz" />
             Czech Republic
           </Dropdown.Item>
@@ -93,11 +91,7 @@ const DropDownMenu = () => {
             <Flag name="dk" />
             Denmark
           </Dropdown.Item>
-          <Dropdown.Item
-            value="do"
-            nation="Dominican Republic"
-            onClick={clickhandler}
-          >
+          <Dropdown.Item value="do" nation="Dominican Republic" onClick={clickhandler}>
             <Flag name="do" />
             Dominican Republic
           </Dropdown.Item>
@@ -273,11 +267,7 @@ const DropDownMenu = () => {
             <Flag name="ru" />
             Russia
           </Dropdown.Item>
-          <Dropdown.Item
-            value="sa"
-            nation="Saudi Arabia"
-            onClick={clickhandler}
-          >
+          <Dropdown.Item value="sa" nation="Saudi Arabia" onClick={clickhandler}>
             <Flag name="sa" />
             Saudi Arabia
           </Dropdown.Item>
@@ -297,11 +287,7 @@ const DropDownMenu = () => {
             <Flag name="si" />
             Slovenia
           </Dropdown.Item>
-          <Dropdown.Item
-            value="za"
-            nation="South Africa"
-            onClick={clickhandler}
-          >
+          <Dropdown.Item value="za" nation="South Africa" onClick={clickhandler}>
             <Flag name="za" />
             South Africa
           </Dropdown.Item>
@@ -341,27 +327,15 @@ const DropDownMenu = () => {
             <Flag name="ua" />
             Ukraine
           </Dropdown.Item>
-          <Dropdown.Item
-            value="ae"
-            nation="United Arab Emirates"
-            onClick={clickhandler}
-          >
+          <Dropdown.Item value="ae" nation="United Arab Emirates" onClick={clickhandler}>
             <Flag name="ae" />
             United Arab Emirates
           </Dropdown.Item>
-          <Dropdown.Item
-            value="gb"
-            nation="United Kingdom"
-            onClick={clickhandler}
-          >
+          <Dropdown.Item value="gb" nation="United Kingdom" onClick={clickhandler}>
             <Flag name="gb" />
             United Kingdom
           </Dropdown.Item>
-          <Dropdown.Item
-            value="us"
-            nation="United States"
-            onClick={clickhandler}
-          >
+          <Dropdown.Item value="us" nation="United States" onClick={clickhandler}>
             <Flag name="us" />
             United States
           </Dropdown.Item>
@@ -380,7 +354,7 @@ const DropDownMenu = () => {
         </Dropdown.Menu>
       </Dropdown>
     </Menu>
-)}
-
+  );
+};
 
 export default DropDownMenu;

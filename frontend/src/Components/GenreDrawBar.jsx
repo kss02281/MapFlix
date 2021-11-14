@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
-function GenreDrawBar(props) {
+const GenreDrawBar = React.memo(function GenreDrawBar(props) {
   const fullweek = props.fullweek;
   const countryCode = props.countryCode;
   const [color, setColor] = useState('#ffffff');
@@ -9,6 +10,7 @@ function GenreDrawBar(props) {
   const confirmedCnt = props.confirmedCnt;
   const onClickAction = props.onClick;
   const ratio = props.ratio;
+  const history = useHistory();
 
   useEffect(() => {
     fetch(process.env.REACT_APP_DB_HOST + '/api/netflix/' + countryCode + '/' + fullweek + '/genre')
@@ -22,8 +24,9 @@ function GenreDrawBar(props) {
       .then((data) => {
         setColor(data?.color);
       })
-      .catch((error) => {
+      .catch(function (error) {
         console.log(error);
+        history.push('./loading');
       });
   }, [fullweek, countryCode]);
 
@@ -32,7 +35,7 @@ function GenreDrawBar(props) {
       <Bar confirmedCnt={confirmedCnt} ratio={ratio} onClick={onClickAction} color={color}></Bar>
     </div>
   );
-}
+});
 
 export default GenreDrawBar;
 

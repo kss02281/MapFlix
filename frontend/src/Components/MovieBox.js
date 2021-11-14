@@ -13,10 +13,15 @@ function MovieBox() {
   const [imgSrc, setImgSrc] = useState('');
 
   useEffect(() => {
-    console.log('saga result of movie');
-    console.log(movieData);
     if (movieData != null) {
-      setImgSrc(movieData[0]?.poster);
+      if (movieData[0]) {
+        if (movieData[0].title === 'No Data') {
+          console.log('No Data');
+          setImgSrc('../img/1.png');
+        } else {
+          setImgSrc(movieData[0]?.poster);
+        }
+      }
     }
   }, [movieData]);
 
@@ -24,7 +29,7 @@ function MovieBox() {
     const idx = parseInt(e.target.id);
     setTimeout(() => {
       setImgSrc(movieData[idx]?.poster);
-    }, 500);
+    }, 200);
   };
 
   return (

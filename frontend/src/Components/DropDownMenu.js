@@ -11,8 +11,6 @@ const DropDownMenuGenre = () => {
 
   const history = useHistory();
   const clickhandler = (e, {value, nation}) => {
-    console.log(value, nation)
-    
     dispatch(setDate({
       'year': '2021', 
       'week': '39',

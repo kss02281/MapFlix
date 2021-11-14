@@ -19,6 +19,7 @@ import { weekDate } from '../data/Week_date';
 import queryString from 'query-string';
 import '../css/TimeLine.scss';
 import DropDownMenu from '../Components/DropDownMenu';
+import { useHistory } from 'react-router';
 
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -28,11 +29,10 @@ function DrawBarChart(props) {
   const [maxVal, setMaxVal] = useState(0);
   const [ratio, setRatio] = useState(1);
   const [coronaData, setCoronaData] = useState([]);
-
+  const history = useHistory();
   const topContent = useSelector((state) => state.topContentList.topContent, shallowEqual);
 
   useMemo(() => {
-    console.log(process.env.REACT_APP_DB_HOST)
     fetch(process.env.REACT_APP_DB_HOST + '/api/timeline/' + props.nationCode)
       .then((response) => {
         if (response.ok) {
@@ -45,9 +45,11 @@ function DrawBarChart(props) {
             return { week: item.week, confirmedCnt: item.confirmed };
           })
         )
-      );
+      )
+      .catch(function (error) {
+        console.log(error);
+      });
     dispatch(getTopContentList({ nationCode: props.nationCode }));
-    console.log(coronaData);
   }, [props.nationCode]);
 
   useEffect(() => {
@@ -59,7 +61,6 @@ function DrawBarChart(props) {
       })
     );
     dispatch(getContentShow({ nationCode: props.nationCode, week: '2021-039' }));
-    console.log(topContent['2020-040']);
   }, []);
 
   useEffect(() => {
@@ -75,7 +76,6 @@ function DrawBarChart(props) {
     }
 
     setRatio(maxVal / 400);
-    console.log(confirmedList[confirmedList.length - 2]);
   }, [maxVal, coronaData, props.nationCode]);
 
   return (

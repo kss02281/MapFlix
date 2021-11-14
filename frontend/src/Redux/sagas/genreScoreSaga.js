@@ -1,17 +1,16 @@
-import { all, fork, put, call, takeLatest } from "redux-saga/effects";
-import {
-  GET_GENRE_SCORE_REQUEST,
-  GET_GENRE_SCORE_SUCCESS,
-  GET_GENRE_SCORE_FAILURE
-} from "../types";
+import { all, fork, put, call, takeLatest } from 'redux-saga/effects';
+import { GET_GENRE_SCORE_REQUEST, GET_GENRE_SCORE_SUCCESS, GET_GENRE_SCORE_FAILURE } from '../types';
 
 function getGenreScoreApi(params) {
   return fetch(process.env.REACT_APP_DB_HOST + `/api/netflix/${params.nationCode}/${params.week}/genres`)
-  .then((response) => {
-    if(response.ok){
-      return response.json()
-    }
-  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 
 function* getGenreScore(action) {

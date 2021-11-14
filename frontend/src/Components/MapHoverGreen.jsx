@@ -1,18 +1,13 @@
-import React, { useState, useMemo } from "react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
-import "../css/MapHoverGreen.scss";
-import { IoCaretDown, IoCaretUp } from "react-icons/io5";
-import Title from "./Title";
+import React, { useState, useMemo } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
+import '../css/MapHoverGreen.scss';
+import { IoCaretDown, IoCaretUp } from 'react-icons/io5';
+import Title from './Title';
+import { useHistory } from 'react-router';
 
 function Icrease_Subscibes(props) {
   const increase_Subscibes_Data = props.subscibesQ2 - props.subscibesQ1;
-  const increase_Color =
-    increase_Subscibes_Data > 0
-      ? "red"
-      : increase_Subscibes_Data == 0
-      ? "black"
-      : "blue";
-  console.log(increase_Color);
+  const increase_Color = increase_Subscibes_Data > 0 ? 'red' : increase_Subscibes_Data == 0 ? 'black' : 'blue';
   if (increase_Subscibes_Data > 0) {
     return (
       <div className="increase_Subscibes" style={{ color: increase_Color }}>
@@ -39,29 +34,28 @@ function Icrease_Subscibes(props) {
 function MapHoverGreen(props) {
   const [subscibesQ1, setSubscibesQ1] = useState(0);
   const [subscibesQ2, setSubscibesQ2] = useState(0);
-  const [movieURL, setMovieURL] = useState("");
-  const [showURL, setShowURL] = useState("");
-  const [movieTitle, setMovieTitle] = useState("");
-  const [showTitle, setShowTitle] = useState("");
-  const [movieId, setMovieId] = useState("");
-  const [showId, setShowId] = useState("");
+  const [movieURL, setMovieURL] = useState('');
+  const [showURL, setShowURL] = useState('');
+  const [movieTitle, setMovieTitle] = useState('');
+  const [showTitle, setShowTitle] = useState('');
+  const [movieId, setMovieId] = useState('');
+  const [showId, setShowId] = useState('');
   const nationName = props.nationName;
   const nationCode = props.nationCode;
+  const history = useHistory();
 
   const subscibes_data = [
     {
-      name: "2021 Q1",
+      name: '2021 Q1',
       pv: subscibesQ1,
     },
     {
-      name: "2021 Q2",
+      name: '2021 Q2',
       pv: subscibesQ2,
     },
   ];
   useMemo(() => {
-    console.log("/netflix/" + nationCode);
-    console.log(process.env.REACT_APP_DB_HOST)
-    fetch(process.env.REACT_APP_DB_HOST + "/api/netflix/" + nationCode)
+    fetch(process.env.REACT_APP_DB_HOST + '/api/netflix/' + nationCode)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -70,12 +64,14 @@ function MapHoverGreen(props) {
       .then((data) => {
         setSubscibesQ1(data.q1_subscribers);
         setSubscibesQ2(data.q2_subscribers);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   });
 
   useMemo(() => {
-    console.log("/api/netflix/" + nationCode + "/2021-040/top1");
-    fetch(process.env.REACT_APP_DB_HOST + "/api/netflix/" + nationCode + "/2021-040/top1")
+    fetch(process.env.REACT_APP_DB_HOST + '/api/netflix/' + nationCode + '/2021-040/top1')
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -90,6 +86,9 @@ function MapHoverGreen(props) {
         setShowTitle(show.title);
         setMovieId(movie.id);
         setShowId(show.id);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   });
 
@@ -102,10 +101,7 @@ function MapHoverGreen(props) {
             <p className="subscibesText">Subscibes</p>
             <p className="total_Subscibes">{subscibesQ2}</p>
             <div>
-              <Icrease_Subscibes
-                subscibesQ1={subscibesQ1}
-                subscibesQ2={subscibesQ2}
-              ></Icrease_Subscibes>
+              <Icrease_Subscibes subscibesQ1={subscibesQ1} subscibesQ2={subscibesQ2}></Icrease_Subscibes>
             </div>
           </div>
           <div className="subscribes_Chart">

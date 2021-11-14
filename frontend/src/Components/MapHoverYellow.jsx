@@ -1,20 +1,21 @@
-import React, { useState, useMemo } from "react";
-import "../css/MapHoverYellow.scss";
-import Title from "./Title";
+import React, { useState, useMemo } from 'react';
+import { useHistory } from 'react-router';
+import '../css/MapHoverYellow.scss';
+import Title from './Title';
 
 function MapHoverYellow(props) {
-  const [movieURL, setMovieURL] = useState("");
-  const [showURL, setShowURL] = useState("");
-  const [movieTitle, setMovieTitle] = useState("");
-  const [showTitle, setShowTitle] = useState("");
-  const [movieId, setMovieId] = useState("");
-  const [showId, setShowId] = useState("");
+  const [movieURL, setMovieURL] = useState('');
+  const [showURL, setShowURL] = useState('');
+  const [movieTitle, setMovieTitle] = useState('');
+  const [showTitle, setShowTitle] = useState('');
+  const [movieId, setMovieId] = useState('');
+  const [showId, setShowId] = useState('');
   const nationName = props.nationName;
   const nationCode = props.nationCode;
+  const history = useHistory();
 
   useMemo(() => {
-    console.log("/netflix/" + nationCode + "/2021-040/top1");
-    fetch(process.env.REACT_APP_DB_HOST + "/api/netflix/" + nationCode + "/2021-040/top1")
+    fetch(process.env.REACT_APP_DB_HOST + '/api/netflix/' + nationCode + '/2021-040/top1')
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -29,6 +30,9 @@ function MapHoverYellow(props) {
         setShowTitle(show.title);
         setMovieId(movie.id);
         setShowId(show.id);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   });
   return (

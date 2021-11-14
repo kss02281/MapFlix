@@ -3,6 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import GenreDrawBar from '../Components/GenreDrawBar';
 import DropDownMenuGenre from '../Components/DropDownMenuGenre';
 import styled from 'styled-components';
+import ReactHover, { Trigger, Hover } from 'react-hover';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import queryString from 'query-string';
@@ -11,6 +12,7 @@ import { useLocation } from 'react-router';
 import { getGenreScore } from '../Redux/actions/genreScore';
 import { setDate } from '../Redux/actions/yearWeek';
 import { weekDate } from '../data/Week_date';
+import { useHistory } from 'react-router';
 
 function DrawBarChart(props) {
   const dispatch = useDispatch();
@@ -20,7 +22,7 @@ function DrawBarChart(props) {
   const [maxVal, setMaxVal] = useState(0);
   const [ratio, setRatio] = useState(1);
   const query = queryString.parse(location.search);
-  console.log(query);
+  const history = useHistory();
 
   const { year, week } = useSelector(
     (state) => ({
@@ -29,6 +31,11 @@ function DrawBarChart(props) {
     }),
     shallowEqual
   );
+  const optionsCursorTrueWithMargin = {
+    followCursor: true,
+    shiftX: 20,
+    shiftY: 0,
+  };
   useMemo(() => {
     fetch(process.env.REACT_APP_DB_HOST + '/api/timeline/' + props.nationCode)
       .then((response) => {
@@ -42,9 +49,12 @@ function DrawBarChart(props) {
             return { week: item.week, confirmedCnt: item.confirmed };
           })
         )
-      );
+      )
+      .catch(function (error) {
+        history.push('./loading');
+        console.log(error);
+      });
 
-    console.log(coronaData);
     setCnt(1);
   }, [cnt, props.nationCode]);
 
@@ -60,7 +70,6 @@ function DrawBarChart(props) {
     }
 
     setRatio(maxVal / 330);
-    console.log(confirmedList[confirmedList.length - 2]);
   }, [coronaData, props.nationCode]);
 
   const styleLink = document.createElement('link');
@@ -82,30 +91,42 @@ function DrawBarChart(props) {
           {coronaData.map((item, idx) => (
             <>
               <BarG />
-              <GenreDrawBar
-                countryCode={props.nationCode}
-                fullweek={item.week}
-                year={parseInt(item.week.slice(0, 4))}
-                week={parseInt(item.week.slice(5, 8))}
-                confirmedCnt={item.confirmedCnt}
-                maxHeight={maxVal}
-                ratio={ratio}
-                onClick={() => {
-                  dispatch(
-                    setDate({
-                      year: item.week.slice(0, 4),
-                      week: parseInt(item.week.slice(5, 8)).toString(),
-                      date: weekDate[item.week],
-                    })
-                  );
-                  dispatch(
-                    getGenreScore({
-                      nationCode: props.nationCode,
-                      week: item.week,
-                    })
-                  );
-                }}
-              />
+              <ReactHover options={optionsCursorTrueWithMargin}>
+                <Trigger type="trigger">
+                  <GenreDrawBar
+                    countryCode={props.nationCode}
+                    fullweek={item.week}
+                    year={parseInt(item.week.slice(0, 4))}
+                    week={parseInt(item.week.slice(5, 8))}
+                    confirmedCnt={item.confirmedCnt}
+                    maxHeight={maxVal}
+                    ratio={ratio}
+                    onClick={() => {
+                      dispatch(
+                        setDate({
+                          year: item.week.slice(0, 4),
+                          week: parseInt(item.week.slice(5, 8)).toString(),
+                          date: weekDate[item.week],
+                        })
+                      );
+                      dispatch(
+                        getGenreScore({
+                          nationCode: props.nationCode,
+                          week: item.week,
+                        })
+                      );
+                    }}
+                  />
+                </Trigger>
+
+                <Hover type="hoverG">
+                  <div className="hoverContainerG">
+                    <p className="hoverG">{props.nation}</p>
+                    <p className="hoverG">{item.week}</p>
+                    <p className="hoverG">Confirmed People : {parseInt(item.confirmedCnt ** 2)}</p>
+                  </div>
+                </Hover>
+              </ReactHover>
             </>
           ))}
         </ChartContainerG>
@@ -119,7 +140,6 @@ function DrawBarChart(props) {
 
 const GenreTimeLine = ({ history, location, match }) => {
   const query = queryString.parse(location.search);
-  console.log(query);
   const { nation, nationCode } = query;
   return (
     <div>

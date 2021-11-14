@@ -50,7 +50,6 @@ const MapChart = ({ setTooltipContent }) => {
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                console.log();
                 const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
                 return (
                   <Geography
@@ -59,35 +58,30 @@ const MapChart = ({ setTooltipContent }) => {
                     fill={d ? colorScale(d['Status']) : '#ffffff'}
                     onClick={(Status) => {
                       const { NAME, ISO_A2 } = geo.properties;
-                      console.log(NAME, ISO_A2);
-
                       if (d['Status'] === '1' || d['Status'] === '2') {
                         history.push(`/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`);
                       }
                     }}
-
                     onMouseEnter={() => {
-                      hoverCheck = true
-                      if(timer){
+                      hoverCheck = true;
+                      if (timer) {
                         clearTimeout(timer);
                       }
-                      timer = setTimeout(function(){
+                      timer = setTimeout(function () {
                         const { NAME, ISO_A2 } = geo.properties;
-                        console.log(NAME, ISO_A2);
-                        if (hoverCheck == true){
+                        if (hoverCheck == true) {
                           if (d['Status'] === '1') {
                             setTooltipContent(<MapHoverGreen nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverGreen>);
                           } else if (d['Status'] === '3' || d['Status'] === '4') {
                             setTooltipContent(<MapHoverRedGray nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverRedGray>);
-                            } else if (d['Status'] === '2') {
+                          } else if (d['Status'] === '2') {
                             setTooltipContent(<MapHoverYellow nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverYellow>);
                           }
                         }
                       }, 200);
                     }}
-
                     onMouseLeave={() => {
-                      hoverCheck = false
+                      hoverCheck = false;
                       setTooltipContent('');
                     }}
                     style={{
