@@ -39,36 +39,21 @@ function DrawBar(props) {
     shiftY: 0,
   };
 
-
   return (
     <>
-      <ReactHover options={optionsCursorTrueWithMargin}>
-        <Trigger>
-          <Bar
-            confirmedCnt={confirmedCnt}
-            ratio={ratio}
-            onClick={onClickAction}
-            color={color}
-            onMouseEnter={() => {
-              console.log(contentList[fullweek]);
-              if (contentList[fullweek]) {
-                setMovie(contentList[fullweek][0]);
-                setShow(contentList[fullweek][1]);
-              }
-            }}
-          ></Bar>
-        </Trigger>
-        <Hover>
-          <TimelineHoverBox
-            nation={props.nation}
-            nationCode={props.nationCode}
-            fullWeek={fullweek}
-            movie={movie}
-            show={show}
-            confirmedCnt={parseInt(confirmedCnt ** 2)}
-          />
-        </Hover>
-      </ReactHover>
+      <Bar
+        confirmedCnt={confirmedCnt}
+        ratio={ratio}
+        onClick={onClickAction}
+        color={color}
+        onMouseEnter={() => {
+          console.log(contentList[fullweek]);
+          if (contentList[fullweek]) {
+            setMovie(contentList[fullweek][0]);
+            setShow(contentList[fullweek][1]);
+          }
+        }}
+      ></Bar>
     </>
   );
 }
@@ -76,14 +61,14 @@ function DrawBar(props) {
 export default DrawBar;
 
 const Bar = styled.div`
-width: 12px;
-height: ${(props) => Math.round(props.confirmedCnt / props.ratio)}px;
-margin-top: ${(props) => 280 - Math.round(props.confirmedCnt / props.ratio) / 2}px;
-background-color: ${(props) => props.color};
-cursor: pointer;
-border-radius: 60px 60px;
+  width: 12px;
+  height: ${(props) => Math.round(props.confirmedCnt / props.ratio)}px;
+  margin-top: ${(props) => 280 - Math.round(props.confirmedCnt / props.ratio) / 2}px;
+  background-color: ${(props) => props.color};
+  cursor: pointer;
+  border-radius: 60px 60px;
 
-&:hover {
-  opacity: 0.7;
-}
+  &:hover {
+    opacity: 0.7;
+  }
 `;
