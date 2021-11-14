@@ -4,7 +4,6 @@ import GenreDrawBar from '../Components/GenreDrawBar';
 import DropDownMenuGenre from '../Components/DropDownMenuGenre';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ReactHover, { Trigger, Hover } from 'react-hover';
 
 import queryString from 'query-string';
 import '../css/GenreTimeLine.scss';
@@ -22,7 +21,6 @@ function DrawBarChart(props) {
   const [ratio, setRatio] = useState(1);
   const query = queryString.parse(location.search);
   console.log(query);
-  const { nation, nationCode } = query;
 
   const { year, week } = useSelector(
     (state) => ({
@@ -32,9 +30,6 @@ function DrawBarChart(props) {
     shallowEqual
   );
   useMemo(() => {
-    console.log('/timeline/' + props.nationCode);
-    console.log(props.nationCode);
-    console.log(props.nation);
     fetch(process.env.REACT_APP_DB_HOST + '/api/timeline/' + props.nationCode)
       .then((response) => {
         if (response.ok) {
@@ -66,18 +61,12 @@ function DrawBarChart(props) {
 
     setRatio(maxVal / 330);
     console.log(confirmedList[confirmedList.length - 2]);
-  }, [coronaData]);
+  }, [coronaData, props.nationCode]);
 
-  const optionsCursorTrueWithMargin = {
-    followCursor: true,
-    shiftX: 20,
-    shiftY: 0,
-  };
   const styleLink = document.createElement('link');
   styleLink.rel = 'stylesheet';
   styleLink.href = 'https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css';
   document.head.appendChild(styleLink);
-
 
   return (
     <div>
@@ -93,42 +82,30 @@ function DrawBarChart(props) {
           {coronaData.map((item, idx) => (
             <>
               <BarG />
-              <ReactHover options={optionsCursorTrueWithMargin}>
-                <Trigger type="trigger">
-                  <GenreDrawBar
-                    countryCode={props.nationCode}
-                    fullweek={item.week}
-                    year={parseInt(item.week.slice(0, 4))}
-                    week={parseInt(item.week.slice(5, 8))}
-                    confirmedCnt={item.confirmedCnt}
-                    maxHeight={maxVal}
-                    ratio={ratio}
-                    onClick={() => {
-                      dispatch(
-                        setDate({
-                          year: item.week.slice(0, 4),
-                          week: parseInt(item.week.slice(5, 8)).toString(),
-                          date: weekDate[item.week],
-                        })
-                      );
-                      dispatch(
-                        getGenreScore({
-                          nationCode: props.nationCode,
-                          week: item.week,
-                        })
-                      );
-                    }}
-                  />
-                </Trigger>
-
-                <Hover type="hoverG">
-                  <div className="hoverContainerG">
-                    <p className="hoverG">{props.nation}</p>
-                    <p className="hoverG">{item.week}</p>
-                    <p className="hoverG">Confirmed People : {parseInt(item.confirmedCnt ** 2)}</p>
-                  </div>
-                </Hover>
-              </ReactHover>
+              <GenreDrawBar
+                countryCode={props.nationCode}
+                fullweek={item.week}
+                year={parseInt(item.week.slice(0, 4))}
+                week={parseInt(item.week.slice(5, 8))}
+                confirmedCnt={item.confirmedCnt}
+                maxHeight={maxVal}
+                ratio={ratio}
+                onClick={() => {
+                  dispatch(
+                    setDate({
+                      year: item.week.slice(0, 4),
+                      week: parseInt(item.week.slice(5, 8)).toString(),
+                      date: weekDate[item.week],
+                    })
+                  );
+                  dispatch(
+                    getGenreScore({
+                      nationCode: props.nationCode,
+                      week: item.week,
+                    })
+                  );
+                }}
+              />
             </>
           ))}
         </ChartContainerG>
@@ -144,15 +121,6 @@ const GenreTimeLine = ({ history, location, match }) => {
   const query = queryString.parse(location.search);
   console.log(query);
   const { nation, nationCode } = query;
-
-  const { year, week } = useSelector(
-    (state) => ({
-      year: state.yearWeek.year,
-      week: state.yearWeek.week,
-    }),
-    shallowEqual
-  );
-
   return (
     <div>
       <DrawBarChart nation={nation} nationCode={nationCode} />
@@ -163,16 +131,16 @@ const GenreTimeLine = ({ history, location, match }) => {
 export default GenreTimeLine;
 
 const ChartContainerG = styled.div`
-display: flex;
-flex-direction: row;
-height: 200px;
-flex-wrap: nowrap;
-overflow: hidden;
-padding: 0;
-align-items: flex-start;
-margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  padding: 0;
+  align-items: flex-start;
+  margin-top: 30px;
 `;
 const BarG = styled.div`
-width: 2px;
-height: 200px;
+  width: 2px;
+  height: 200px;
 `;

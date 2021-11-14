@@ -1,8 +1,7 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
 import TimelineHoverBox from './TimelineHoverBox';
-import ReactHover, { Trigger, Hover } from 'react-hover';
 
 function DrawBar(props) {
   const confirmedCnt = props.confirmedCnt;
