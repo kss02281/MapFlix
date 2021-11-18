@@ -27,14 +27,14 @@ const Loading = () => {
   const history = useHistory();
 
   const goBack = () => {
-    history.push('./nationInfo?nation=South%20Korea&nationCode=kr');
+    history.push('./nationInfo?nation=World&nationCode=world');
   };
   return (
     <Container>
       <Title>Error Page</Title>
       <Spinner />
       <Button style={{ marginTop: '70px' }} onClick={goBack} variant="outlined" color="error">
-        Error: Go To South Korea Timeline
+        Error: Go To World Timeline
       </Button>
       {/* <button onClick={goBack}>한국으로 돌아가기</button> */}
     </Container>

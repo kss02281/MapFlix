@@ -20,20 +20,15 @@ circle {
   background-color: #111111;
 }
 
-.mainBackgroundWhite{
-  height: 100vh;
-  background-color: white;
-}
 
 .mapContainer{
   position: absolute;
-  top: 34vh;
-  left: 25vw;
-  width: 50%;
-  background-color: rgb(255, 255, 255);
+  top: 25vh;
+  left: 10vw;
+  width: 80%;
   border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  
+  //box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
 }
 
 .mainWrap {
@@ -100,8 +95,71 @@ circle {
       }
     }
     .Explanation_text {
-      font-size: 1.5em;
-      text-align: center;
+      p{
+        font-size: 100px !important;
+        text-align: center;
+      }
     }
+  }
+}
+
+.ExplanationText1{
+  font-size: 20px !important;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+}
+.ExplanationText2{
+  font-size: 19px !important;  
+  font-weight: 600;
+  text-align: center;
+  color: white;
+}
+
+@media (max-width: 992px)
+{
+  .map_wrap{
+    margin-top: 0px;
+  }
+  .ExplanationText1{
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 13px !important;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+  }
+  .ExplanationText2{
+    width: 95%;
+    margin: 0 auto;
+    font-size: 13px !important;  
+    font-weight: 600;
+    text-align: center;
+    color: white;
+  }
+}
+
+@media (max-width: 400px)
+{
+  .map_wrap{
+    margin-top: 50px;
+  }
+  .ExplanationText1{
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 13px !important;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+  }
+  .ExplanationText2{
+    width: 95%;
+    margin: 0 auto;
+    font-size: 13px !important;  
+    font-weight: 600;
+    text-align: center;
+    color: white;
   }
 }
