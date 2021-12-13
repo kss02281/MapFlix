@@ -1,0 +1,107 @@
+@charset 'utf-8';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+$title-font: 'Anton', sans-serif;
+$body-font: 'Maven Pro', sans-serif;
+
+.hoverTitle {
+    text-align: center;
+    font-family: $title-font;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-top: -20px;
+}
+
+.contentBoxT {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    justify-content: left;
+    flex-wrap: nowrap;
+    overflow: auto;
+}
+
+.posterBoxT {
+    margin-top: 15px;
+    .posterT {
+        width: 40vh;
+        height: 60vh;
+    }
+}
+
+.spaceT {
+    width: 5px;
+}
+
+.rankNumT {
+    font-size: 31px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.rankBoxT {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    flex-wrap: nowrap;
+    overflow: auto;
+    margin-top: 20px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.rankBoxT::-webkit-scrollbar {
+    display: none;
+}
+
+.rankContentT {
+    width: 37vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    flex-wrap: nowrap;
+    overflow: auto;
+    margin: 5px 0 0 10px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.rankContentT::-webkit-scrollbar {
+    display: none;
+}
+
+.rankT {
+
+    font-size: 21px;   
+    text-decoration: none;
+    color: black;
+    line-height: 2.2em;
+    cursor:pointer;
+
+    &:link {color: black; text-decoration: none;}
+    &:visited {color: black; text-decoration: none;}
+    &:hover {color: rgb(56, 56, 56); text-decoration: underline;}
+
+    .circleHoverT {
+        cursor:default;
+    }
+}
+
+.genreCircleT {
+    width: 2px;
+    + div{
+        margin-left: 10px;
+    }
+}
+
+.titleButton {
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    font-family: $body-font;
+    &:hover {color: rgb(56, 56, 56); text-decoration: underline;}
+}

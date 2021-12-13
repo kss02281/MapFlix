@@ -1,38 +1,70 @@
-import React from "react"
-import ReactHover from 'react-hover'
-import { useEffect, useState, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import styled, {css} from 'styled-components'
+import React, { useEffect, useState } from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
+import styled from 'styled-components';
+import TimelineHoverBox from './TimelineHoverBox';
+import { useHistory } from 'react-router';
+
+const DrawBar = React.memo(function DrawBar(props) {
+  const confirmedCnt = props.confirmedCnt;
+  const onClickAction = props.onClick;
+  const ratio = props.ratio;
+
+  const fullweek = props.fullweek;
+  const week = props.week;
+  const year = props.year;
+  const countryCode = props.countryCode;
+  const [color, setColor] = useState('#ffffff');
+  const [movie, setMovie] = useState([]);
+  const [show, setShow] = useState([]);
+
+  const contentList = useSelector((state) => {
+    return state.topContentList.topContent;
+  }, shallowEqual);
 
 
-function DrawBar(props) {
+  useEffect(() => {
+    fetch(process.env.REACT_APP_DB_HOST + '/api/netflix/' + countryCode + '/' + fullweek + '/genre')
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        setColor(data? data.color: '#ffffff');
+      });
+  }, [week, countryCode, fullweek]);
 
-    const week = props.week;
-    const confirmedCnt = props.confirmedCnt;
-    const maxHeight = props.maxHeight;
-    const onClickAction = props.onClick;
-    const ratio = props.ratio;
-    const idx = props.idx;
-
-
-    return (
-        <>
-            <Bar confirmedCnt={confirmedCnt} ratio={ratio} onClick={onClickAction}></Bar>
-        </>
-    )
-}
-
+  return (
+    <>
+      <Bar
+      confirmedCnt={confirmedCnt}
+      ratio={ratio}
+      onClick={onClickAction}
+      color={color}
+      onMouseEnter={() => {
+          if (contentList[fullweek]) {
+            setTimeout(() => {
+              setMovie(contentList[fullweek][0]);
+              setShow(contentList[fullweek][1]);
+            }, 200);
+          }
+        }}
+      >
+      </Bar>
+    </>
+  );
+});
 export default DrawBar;
 
 const Bar = styled.div`
-    width: 12px;
-    height: ${(props) => Math.round(props.confirmedCnt/props.ratio)}px;
-    margin-top: ${(props) => 300-Math.round(props.confirmedCnt/props.ratio)/2}px;
-    background-color: pink;
-    cursor: pointer;
-    border-radius: 60px 60px;
+  width: 12px;
+  height: ${(props) => Math.round(props.confirmedCnt / props.ratio)}px;
+  margin-top: ${(props) => 280 - Math.round(props.confirmedCnt / props.ratio) / 2}px;
+  background-color: ${(props) => props.color};
+  cursor: pointer;
+  border-radius: 60px 60px;
 
-    &:hover {
-        background-color: #F08080;
-    }
-`
+  &:hover {
+    opacity: 0.7;
+  }
+`;

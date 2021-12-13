@@ -1,0 +1,111 @@
+@charset 'utf-8';
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+$body-font: "Maven Pro", sans-serif;
+
+.All{
+    background-color: #111111;
+}
+
+.test {
+    color:white;
+    background-color:orange;
+    height:100px;
+    border-bottom:3px solid white;
+    text-align:center;
+    font-size:50px;
+    padding-top:5px;
+}
+
+.Leader{
+    color: rgb(230, 84, 84);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: -14px;
+}
+
+.Team{
+ font-family: $title-font;
+ color:white;
+ font-size:50px;
+ padding-top: 200px;
+ text-align:center;
+ font-size: 70px;
+ font-weight: 500;
+ letter-spacing: 6px;
+}
+
+.people{
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ justify-content:center;
+ text-align:center;
+ align-items: center;
+}
+
+.person{
+ width: 260px;
+ height: 300px;
+ margin-top: 40px;
+ align-self: center;
+ align-items: center;
+}
+
+.NAME{
+    padding-top: 15px;
+    font-size: 26px;
+    color: #837d7d;
+    font-weight: 400;
+}
+.MpositionF{
+ font-size: 20px;
+ font-weight: 900;
+ color: #e5ff00;
+}
+
+.MpositionB{
+    font-size: 20px;
+    font-weight: 900;
+    color: #1dc046;
+   }
+
+.MpositionD{
+ font-size: 20px;
+ font-weight: 900;
+ color: #7722ff;
+}
+
+.SpositionF{
+    font-size: 15px;
+    font-weight: 300;
+    color: #e5ff00;
+}
+
+.SpositionD{
+    font-size: 15px;
+    font-weight: 300;
+    color: #7722ff;
+}
+
+.SpositionB{
+    font-size: 15px;
+    font-weight: 300;
+    color: #1dc046;
+}
+
+.Profile{
+    width: 200px;
+    height: 200px;
+    border-radius: 3px;
+    text-align: center;
+    background-color: white;
+    object-fit: cover;
+    cursor: pointer;
+}
+.Profile:hover{
+    border: 3px solid white;
+}

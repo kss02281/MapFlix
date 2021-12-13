@@ -1,0 +1,90 @@
+@charset 'utf-8';
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+$body-font: "Maven Pro", sans-serif;
+
+body {
+  background-color: black;
+}
+
+body {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.timelineG {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    
+}
+
+.DropDownGenre{
+  position: absolute;
+  margin-right: -940px !important;
+  margin-top: -320px;
+}
+
+.DaTG {
+    display: flex;
+    margin-top: 40px;
+    align-items: center;
+    padding-bottom: -100px;
+}
+
+.BarContainer{
+  height: 200px !important;
+}
+
+.nationNameG {
+    color: white;
+    font-size: 4em;
+    font-family: $title-font;
+    text-align: center;
+    letter-spacing: 4px;
+    margin: 0;
+}
+
+.titleG {
+    color: white;
+    font-family: $body-font;
+    font-size: 1.5em;
+    margin-right: 20px;
+}
+
+
+
+.hoverContainerG {
+    width: 150px;
+    background-color: white;
+    border: 1px solid #8A2BE2;
+    border-radius: 20px 40px;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    overflow: auto;
+}
+
+.hoverG {
+    font-family: $title-font;
+    text-align: center;
+    color: black;
+}
+
+#yearAweek{
+  position: absolute;
+  bottom : 47%;
+  right: 37.4%;
+  width: 200px;
+  font-size: 30px;
+  font-family:$title-font;
+  text-align: center;
+  letter-spacing: 2px;
+
+}

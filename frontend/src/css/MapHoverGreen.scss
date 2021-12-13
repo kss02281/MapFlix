@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+$title-font: "Bebas Neue", sans-serif;
+
+.__react_component_tooltip {
+  width: 1px !important;
+  height: 1px !important;
+  border-radius: 20px !important;
+}
+tspan {
+  font-size: 10px;
+}
+.MapHoverGreen_Wrap {
+  width: 480px;
+  height: 300px;
+  background-color: #212529;
+  border-radius: 20px;
+  .countryName {
+    display: inline-block;
+    font-size: 30px;
+    color: whitesmoke;
+    font-family: $title-font;
+    letter-spacing: 2px;
+  }
+  .hover_Wrap {
+    display: grid;
+    grid-template-columns: 1fr 10px 1fr;
+    grid-gap: 10px;
+    width: 210px;
+    height: 200px;
+    margin-left: 15px;
+    .leftBox {
+      width: 210px;
+      background-color: whitesmoke;
+      border-radius: 20px;
+      font-family: $title-font;
+      .subscibesText {
+        font-size: 30px;
+        grid-row: 1/3;
+        text-align: center;
+        margin: 0;
+        color: rgba(0, 0, 0, 0.596);
+        letter-spacing: 2px;
+      }
+
+      .total_Subscibes {
+        font-size: 25px;
+        justify-self: end;
+        color: rgba(0, 0, 0, 0.596);
+        font-family: $title-font;
+      }
+
+      .increase_Subscibes {
+        justify-self: end;
+        margin-right: 10px;
+        font-size: 25px;
+      }
+      .subscribes_Chart {
+        font-family: sans-serif;
+        text-align: center;
+        .subscribes_Chart_Box {
+          padding-right: 10px;
+          justify-items: left;
+        }
+      }
+    }
+    .line {
+      height: auto;
+    }
+
+    .rightBox {
+      width: 210px;
+      background-color: whitesmoke;
+      border-radius: 20px;
+      color: black;
+      font-family: $title-font;
+      .topMovieBox {
+        display: grid;
+        grid-template-columns: 1fr 100px 1fr;
+        grid-gap: 10px;
+        text-align: left;
+        .movieImageBox {
+          display: inline;
+          .movieImage {
+            width: 70px;
+            height: 100px;
+            margin-top: 10px;
+            margin-left: 20px;
+          }
+        }
+        .movieTextBox {
+          text-align: left;
+          font-size: 15px;
+          margin-top: 35px;
+          margin-bottom: 5px;
+
+          .topMovie {
+            font-weight: 900;
+            display: block;
+            letter-spacing: 3px;
+          }
+          .movieTitle {
+            display: block;
+          }
+        }
+      }
+
+      .topShowBox {
+        display: grid;
+        grid-template-columns: 1fr 100px 1fr;
+        grid-gap: 10px;
+        text-align: left;
+        .showImageBox {
+          display: inline;
+          .showImage {
+            width: 70px;
+            height: 100px;
+            margin-top: 10px;
+            margin-left: 20px;
+          }
+        }
+        .showTextBox {
+          margin-top: 35px;
+          text-align: left;
+          font-size: 15px;
+          margin-bottom: 5px;
+
+          .topShow {
+            font-weight: 900;
+            display: block;
+            letter-spacing: 3px;
+          }
+        }
+      }
+    }
+  }
+}
