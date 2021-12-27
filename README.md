@@ -1,6 +1,10 @@
 # COVID MAPFLIX
 - 국가별 인기 OTT컨텐츠와 장르를 클릭 한번으로 쉽게 알아보세요!
 
+## 실행 영상
+https://user-images.githubusercontent.com/82202370/147452681-0afdd898-6fc1-4c68-8165-02a3cf5e94b0.mp4
+
+
 ## 프로젝트 구성 안내
 
 ## 1. 프로젝트 소개
