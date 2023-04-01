@@ -6,7 +6,7 @@ import MapHoverGreen from './MapHoverGreen';
 import MapHoverYellow from './MapHoverYellow';
 import MapHoverRedGray from './MapHoverRed';
 
-const geoUrl = 'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
+const geoUrl = 'https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json';
 
 function colorScale(Status) {
   if (Status === '1') {
@@ -50,32 +50,39 @@ const MapChart = ({ setTooltipContent }) => {
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
+                const d = data.find((s) => s.ISO3 === geo.properties['Alpha-2']); 
+                const NAME = geo.properties['name'];
+                const ISO_A2 = geo.properties['Alpha-2']?.toLowerCase();
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={d ? colorScale(d['Status']) : '#ffffff'}
-                    onClick={(Status) => {
-                      const { NAME, ISO_A2 } = geo.properties;
+                    fill={d ? colorScale(d.Status) : '#aaaaaa'}
+                    onClick={() => {
+                      console.log(NAME, ISO_A2)
                       if (d['Status'] === '1' || d['Status'] === '2') {
                         history.push(`/timeLine/nationInfo?nation=${NAME}&nationCode=${ISO_A2.toLowerCase()}`);
                       }
                     }}
+                    
                     onMouseEnter={() => {
                       hoverCheck = true;
                       if (timer) {
                         clearTimeout(timer);
                       }
                       timer = setTimeout(function () {
-                        const { NAME, ISO_A2 } = geo.properties;
-                        if (hoverCheck == true) {
-                          if (d['Status'] === '1') {
-                            setTooltipContent(<MapHoverGreen nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverGreen>);
-                          } else if (d['Status'] === '3' || d['Status'] === '4') {
-                            setTooltipContent(<MapHoverRedGray nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverRedGray>);
-                          } else if (d['Status'] === '2') {
-                            setTooltipContent(<MapHoverYellow nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverYellow>);
+                        if (hoverCheck === true) {
+                          if(d){
+                            if (d['Status'] === '1') {
+                              setTooltipContent(<MapHoverGreen nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverGreen>);
+                            } else if (d['Status'] === '3' || d['Status'] === '4') {
+                              setTooltipContent(<MapHoverRedGray nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverRedGray>);
+                            } else if (d['Status'] === '2') {
+                              setTooltipContent(<MapHoverYellow nationName={NAME} nationCode={ISO_A2.toLowerCase()}></MapHoverYellow>);
+                            }
+                          }
+                          else{
+                            setTooltipContent(<MapHoverRedGray nationName={NAME}></MapHoverRedGray>);
                           }
                         }
                       }, 50);
